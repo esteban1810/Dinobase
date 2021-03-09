@@ -1,10 +1,10 @@
 package controlador;
 
 import controlador.ClimaCtrl;
-import framesUsuario.PaisFrame;
-import framesUsuario.PaisTablaFrame;
-import framesUsuario.ClimaTablaFrame;
-import framesUsuario.ClimaFrame;
+import view.pais.PaisForm;
+import view.pais.PaisIndex;
+import view.clima.ClimaIndex;
+import view.clima.ClimaForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ import modelo.ConsultasPais_Clima;
 public class PaisCtrl implements ActionListener{
     private Pais mod;
     private ConsultasPais modC;
-    private PaisFrame frame;
-    private PaisTablaFrame frameAux;
-    private ClimaTablaFrame modClim;
+    private PaisForm frame;
+    private PaisIndex frameAux;
+    private ClimaIndex modClim;
     private DefaultListModel modeloList;
     DefaultTableModel model = new DefaultTableModel();
     ArrayList<Pais> lista;
@@ -36,9 +36,9 @@ public class PaisCtrl implements ActionListener{
         ctrlM = new MenuCtrl();
         this.mod=mod;
         this.modC=modC;  
-        this.modClim = new ClimaTablaFrame();
-        this.frame=new PaisFrame();
-        this.frameAux= new PaisTablaFrame();
+        this.modClim = new ClimaIndex();
+        this.frame=new PaisForm();
+        this.frameAux= new PaisIndex();
         
         lista = new ArrayList();
                 

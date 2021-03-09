@@ -1,18 +1,19 @@
 package controlador;
 
+import view.usuario.UsuarioLogin;
 import dinobase.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.*;
 
 public class MenuCtrl implements ActionListener{
-    private login login;
+    private UsuarioLogin login;
     private static Usuario user;
     private RegistroVisitanteCtrl visit;
     
     
     public MenuCtrl(){
-        login = new login();
+        login = new UsuarioLogin();
 
         this.login.registrarseBtn.addActionListener(this);
         this.login.taxBtn.addActionListener(this);

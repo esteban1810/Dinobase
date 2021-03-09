@@ -1,6 +1,7 @@
 package controlador;
 
-import framesTiempo.*;
+import view.tiempo.TiempoIndex;
+import view.tiempo.TiempoForm;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -10,8 +11,8 @@ import modelo.*;
 public class TiempoCtrl implements ActionListener{
     private Tiempo mod;
     private ConsultasTiempo modC;
-    private TiempoFrame frm;
-    private TiempoRegistro frmReg;
+    private TiempoIndex frm;
+    private TiempoForm frmReg;
     private static DefaultListModel listaR;
     private DefaultTableModel modelo;
     private ArrayList<Tiempo> lista;
@@ -22,8 +23,8 @@ public class TiempoCtrl implements ActionListener{
         this.mod=mod;
         this.modC=modC;
         
-        this.frm=new TiempoFrame();
-        frmReg = new TiempoRegistro();
+        this.frm=new TiempoIndex();
+        frmReg = new TiempoForm();
         modelo = new DefaultTableModel();
         listaR = new DefaultListModel();
         lista = new ArrayList();

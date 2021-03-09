@@ -1,21 +1,21 @@
 package controlador;
 
-import dinobase.login;
+import view.usuario.UsuarioForm;
+import view.usuario.UsuarioLogin;
 import java.sql.Date;
 import javax.swing.JOptionPane;
 import java.awt.event.*;
-import framesUsuario.*;
 import modelo.*;
 
 public class UsuarioCtrl implements ActionListener {
     private Usuario mod;
     private ConsultasUsuario modC;
-    private UsuarioFrame frame;
+    private UsuarioForm frame;
     
     public UsuarioCtrl(Usuario mod, ConsultasUsuario modC){
         this.mod=mod;
         this.modC=modC;
-        this.frame=new UsuarioFrame();
+        this.frame=new UsuarioForm();
         
         this.frame.registrarBtn.addActionListener(this);
         

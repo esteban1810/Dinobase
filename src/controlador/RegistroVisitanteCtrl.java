@@ -1,24 +1,23 @@
 package controlador;
 
 import modelo.ConsultasRegistrosV;
-import framesTiempo.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import modelo.RegistroVisitante;
-import framesVisitante.FormVisitante1;
-import framesVisitante.IndexVisitante1;
+import view.visitante.VisitanteForm;
+import view.visitante.VisitanteIndex;
 
 public class RegistroVisitanteCtrl implements ActionListener{
     private ConsultasRegistrosV modC;
-    private IndexVisitante1 frm;
+    private VisitanteIndex frm;
     private ArrayList<RegistroVisitante> listaRV;
     private DefaultTableModel modelo;
     private DefaultTableModel modelo2;
     private DefaultTableModel modelo3;
-    private FormVisitante1 fv;
+    private VisitanteForm fv;
 //    private RegistroVisitante mod;
     
 //    private TiempoRegistro frmReg;
@@ -30,12 +29,12 @@ public class RegistroVisitanteCtrl implements ActionListener{
 //        this.mod=mod;
         this.modC=new ConsultasRegistrosV();
         
-        this.frm=new IndexVisitante1();
+        this.frm=new VisitanteIndex();
 //        frmReg = new TiempoRegistro();
         modelo = new DefaultTableModel();
         modelo2 = new DefaultTableModel();
         modelo3 = new DefaultTableModel();
-        fv = new FormVisitante1();
+        fv = new VisitanteForm();
 //        listaR = new DefaultListModel();
 //        lista = new ArrayList();
         

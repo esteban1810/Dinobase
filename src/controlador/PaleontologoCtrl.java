@@ -1,7 +1,7 @@
 package controlador;
 
-import framesPaleontologo.PaleontologoFrame;
-import framesPaleontologo.PaleontologoRegistro;
+import view.paleontologo.PaleontologoIndex;
+import view.paleontologo.PaleontologoForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -19,8 +19,8 @@ public class PaleontologoCtrl implements ActionListener {
     private static String cedula;
     private Paleontologo mod;
     private ConsultasPaleontologo modC;
-    private PaleontologoFrame frm;
-    private PaleontologoRegistro frmReg;
+    private PaleontologoIndex frm;
+    private PaleontologoForm frmReg;
     private MenuCtrl ctrlM;
     private DefaultTableModel modelo;
     private ArrayList<Paleontologo> lista;
@@ -30,8 +30,8 @@ public class PaleontologoCtrl implements ActionListener {
         this.mod = mod;
         this.modC = modC;
 
-        frm = new PaleontologoFrame();
-        frmReg = new PaleontologoRegistro();
+        frm = new PaleontologoIndex();
+        frmReg = new PaleontologoForm();
         modelo = new DefaultTableModel();
         ctrlM = new MenuCtrl();
         lista = new ArrayList();

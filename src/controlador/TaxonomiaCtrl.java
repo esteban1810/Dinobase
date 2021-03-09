@@ -1,6 +1,7 @@
 package controlador;
 
-import framesTaxonomia.*;
+import view.taxonomia.TaxonomiaIndex;
+import view.taxonomia.TaxonomiaForm;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -10,8 +11,8 @@ import modelo.*;
 public class TaxonomiaCtrl implements ActionListener {
     private Taxonomia mod;
     private ConsultasTaxonomia modC;
-    private TaxonomiaFrame frame;
-    private TaxonomiaRegistro frmReg;
+    private TaxonomiaIndex frame;
+    private TaxonomiaForm frmReg;
     private MenuCtrl ctrlM;
     private DefaultTableModel modelo;
     private ArrayList<Taxonomia> lista;
@@ -19,8 +20,8 @@ public class TaxonomiaCtrl implements ActionListener {
     public TaxonomiaCtrl(Taxonomia mod, ConsultasTaxonomia modC){
         this.mod=mod;
         this.modC=modC;
-        this.frame=new TaxonomiaFrame();
-        frmReg = new TaxonomiaRegistro();
+        this.frame=new TaxonomiaIndex();
+        frmReg = new TaxonomiaForm();
         modelo = new DefaultTableModel();
         lista = new ArrayList();
         ctrlM = new MenuCtrl();

@@ -1,7 +1,7 @@
 package controlador;
 
-import framesUsuario.ClimaFrame;
-import framesUsuario.ClimaTablaFrame;
+import view.clima.ClimaForm;
+import view.clima.ClimaIndex;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ import modelo.Clima;
 public class ClimaCtrl  implements ActionListener{
     private Clima mod;
     private ConsultasClima modC;
-    private ClimaFrame frame;
+    private ClimaForm frame;
     private MenuCtrl ctrlM;
-    private ClimaTablaFrame frameAux;
+    private ClimaIndex frameAux;
     DefaultTableModel model = new DefaultTableModel();
     private static DefaultListModel listaR;
     ArrayList<Clima> lista;
@@ -27,8 +27,8 @@ public class ClimaCtrl  implements ActionListener{
         lista = new ArrayList();
         this.mod=mod;
         this.modC=modC;
-        this.frame=new ClimaFrame();
-        this.frameAux=new ClimaTablaFrame();
+        this.frame=new ClimaForm();
+        this.frameAux=new ClimaIndex();
         listaR = new DefaultListModel();
         ctrlM = new MenuCtrl();
        
