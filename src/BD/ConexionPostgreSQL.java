@@ -25,15 +25,6 @@ public class ConexionPostgreSQL {
             //Sirve para comprobar que la conexion se haya realizado con exito
             valid = connection.isValid(50000);
             System.out.println(valid ? "TEST OK" : "TEST FAIL");
-            
-//            PreparedStatement pst = connection.prepareStatement("insert into paises values(?,?,?)");
-//            pst.setString(1, "1");
-//            pst.setString(2, "1");
-//            pst.setInt(3, 1);
-//            
-//            System.out.println("entra");
-//            System.out.println((int)pst.executeUpdate());
-//            System.out.println("entra");
         } catch (SQLException ex) {
             System.out.println(ex);
             return false;

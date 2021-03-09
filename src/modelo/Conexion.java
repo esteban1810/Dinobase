@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class Conexion {
     private final String usuario="postgres";
-    private final String pass="Umbreon189";
-    private final String BD="dinoBase";
+    private final String pass="esteban3";
+    private final String BD="dinobase";
     private final String host="localhost";
     private final String port="5432";
     private Connection con=null;
