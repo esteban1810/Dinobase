@@ -86,8 +86,7 @@ public final class MenuCtrl implements ActionListener{
         } else 
         
         if(e.getSource()==frameLogin.paleanBtn){
-            PaleontologoCtrl ctrlP = new PaleontologoCtrl(new Paleontologo(), 
-                    new ConsultasPaleontologo());
+            PaleontologoCtrl ctrlP = new PaleontologoCtrl();
             ctrlP.iniciar();
             frameLogin.setVisible(false);
         }else 

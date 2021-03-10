@@ -42,7 +42,6 @@ public class TaxonomiaCtrl implements ActionListener {
         frmReg.registrarBtn1.addActionListener(this);
         frmReg.regresarBtn1.addActionListener(this);
         frmReg.paleanBtn1.addActionListener(this);
-        frmReg.refrescarBtn1.addActionListener(this);
         frmReg.agregarBtn1.addActionListener(this);
         frmReg.btnAgrPais.addActionListener(this);
         frmReg.setLocationRelativeTo(null);
@@ -254,13 +253,9 @@ public class TaxonomiaCtrl implements ActionListener {
         } 
         
         else if(e.getSource()==frmReg.paleanBtn1){
-            PaleontologoCtrl ctrlP = new PaleontologoCtrl(new Paleontologo(), new ConsultasPaleontologo());
+            PaleontologoCtrl ctrlP = new PaleontologoCtrl(this.frmReg.paleantologoTF1);
             ctrlP.iniciar();
         } 
-        
-        else if(e.getSource()==frmReg.refrescarBtn1){
-            frmReg.paleantologoTF1.setText(PaleontologoCtrl.getCedula());
-        }
         
         else if(e.getSource()==frmReg.agregarBtn1){
             TiempoCtrl ctrlTiempo = new TiempoCtrl(new Tiempo(), new ConsultasTiempo(), (DefaultListModel)this.frmReg.listaT1.getModel());

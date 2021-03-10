@@ -49,7 +49,6 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         registrarBtn1 = new javax.swing.JButton();
         eliminarBtn1 = new javax.swing.JButton();
         paleanBtn1 = new javax.swing.JButton();
-        refrescarBtn1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaT1 = new javax.swing.JList<>();
         jLabel14 = new javax.swing.JLabel();
@@ -275,12 +274,7 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         paleanBtn1.setBackground(new java.awt.Color(87, 198, 196));
         paleanBtn1.setForeground(new java.awt.Color(255, 255, 255));
         paleanBtn1.setText("Seleccionar");
-        jPanel2.add(paleanBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
-
-        refrescarBtn1.setBackground(new java.awt.Color(87, 198, 196));
-        refrescarBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        refrescarBtn1.setText("R");
-        jPanel2.add(refrescarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, -1, -1));
+        jPanel2.add(paleanBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
 
         listaT1.setBackground(new java.awt.Color(12, 156, 208));
         listaT1.setForeground(new java.awt.Color(255, 255, 255));
@@ -477,7 +471,6 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     public javax.swing.JButton paleanBtn1;
     public javax.swing.JTextField paleantologoTF1;
     public javax.swing.JTextField pesoTF1;
-    public javax.swing.JButton refrescarBtn1;
     public javax.swing.JTextField registradoTF1;
     public javax.swing.JButton registrarBtn1;
     public javax.swing.JButton regresarBtn1;
