@@ -1,5 +1,11 @@
 package controlador;
 
+import clase.Paleontologo;
+import clase.Tiempo;
+import clase.Taxonomia;
+import clase.Pais;
+import clase.Usuario;
+import clase.Clima;
 import view.usuario.UsuarioLogin;
 import dinobase.*;
 import java.awt.event.ActionEvent;

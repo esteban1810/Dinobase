@@ -1,12 +1,16 @@
 package controlador;
 
+import clase.Tiempo;
+import clase.Taxonomia;
+import clase.Pais;
+import clase.Clima;
 import modelo.ConsultasRegistrosV;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
-import modelo.RegistroVisitante;
+import clase.RegistroVisitante;
 import view.visitante.VisitanteForm;
 import view.visitante.VisitanteIndex;
 

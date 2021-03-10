@@ -9,7 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasClima;
-import modelo.Clima;
+import clase.Clima;
 
 
 public class ClimaCtrl  implements ActionListener{

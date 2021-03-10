@@ -1,5 +1,6 @@
 package controlador;
 
+import clase.Usuario;
 import view.usuario.UsuarioForm;
 import view.usuario.UsuarioLogin;
 import java.sql.Date;

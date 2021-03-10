@@ -1,5 +1,6 @@
 package modelo;
 
+import clase.Taxonomia;
 import BD.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

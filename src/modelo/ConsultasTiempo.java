@@ -1,5 +1,6 @@
 package modelo;
 
+import clase.Tiempo;
 import BD.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package modelo;
+package clase;
 
 
 public class Clima {

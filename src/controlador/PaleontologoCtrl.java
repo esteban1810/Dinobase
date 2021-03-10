@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasPaleontologo;
 import modelo.ConsultasTaxonomia;
-import modelo.Paleontologo;
-import modelo.Taxonomia;
+import clase.Paleontologo;
+import clase.Taxonomia;
 
 public class PaleontologoCtrl implements ActionListener {
 

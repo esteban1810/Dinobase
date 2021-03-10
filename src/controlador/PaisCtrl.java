@@ -12,8 +12,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasPais;
-import modelo.Pais;
-import modelo.Clima;
+import clase.Pais;
+import clase.Clima;
 import modelo.ConsultasClima;
 import modelo.ConsultasPais_Clima;
 

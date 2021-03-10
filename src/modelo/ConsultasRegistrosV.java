@@ -1,5 +1,9 @@
 package modelo;
 
+import clase.RegistroVisitante;
+import clase.Tiempo;
+import clase.Pais;
+import clase.Clima;
 import BD.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

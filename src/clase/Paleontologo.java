@@ -1,6 +1,6 @@
 
 
-package modelo;
+package clase;
 import java.sql.Date;
 public class Paleontologo {
     private String cedula;

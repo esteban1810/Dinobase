@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesUsuario/ClimaFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesTaxonomia/TaxonomiaFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/Images/sun-day-weather-symbol_icon-icons.com_73146.png</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesPaleontologo/PaleontologoFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/controlador/TiempoCtrl.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/modelo/ConsultasTiempo.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesTaxonomia/TaxonomiaRegistro.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesUsuario/PaisFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesVisitante/FormVisitante1.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesUsuario/ClimaTablaFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesTiempo/TiempoFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/controlador/PaisCtrl.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/framesUsuario/PaisTablaFrame.java</file>
-            <file>file:/C:/Users/franc/OneDrive/Documentos/NetBeansProjects/DinoBase1/src/controlador/TaxonomiaCtrl.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

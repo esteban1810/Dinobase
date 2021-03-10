@@ -1,5 +1,9 @@
 package controlador;
 
+import clase.Paleontologo;
+import clase.Tiempo;
+import clase.Taxonomia;
+import clase.Pais;
 import view.taxonomia.TaxonomiaIndex;
 import view.taxonomia.TaxonomiaForm;
 import java.awt.event.*;

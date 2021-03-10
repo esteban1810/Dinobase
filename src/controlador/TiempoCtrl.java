@@ -1,5 +1,6 @@
 package controlador;
 
+import clase.Tiempo;
 import view.tiempo.TiempoIndex;
 import view.tiempo.TiempoForm;
 import java.awt.event.*;

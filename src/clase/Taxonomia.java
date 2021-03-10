@@ -1,4 +1,4 @@
-package modelo;
+package clase;
 
 public class Taxonomia {
     private String especie;
