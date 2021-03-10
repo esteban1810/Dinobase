@@ -7,30 +7,34 @@ import clase.Pais;
 import clase.Usuario;
 import clase.Clima;
 import view.usuario.UsuarioLogin;
-import dinobase.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.*;
 
-public class MenuCtrl implements ActionListener{
-    private UsuarioLogin login;
+public final class MenuCtrl implements ActionListener{
+    private final UsuarioLogin frameLogin;
     private static Usuario user;
     private RegistroVisitanteCtrl visit;
     
     
     public MenuCtrl(){
-        login = new UsuarioLogin();
+        //Instacia del frame UsuarioLogin
+        frameLogin = new UsuarioLogin();
 
-        this.login.registrarseBtn.addActionListener(this);
-        this.login.taxBtn.addActionListener(this);
-        this.login.paisBtn.addActionListener(this);
-        this.login.tiempoBtn.addActionListener(this);
-        this.login.climaBtn.addActionListener(this);
-        this.login.paleanBtn.addActionListener(this);
+        vincularBotones();
         
+        //Centrar Frame de login
+        frameLogin.setLocationRelativeTo(null);
         
-        login.setLocationRelativeTo(null);
-        
+    }
+    
+    public void vincularBotones(){
+        this.frameLogin.registrarseBtn.addActionListener(this);
+        this.frameLogin.taxBtn.addActionListener(this);
+        this.frameLogin.paisBtn.addActionListener(this);
+        this.frameLogin.tiempoBtn.addActionListener(this);
+        this.frameLogin.climaBtn.addActionListener(this);
+        this.frameLogin.paleanBtn.addActionListener(this);
     }
     
     public static String getNickname(){
@@ -38,123 +42,132 @@ public class MenuCtrl implements ActionListener{
     }
     
     public void iniciar(){
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
+        frameLogin.setVisible(true); // muestra el frame
+        frameLogin.setLocationRelativeTo(null); //centra el frame
         this.bloquear();
     }
+    
+    public void loguearse(){
+        ConsultasUsuario consulta = new ConsultasUsuario();
+        String nickname = frameLogin.nicknameTF.getText();
+        String pass = frameLogin.pass.getText();
+        user = consulta.validarUsuario(nickname, pass);
+        if(user==null){
+            return;
+        }
+        if("Administrador".equals(user.getTipoU())){
+           desbloquear(user.getNickname());
+        }else if("Visitante".equals(user.getTipoU())){
+           this.frameLogin.setVisible(false);
+           visit = new RegistroVisitanteCtrl();
+           visit.iniciar();
+        }
+    }
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==login.loguearseBtn){
-            ConsultasUsuario consulta = new ConsultasUsuario();
-            String nickname = login.nicknameTF.getText();
-            String pass = login.pass.getText();
-            user = consulta.validarUsuario(nickname, pass);
-            if(user==null)
-                return;
-            if("Administrador".equals(user.getTipoU())){
-                System.out.println("pasaLogin");
-               desbloquear(user.getNickname());
-            }else if("Visitante".equals(user.getTipoU())){
-               this.login.setVisible(false);
-               visit = new RegistroVisitanteCtrl();
-               visit.iniciar();
-            }
-        } else 
         
-        if(e.getSource()==login.registrarseBtn){
-            UsuarioCtrl ctrlU = new UsuarioCtrl(new Usuario(), new ConsultasUsuario());
-            ctrlU.iniciar();
-            this.login.setVisible(false);
+        if(e.getSource()==frameLogin.loguearseBtn){
+            loguearse();
         } else 
             
-        if(e.getSource()==login.taxBtn){
+        if(e.getSource()==frameLogin.registrarseBtn){
+            UsuarioCtrl ctrlU = new UsuarioCtrl(new Usuario(), new ConsultasUsuario());
+            ctrlU.iniciar();
+            this.frameLogin.setVisible(false);
+        } else 
+            
+        if(e.getSource()==frameLogin.taxBtn){
             TaxonomiaCtrl ctrlTax = new TaxonomiaCtrl(new Taxonomia(), new ConsultasTaxonomia());
             ctrlTax.iniciar();
-            login.setVisible(false);
+            frameLogin.setVisible(false);
         } else 
         
-        if(e.getSource()==login.paleanBtn){
-            PaleontologoCtrl ctrlP = new PaleontologoCtrl(new Paleontologo(), new ConsultasPaleontologo());
+        if(e.getSource()==frameLogin.paleanBtn){
+            PaleontologoCtrl ctrlP = new PaleontologoCtrl(new Paleontologo(), 
+                    new ConsultasPaleontologo());
             ctrlP.iniciar();
-            login.setVisible(false);
+            frameLogin.setVisible(false);
         }else 
         
-        if(e.getSource()== login.tiempoBtn){
-            TiempoCtrl ctrlT = new TiempoCtrl(new Tiempo(), new ConsultasTiempo());
+        if(e.getSource()== frameLogin.tiempoBtn){
+            TiempoCtrl ctrlT = new TiempoCtrl(new Tiempo(), 
+                    new ConsultasTiempo());
             ctrlT.iniciar();
-            login.setVisible(false);
+            frameLogin.setVisible(false);
         }
         
-        if(e.getSource()== login.paisBtn){
+        if(e.getSource()== frameLogin.paisBtn){
             PaisCtrl ctrlT = new PaisCtrl(new Pais(), new ConsultasPais());
             ctrlT.iniciar();
-            login.setVisible(false);
+            frameLogin.setVisible(false);
         }
-        if(e.getSource()== login.climaBtn){
-        ClimaCtrl ctrlT = new ClimaCtrl(new Clima(), new ConsultasClima());
-        ctrlT.iniciar();
-        login.setVisible(false);
+        
+        if(e.getSource()== frameLogin.climaBtn){
+//            ClimaCtrl ctrlT = new ClimaCtrl(new Clima(), new ConsultasClima());
+            ClimaCtrl ctrlT = new ClimaCtrl();
+            ctrlT.iniciar();
+            frameLogin.setVisible(false);
         }
     }
     
     public void bloquear(){
-        this.login.loguearseBtn.addActionListener(this);
-        this.login.registrarseBtn.addActionListener(this);
-        this.login.taxonomiasLbl.setVisible(false);
-        this.login.paisesLbl.setVisible(false);
-        this.login.periodosLbl.setVisible(false);
-        this.login.climasLbl.setVisible(false);
-        this.login.paleontologosLbl.setVisible(false);
+        this.frameLogin.loguearseBtn.addActionListener(this);
+        this.frameLogin.registrarseBtn.addActionListener(this);
+        this.frameLogin.taxonomiasLbl.setVisible(false);
+        this.frameLogin.paisesLbl.setVisible(false);
+        this.frameLogin.periodosLbl.setVisible(false);
+        this.frameLogin.climasLbl.setVisible(false);
+        this.frameLogin.paleontologosLbl.setVisible(false);
         
-        this.login.nameTaxLbl.setVisible(false);
-        this.login.namePaisLbl.setVisible(false);
-        this.login.namePeriodosLbl.setVisible(false);
-        this.login.namePaleaLbl.setVisible(false);
-        this.login.nameClimasLbl.setVisible(false);
+        this.frameLogin.nameTaxLbl.setVisible(false);
+        this.frameLogin.namePaisLbl.setVisible(false);
+        this.frameLogin.namePeriodosLbl.setVisible(false);
+        this.frameLogin.namePaleaLbl.setVisible(false);
+        this.frameLogin.nameClimasLbl.setVisible(false);
         
-        this.login.taxBtn.setVisible(false);
-        this.login.paisBtn.setVisible(false);
-        this.login.tiempoBtn.setVisible(false);
-        this.login.climaBtn.setVisible(false);
-        this.login.paleanBtn.setVisible(false);
+        this.frameLogin.taxBtn.setVisible(false);
+        this.frameLogin.paisBtn.setVisible(false);
+        this.frameLogin.tiempoBtn.setVisible(false);
+        this.frameLogin.climaBtn.setVisible(false);
+        this.frameLogin.paleanBtn.setVisible(false);
         
-        this.login.BienvenidoLbl.setVisible(false);
-        this.login.userLbl.setVisible(false);
+        this.frameLogin.BienvenidoLbl.setVisible(false);
+        this.frameLogin.userLbl.setVisible(false);
     }
     
     public void desbloquear(String user){
-        this.login.nameNickNameLbl.setVisible(false);
-        this.login.namePassLbl.setVisible(false);
-        this.login.nicknameTF.setVisible(false);
-        this.login.pass.setVisible(false);
-        this.login.loguearseBtn.setVisible(false);
-        this.login.registrarseBtn.setVisible(false);
-        this.login.jSeparator3.setVisible(false);
-        this.login.jSeparator4.setVisible(false);
+        this.frameLogin.nameNickNameLbl.setVisible(false);
+        this.frameLogin.namePassLbl.setVisible(false);
+        this.frameLogin.nicknameTF.setVisible(false);
+        this.frameLogin.pass.setVisible(false);
+        this.frameLogin.loguearseBtn.setVisible(false);
+        this.frameLogin.registrarseBtn.setVisible(false);
+        this.frameLogin.jSeparator3.setVisible(false);
+        this.frameLogin.jSeparator4.setVisible(false);
         
-        this.login.BienvenidoLbl.setVisible(true);
-        this.login.userLbl.setVisible(true);
-        this.login.userLbl.setText(user);
+        this.frameLogin.BienvenidoLbl.setVisible(true);
+        this.frameLogin.userLbl.setVisible(true);
+        this.frameLogin.userLbl.setText(user);
         
-        this.login.taxonomiasLbl.setVisible(true);
-        this.login.paisesLbl.setVisible(true);
-        this.login.periodosLbl.setVisible(true);
-        this.login.climasLbl.setVisible(true);
-        this.login.paleontologosLbl.setVisible(true);
+        this.frameLogin.taxonomiasLbl.setVisible(true);
+        this.frameLogin.paisesLbl.setVisible(true);
+        this.frameLogin.periodosLbl.setVisible(true);
+        this.frameLogin.climasLbl.setVisible(true);
+        this.frameLogin.paleontologosLbl.setVisible(true);
         
-        this.login.nameTaxLbl.setVisible(true);
-        this.login.namePaisLbl.setVisible(true);
-        this.login.namePeriodosLbl.setVisible(true);
-        this.login.namePaleaLbl.setVisible(true);
-        this.login.nameClimasLbl.setVisible(true);
+        this.frameLogin.nameTaxLbl.setVisible(true);
+        this.frameLogin.namePaisLbl.setVisible(true);
+        this.frameLogin.namePeriodosLbl.setVisible(true);
+        this.frameLogin.namePaleaLbl.setVisible(true);
+        this.frameLogin.nameClimasLbl.setVisible(true);
         
-        this.login.taxBtn.setVisible(true);
-        this.login.paisBtn.setVisible(true);
-        this.login.tiempoBtn.setVisible(true);
-        this.login.climaBtn.setVisible(true);
-        this.login.paleanBtn.setVisible(true);
+        this.frameLogin.taxBtn.setVisible(true);
+        this.frameLogin.paisBtn.setVisible(true);
+        this.frameLogin.tiempoBtn.setVisible(true);
+        this.frameLogin.climaBtn.setVisible(true);
+        this.frameLogin.paleanBtn.setVisible(true);
     }
-
-   
 }

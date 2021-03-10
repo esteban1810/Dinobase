@@ -22,25 +22,15 @@ public class RegistroVisitanteCtrl implements ActionListener{
     private DefaultTableModel modelo2;
     private DefaultTableModel modelo3;
     private VisitanteForm fv;
-//    private RegistroVisitante mod;
-    
-//    private TiempoRegistro frmReg;
-//    private static DefaultListModel listaR;
-//    private ArrayList<Tiempo> lista;
-//    private DefaultListModel modeloList;
     
     public RegistroVisitanteCtrl(){
-//        this.mod=mod;
         this.modC=new ConsultasRegistrosV();
         
         this.frm=new VisitanteIndex();
-//        frmReg = new TiempoRegistro();
         modelo = new DefaultTableModel();
         modelo2 = new DefaultTableModel();
         modelo3 = new DefaultTableModel();
         fv = new VisitanteForm();
-//        listaR = new DefaultListModel();
-//        lista = new ArrayList();
         
         this.frm.buscarBtn.addActionListener(this);
         this.frm.mostrarBtn.addActionListener(this);
@@ -68,8 +58,6 @@ public class RegistroVisitanteCtrl implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
         
         if (e.getSource() == frm.todoBtn) {
             listaRV = modC.todosRegistros();

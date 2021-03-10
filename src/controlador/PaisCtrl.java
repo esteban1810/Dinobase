@@ -109,10 +109,6 @@ public class PaisCtrl implements ActionListener{
     }
      @Override
     public void actionPerformed(ActionEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        DefaultListModel modelo;
-        
         if(e.getSource() == frameAux.nuevoBtn){
             DefaultListModel dlm = new DefaultListModel();
             this.frame.ListPaisClima.setModel(dlm);
@@ -250,7 +246,7 @@ public class PaisCtrl implements ActionListener{
             ctrlM.desbloquear(ctrlM.getNickname());
         }
         else if (e.getSource() == frame.btnAgreClim){
-            ClimaCtrl ctrlClima = new ClimaCtrl(new Clima(), new ConsultasClima(), (DefaultListModel)this.frame.ListPaisClima.getModel());
+            ClimaCtrl ctrlClima = new ClimaCtrl((DefaultListModel)this.frame.ListPaisClima.getModel());
             ctrlClima.iniciar();
         }
         
