@@ -78,7 +78,7 @@ public final class MenuCtrl implements ActionListener{
         } else 
             
         if(e.getSource()==frameLogin.taxBtn){
-            TaxonomiaCtrl ctrlTax = new TaxonomiaCtrl(new Taxonomia(), new ConsultasTaxonomia());
+            TaxonomiaCtrl ctrlTax = new TaxonomiaCtrl();
             ctrlTax.iniciar();
             frameLogin.setVisible(false);
         } else 
@@ -90,8 +90,7 @@ public final class MenuCtrl implements ActionListener{
         }else 
         
         if(e.getSource()== frameLogin.tiempoBtn){
-            TiempoCtrl ctrlT = new TiempoCtrl(new Tiempo(), 
-                    new ConsultasTiempo());
+            TiempoCtrl ctrlT = new TiempoCtrl();
             ctrlT.iniciar();
             frameLogin.setVisible(false);
         }
