@@ -1,11 +1,9 @@
 package controlador;
 
-import clase.Paleontologo;
 import clase.Tiempo;
 import clase.Taxonomia;
 import clase.Pais;
 import clase.Usuario;
-import clase.Clima;
 import view.usuario.UsuarioLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -99,7 +97,7 @@ public final class MenuCtrl implements ActionListener{
         }
         
         if(e.getSource()== frameLogin.paisBtn){
-            PaisCtrl ctrlT = new PaisCtrl(new Pais(), new ConsultasPais());
+            PaisCtrl ctrlT = new PaisCtrl();
             ctrlT.iniciar();
             frameLogin.setVisible(false);
         }

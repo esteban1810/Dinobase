@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/controlador/ClimaCtrl.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/controlador/TaxonomiaCtrl.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/controlador/PaisCtrl.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/view/taxonomia/TaxonomiaForm.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/controlador/MenuCtrl.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/controlador/PaleontologoCtrl.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Documents/NetBeansProjects/Dinobase/src/view/paleontologo/PaleontologoIndex.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -1,10 +1,7 @@
 package controlador;
 
-import controlador.ClimaCtrl;
 import view.pais.PaisForm;
 import view.pais.PaisIndex;
-import view.clima.ClimaIndex;
-import view.clima.ClimaForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,55 +10,52 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasPais;
 import clase.Pais;
-import clase.Clima;
-import modelo.ConsultasClima;
 import modelo.ConsultasPais_Clima;
 
 
 
 public class PaisCtrl implements ActionListener{
-    private Pais mod;
-    private ConsultasPais modC;
-    private PaisForm frame;
-    private PaisIndex frameAux;
-    private ClimaIndex modClim;
+    private Pais pais;
+    private ConsultasPais paisModelo;
+    private PaisForm paisForm;
+    private PaisIndex paisIndex;
+    
     private DefaultListModel modeloList;
-    DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model;
     ArrayList<Pais> lista;
-    private MenuCtrl ctrlM;
+    private MenuCtrl menuCtrl;
     
     
     
-     public PaisCtrl(Pais mod, ConsultasPais modC){
-        ctrlM = new MenuCtrl();
-        this.mod=mod;
-        this.modC=modC;  
-        this.modClim = new ClimaIndex();
-        this.frame=new PaisForm();
-        this.frameAux= new PaisIndex();
-        
-        lista = new ArrayList();
+     public PaisCtrl(){
+        menuCtrl    = new MenuCtrl();
+        pais        = new Pais();
+        paisModelo  = new ConsultasPais();
+        paisForm    = new PaisForm();
+        paisIndex   = new PaisIndex();
+        model       = new DefaultTableModel();
+        lista       = new ArrayList();
                 
-        this.frame.btnGuardar.addActionListener(this); 
-        this.frame.btnModificar.addActionListener(this);
-        this.frame.btnEliminar.addActionListener(this);
-        this.frame.regresarBtn.addActionListener(this);
-        this.frame.btnAgreClim.addActionListener(this);
+        this.paisForm.btnGuardar.addActionListener(this); 
+        this.paisForm.btnModificar.addActionListener(this);
+        this.paisForm.btnEliminar.addActionListener(this);
+        this.paisForm.regresarBtn.addActionListener(this);
+        this.paisForm.btnAgreClim.addActionListener(this);
         
                      
-        this.frameAux.buscarBtn.addActionListener(this); 
-        this.frameAux.todoBtn.addActionListener(this);
-        this.frameAux.mostrarBtn.addActionListener(this);
-        this.frameAux.nuevoBtn.addActionListener(this);
-        this.frameAux.regresarBtn.addActionListener(this);
-        this.frameAux.agregarBtn.addActionListener(this);
-        this.frameAux.aceptarBtn.addActionListener(this);
+        this.paisIndex.buscarBtn.addActionListener(this); 
+        this.paisIndex.todoBtn.addActionListener(this);
+        this.paisIndex.mostrarBtn.addActionListener(this);
+        this.paisIndex.nuevoBtn.addActionListener(this);
+        this.paisIndex.regresarBtn.addActionListener(this);
+        this.paisIndex.agregarBtn.addActionListener(this);
+        this.paisIndex.aceptarBtn.addActionListener(this);
         
-        this.frameAux.aceptarBtn.setVisible(false);
-        this.frameAux.agregarBtn.setVisible(false);
-        this.frameAux.listaPaises.setVisible(false);
+        this.paisIndex.aceptarBtn.setVisible(false);
+        this.paisIndex.agregarBtn.setVisible(false);
+        this.paisIndex.listaPaises.setVisible(false);
        
-        modC.todosPaises(lista);
+        paisModelo.todosPaises(lista);
         cargarTabla();
         
     }
@@ -69,7 +63,7 @@ public class PaisCtrl implements ActionListener{
      public void cargarTabla(){
         model = new DefaultTableModel();
         
-        frameAux.tbPais.setModel(model);
+        paisIndex.tbPais.setModel(model);
         model.addColumn("Nombre");
         model.addColumn("Continente");
         model.addColumn("Extension");
@@ -83,74 +77,130 @@ public class PaisCtrl implements ActionListener{
         }
     }
      
-    public PaisCtrl(Pais mod, ConsultasPais modC,DefaultListModel modeloList){
-        this(mod,modC);
+    public PaisCtrl(DefaultListModel modeloList){
+        this();
         this.modeloList=modeloList;
-        this.frameAux.listaPaises.setModel(modeloList);
-        this.frameAux.aceptarBtn.setVisible(true);
-        this.frameAux.agregarBtn.setVisible(true);
-        this.frameAux.listaPaises.setVisible(true);
+        this.paisIndex.listaPaises.setModel(modeloList);
+        this.paisIndex.aceptarBtn.setVisible(true);
+        this.paisIndex.agregarBtn.setVisible(true);
+        this.paisIndex.listaPaises.setVisible(true);
     }
      
     public void limpiar(){
-        frame.txtNombre.setText(null);
-        frame.txtConti.setText(null);
-        frame.txtExten.setText(null);         
+        paisForm.txtNombre.setText(null);
+        paisForm.txtConti.setText(null);
+        paisForm.txtExten.setText(null);         
     } 
     
     
      public void iniciar(){
-        frame.setTitle("Paises");
-        frame.setLocationRelativeTo(null);
-        frameAux.setTitle("TablaPaises");
-        frameAux.setLocationRelativeTo(null);
-        frameAux.setVisible(true);     
+        paisForm.setTitle("Paises");
+        paisForm.setLocationRelativeTo(null);
+        paisIndex.setTitle("TablaPaises");
+        paisIndex.setLocationRelativeTo(null);
+        paisIndex.setVisible(true);     
         
     }
-     @Override
+     
+    
+     
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == frameAux.nuevoBtn){
-            DefaultListModel dlm = new DefaultListModel();
-            this.frame.ListPaisClima.setModel(dlm);
-            frame.setVisible(true);
-            frameAux.setVisible(false);
-            frame.btnModificar.setVisible(false);
-            frame.btnEliminar.setVisible(false);
+        if(e.getSource() == paisIndex.nuevoBtn){
+            presionarNuevoBtn();
         }
 
-        else if(e.getSource() == frame.btnGuardar){
-            
-            ConsultasPais_Clima pc = new ConsultasPais_Clima();
-            DefaultListModel dlm;
-            
-            mod.setNombre(frame.txtNombre.getText());
-            mod.setContinente(frame.txtConti.getText());
-            mod.setExtension(Float.parseFloat(frame.txtExten.getText()));
-                      
-            if(modC.registrar(mod)){
-                JOptionPane.showMessageDialog(null, "Registro Guardado");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar");
-                return;
-            }            
-            dlm = (DefaultListModel) this.frame.ListPaisClima.getModel();
-
-            pc.registrar(mod.getNombre(), dlm.toArray());
-
-            limpiar();
-            frame.setVisible(false);
-            frameAux.setVisible(true);
+        else if(e.getSource() == paisForm.btnGuardar){
+            presionarBtnGuardar();
         }
         
-        else if(e.getSource() == frame.btnModificar){
-            String nombre = mod.getNombre();
+        else if(e.getSource() == paisForm.btnModificar){
+            presionarBtnModificar();
+        }
+        
+        else if(e.getSource() == paisForm.btnEliminar){
+            presionarBtnEliminar();
+        }
+        
+        else if(e.getSource() == paisIndex.buscarBtn){
+            presionarBuscarBtn();
+        }
+        
+        else if(e.getSource() == paisIndex.todoBtn){  
+            paisModelo.todosPaises(lista);          
+            cargarTabla();
+        }
+        
+        else if (e.getSource() == paisIndex.mostrarBtn){
+            presionarMostrarBtn();           
+        }
+        
+        else if(e.getSource() == paisForm.regresarBtn){
+            paisForm.setVisible(false);
+            paisIndex.setVisible(true);
+        }
+        
+        else if(e.getSource() == paisIndex.regresarBtn){
+            paisIndex.setVisible(false);
+            menuCtrl.iniciar();
+            menuCtrl.desbloquear(menuCtrl.getNickname());
+        }
+        else if (e.getSource() == paisForm.btnAgreClim){
+            ClimaCtrl ctrlClima = new ClimaCtrl((DefaultListModel)this.paisForm.ListPaisClima.getModel());
+            ctrlClima.iniciar();
+        }
+        
+        else if(e.getSource()==this.paisIndex.agregarBtn){
+            presionarAgregarBtn();
+        }
+        
+        else if(e.getSource()==this.paisIndex.aceptarBtn){
+            this.paisIndex.setVisible(false);
+        }
+        
+    }
+
+    private void presionarNuevoBtn() {
+        DefaultListModel dlm = new DefaultListModel();
+        this.paisForm.ListPaisClima.setModel(dlm);
+        paisForm.setVisible(true);
+        paisIndex.setVisible(false);
+        paisForm.btnModificar.setVisible(false);
+        paisForm.btnEliminar.setVisible(false);
+    }
+
+    private void presionarBtnGuardar() {
+        ConsultasPais_Clima pc = new ConsultasPais_Clima();
+        DefaultListModel dlm;
+        
+        pais.setNombre(paisForm.txtNombre.getText());
+        pais.setContinente(paisForm.txtConti.getText());
+        pais.setExtension(Float.parseFloat(paisForm.txtExten.getText()));
+                    
+        if(paisModelo.registrar(pais)){
+            JOptionPane.showMessageDialog(null, "Registro Guardado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al guardar");
+            return;
+        }            
+        dlm = (DefaultListModel) this.paisForm.ListPaisClima.getModel();
+
+        pc.registrar(pais.getNombre(), dlm.toArray());
+
+        limpiar();
+        paisForm.setVisible(false);
+        paisIndex.setVisible(true);
+    }
+
+    private void presionarBtnModificar() {
+            String nombre = pais.getNombre();
             ConsultasPais_Clima pc = new ConsultasPais_Clima();
-            mod.setNombre(frame.txtNombre.getText());
-            mod.setContinente(frame.txtConti.getText());
-            mod.setExtension(Float.parseFloat(frame.txtExten.getText()));
+            pais.setNombre(paisForm.txtNombre.getText());
+            pais.setContinente(paisForm.txtConti.getText());
+            pais.setExtension(Float.parseFloat(paisForm.txtExten.getText()));
             
             
-            if(modC.modificar(mod, nombre)){
+            if(paisModelo.modificar(pais, nombre)){
                 JOptionPane.showMessageDialog(null, "Registro modificado");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar");
@@ -158,118 +208,90 @@ public class PaisCtrl implements ActionListener{
             
             ArrayList<String> listaClimas = new ArrayList();
             
-            for(int i = 0; i< this.frame.ListPaisClima.getModel().getSize();i++){
-               listaClimas.add(frame.ListPaisClima.getModel().getElementAt(i));
+            for(int i = 0; i< this.paisForm.ListPaisClima.getModel().getSize();i++){
+               listaClimas.add(paisForm.ListPaisClima.getModel().getElementAt(i));
             }
             
-            pc.modificar(mod.getNombre(), listaClimas.toArray());
+            pc.modificar(pais.getNombre(), listaClimas.toArray());
             
             limpiar();
-            modC.todosPaises(lista);
+            paisModelo.todosPaises(lista);
             cargarTabla();
-            frame.setVisible(false);
-            frameAux.setVisible(true);
-        }
-        
-        else if(e.getSource() == frame.btnEliminar){
-            mod.setNombre(frame.txtNombre.getText());
-            
-            if(modC.eliminar(mod)){
-                JOptionPane.showMessageDialog(null, "Registro Eliminado");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar");
-            }
-            limpiar();
-            frame.setVisible(false);
-            frameAux.setVisible(true);
-        }
-        
-        else if(e.getSource() == frameAux.buscarBtn){
-            lista.clear();
-            int fila2 = frameAux.tbPais.getRowCount();
-                    for(int i = fila2-1; i >= 0 ; i--){
-                        model.removeRow(i); 
-                    }
-            modC.coincidencias(lista, frameAux.buscarTF.getText());
-            if(lista.size()==0){
-                JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
-                return;
-            }
-            cargarTabla();            
-
-        }
-        
-        else if(e.getSource() == frameAux.todoBtn){  
-            modC.todosPaises(lista);          
-            cargarTabla();
-        }
-        
-        else if (e.getSource() == frameAux.mostrarBtn){
-            frame.btnGuardar.setVisible(false);
-            int fila= frameAux.tbPais.getSelectedRow();
-            ArrayList<String> climas;
-            String pais;
-            DefaultListModel modelClima;
-            
-            if(fila==-1){
-                JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
-                return;
-            }
-            
-            pais = frameAux.tbPais.getValueAt(fila,0).toString();
-            climas = new ConsultasPais_Clima().getRelacionesClima(pais);
-            modelClima = new DefaultListModel();
-            for(int i=0; i<climas.size(); i++){
-                modelClima.addElement(climas.get(i));
-            }
-            frame.ListPaisClima.setModel(modelClima);
-            
-            mod = modC.buscar(pais);
-            
-            frame.txtNombre.setText(mod.getNombre());
-            frame.txtConti.setText(mod.getContinente());
-            frame.txtExten.setText(String.valueOf(mod.getExtension()));
-
-            frame.setVisible(true);
-            frameAux.setVisible(false);
-           
-        }
-        
-        else if(e.getSource() == frame.regresarBtn){
-            frame.setVisible(false);
-            frameAux.setVisible(true);
-        }
-        
-        else if(e.getSource() == frameAux.regresarBtn){
-            frameAux.setVisible(false);
-            ctrlM.iniciar();
-            ctrlM.desbloquear(ctrlM.getNickname());
-        }
-        else if (e.getSource() == frame.btnAgreClim){
-            ClimaCtrl ctrlClima = new ClimaCtrl((DefaultListModel)this.frame.ListPaisClima.getModel());
-            ctrlClima.iniciar();
-        }
-        
-        else if(e.getSource()==this.frameAux.agregarBtn){
-            int fila = this.frameAux.tbPais.getSelectedRow();
-            String tiempo;
-            
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
-                return;
-            }
-            
-            tiempo = frameAux.tbPais.getValueAt(fila, 0).toString();
-            
-            if(!this.modeloList.removeElement(tiempo)){
-                this.modeloList.addElement(tiempo);
-            }
-        }
-        
-        else if(e.getSource()==this.frameAux.aceptarBtn){
-            this.frameAux.setVisible(false);
-        }
-        
+            paisForm.setVisible(false);
+            paisIndex.setVisible(true);
     }
 
+    private void presionarBtnEliminar() {
+        pais.setNombre(paisForm.txtNombre.getText());
+        
+        if(paisModelo.eliminar(pais)){
+            JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al eliminar");
+        }
+        limpiar();
+        paisForm.setVisible(false);
+        paisIndex.setVisible(true);
+    }
+
+    private void presionarBuscarBtn() {
+        lista.clear();
+        int fila2 = paisIndex.tbPais.getRowCount();
+                for(int i = fila2-1; i >= 0 ; i--){
+                    model.removeRow(i); 
+                }
+        paisModelo.coincidencias(lista, paisIndex.buscarTF.getText());
+        if(lista.size()==0){
+            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
+            return;
+        }
+        cargarTabla();            
+    }
+
+    private void presionarMostrarBtn() {
+        paisForm.btnGuardar.setVisible(false);
+        int fila= paisIndex.tbPais.getSelectedRow();
+        ArrayList<String> climas;
+        String nombrePais;
+        DefaultListModel modelClima;
+        
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
+            return;
+        }
+        
+        nombrePais = paisIndex.tbPais.getValueAt(fila,0).toString();
+        climas = new ConsultasPais_Clima().getRelacionesClima(nombrePais);
+        modelClima = new DefaultListModel();
+        for(int i=0; i<climas.size(); i++){
+            modelClima.addElement(climas.get(i));
+        }
+        paisForm.ListPaisClima.setModel(modelClima);
+        
+        pais = paisModelo.buscar(nombrePais);
+        
+        paisForm.txtNombre.setText(pais.getNombre());
+        paisForm.txtConti.setText(pais.getContinente());
+        paisForm.txtExten.setText(String.valueOf(pais.getExtension()));
+
+        paisForm.setVisible(true);
+        paisIndex.setVisible(false);
+    }
+
+    private void presionarAgregarBtn() {
+        int fila = this.paisIndex.tbPais.getSelectedRow();
+        String tiempo;
+        
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
+            return;
+        }
+        
+        tiempo = paisIndex.tbPais.getValueAt(fila, 0).toString();
+        
+        if(!this.modeloList.removeElement(tiempo)){
+            this.modeloList.addElement(tiempo);
+        }
+    }
+    
 }

@@ -269,7 +269,7 @@ public class TaxonomiaCtrl implements ActionListener {
         }
         
         else if(e.getSource() == frmReg.btnAgrPais){
-            PaisCtrl ctrlPais = new PaisCtrl(new Pais(), new ConsultasPais(),(DefaultListModel)this.frmReg.listaPaises.getModel());
+            PaisCtrl ctrlPais = new PaisCtrl((DefaultListModel)this.frmReg.listaPaises.getModel());
             ctrlPais.iniciar();
         }
     }
