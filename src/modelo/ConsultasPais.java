@@ -193,7 +193,7 @@ public class ConsultasPais extends Conexion{
         Connection con = getConnection();
 
         
-        String sql = "SELECT * FROM paises ORDER BY nombre";
+        String sql = "SELECT nombre FROM paises ORDER BY nombre";
         
         try {
             ps = con.prepareStatement(sql);
@@ -217,13 +217,28 @@ public class ConsultasPais extends Conexion{
         
     }
     
-    public boolean coincidencias(ArrayList<Pais> lista, String nombre){
+    
+    
+    public ArrayList<Pais> coincidencias(String nombre, String continente){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
+        ArrayList<Pais> lista = new ArrayList();
+        String sql = null;
         
-        String sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' ORDER BY nombre";
+        if(nombre.isEmpty()){
+            if(continente.isEmpty()){
+                return null;
+            } else {
+                sql = "SELECT * FROM paises WHERE continente='"+continente+"' ORDER BY nombre";
+            }
+        } else {
+            if(continente.isEmpty()){
+                sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' ORDER BY nombre";
+            } else {
+                sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' AND continente='"+continente+"' ORDER BY nombre";
+            }
+        }
         
         try {
             ps = con.prepareStatement(sql);
@@ -237,10 +252,10 @@ public class ConsultasPais extends Conexion{
                                                
                 lista.add(pais);
             }
-            return true;
+            return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return false;
+            return null;
         } finally {
             try {
                 con.close();

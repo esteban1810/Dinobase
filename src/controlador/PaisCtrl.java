@@ -127,7 +127,8 @@ public class PaisCtrl implements ActionListener{
         }
         
         else if(e.getSource() == paisIndex.todoBtn){  
-            paisModelo.todosPaises(lista);          
+            paisModelo.todosPaises(lista);     
+            this.paisIndex.continenteCB.setSelectedIndex(0);
             cargarTabla();
         }
         
@@ -235,12 +236,18 @@ public class PaisCtrl implements ActionListener{
     }
 
     private void presionarBuscarBtn() {
-        lista.clear();
+        String pais = paisIndex.buscarTF.getText();
+        String continente = this.paisIndex.continenteCB.getSelectedItem().toString();
         int fila2 = paisIndex.tbPais.getRowCount();
-                for(int i = fila2-1; i >= 0 ; i--){
-                    model.removeRow(i); 
-                }
-        paisModelo.coincidencias(lista, paisIndex.buscarTF.getText());
+        
+        lista.clear();
+        
+        for(int i = fila2-1; i >= 0 ; i--){
+            model.removeRow(i); 
+        }
+        
+        lista = paisModelo.coincidencias(pais,continente);
+        
         if(lista.size()==0){
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
