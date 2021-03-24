@@ -187,13 +187,49 @@ public class ConsultasTiempo  extends Conexion{
     
     
     
-    public boolean coincidencias(ArrayList<Tiempo> lista, String periodo){
+    public ArrayList<Tiempo> coincidencias(String periodo,String desde, String hasta){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
+        ArrayList<Tiempo> lista = new ArrayList();
+        String sql = null;
         
-        String sql = "SELECT * FROM tiempos WHERE periodo LIKE '%"+periodo+"%' ORDER BY periodo";
+        if(periodo.isEmpty()){
+            if(desde.isEmpty()){
+                if(hasta.isEmpty()){
+                    System.out.println("ando por aqui");
+                    return null;
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE descubierto<='"+hasta+"' ORDER BY periodo";
+                }
+            } else {
+                if(hasta.isEmpty()){
+                    sql = "SELECT * FROM tiempos WHERE descubierto>='"+desde+"' ORDER BY periodo";
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE descubierto<='"+hasta+
+                            "' AND descubierto>='"+desde+"' ORDER BY periodo";
+                }
+            }
+        } else {
+            if(desde.isEmpty()){
+                if(hasta.isEmpty()){
+                    sql = "SELECT * FROM tiempos WHERE periodo ILIKE '%"+periodo+
+                            "%' ORDER BY periodo";
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE periodo='%"+periodo+
+                            "%' AND descubierto<='"+hasta+"' ORDER BY periodo";
+                }
+            } else {
+                if(hasta.isEmpty()){
+                    sql = "SELECT * FROM tiempos WHERE descubierto>='"+desde+
+                            "' AND descubierto>='"+desde+"' ORDER BY periodo";
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE periodo='%"+periodo+
+                            "%' AND descubierto<='"+hasta+
+                            "' AND descubierto>='"+desde+"' ORDER BY periodo";
+                }
+            }
+        }
         
         try {
             ps = con.prepareStatement(sql);
@@ -207,10 +243,10 @@ public class ConsultasTiempo  extends Conexion{
                 tiem.setDescubierto(rs.getString("descubierto"));
                 lista.add(tiem);
             }
-            return true;
+            return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return false;
+            return null;
         } finally {
             try {
                 con.close();
@@ -220,5 +256,6 @@ public class ConsultasTiempo  extends Conexion{
         }
         
     }
+    
     
 }
