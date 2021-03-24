@@ -277,13 +277,22 @@ public class PaleontologoCtrl implements ActionListener {
     }
 
     private void presionarBuscarBtn() {
+        String cadenaBuscada = peloentologoIndex.buscarTF.getText();
+        
+        if(cadenaBuscada.isEmpty()){
+            return;
+        }
+        
         lista.clear();
         limpiarTabla();
-        paleontologoModelo.coincidencias(lista, peloentologoIndex.buscarTF.getText());
-        if (lista.size() == 0) {
+        
+        lista = paleontologoModelo.coincidencias(cadenaBuscada);
+        
+        if (lista.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
+        
         cargarTabla();
     }
 
