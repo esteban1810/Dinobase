@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ConsultasPais extends Conexion{
     
@@ -179,6 +180,35 @@ public class ConsultasPais extends Conexion{
             return false;
         } finally {
             try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
+    
+    public boolean nombrePaises(JComboBox<String> paisCB){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        
+        String sql = "SELECT * FROM paises ORDER BY nombre";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                paisCB.addItem(rs.getString("nombre"));
+            }
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("todo OK");
                 con.close();
             } catch (SQLException ex) {
                 System.out.println(ex);

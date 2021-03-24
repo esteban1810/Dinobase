@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ConsultasTiempo  extends Conexion{
      public boolean registrar(Tiempo time){
@@ -155,6 +156,36 @@ public class ConsultasTiempo  extends Conexion{
         }
         
     }
+    
+    public boolean nombrePeriodos(JComboBox<String> periodoCB){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        
+        String sql = "SELECT * FROM tiempos ORDER BY periodo";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                periodoCB.addItem(rs.getString("periodo"));
+            }
+            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        
+    }
+    
+    
     
     public boolean coincidencias(ArrayList<Tiempo> lista, String periodo){
         PreparedStatement ps = null;

@@ -1,5 +1,7 @@
 package clase;
 
+import java.util.ArrayList;
+
 public class Taxonomia {
     private String especie;
     private String reino;
@@ -15,6 +17,40 @@ public class Taxonomia {
     private String alimentacion;
     private String registrado;
     private String paleantologo;
+    private ArrayList<String> listaPaises;
+    private ArrayList<String> listaPeriodos;
+    
+    public Taxonomia(){
+        listaPaises = new ArrayList<>();
+        listaPeriodos = new ArrayList<>();
+    }
+    
+    public Taxonomia(String especie, String periodo, String pais){
+        listaPaises = new ArrayList<>();
+        listaPeriodos = new ArrayList<>();
+        this.especie=especie;
+        this.listaPaises.add(pais);
+        this.listaPeriodos.add(periodo);
+    }
+
+    public ArrayList<String> getListaPaises() {
+        return listaPaises;
+    }
+
+    public void setListaPaises(ArrayList<String> listaPaises) {
+        this.listaPaises = listaPaises;
+    }
+
+    public ArrayList<String> getListaPeriodos() {
+        return listaPeriodos;
+    }
+
+    public void setListaPeriodos(ArrayList<String> listaPeriodos) {
+        this.listaPeriodos = listaPeriodos;
+    }
+    
+    
+
 
     public String getEspecie() {
         return especie;
@@ -135,21 +171,58 @@ public class Taxonomia {
     
     public Object[] arreglo(){
         Object[] arreglo = new Object[15];
+        String paises="";
+        String periodos="";
         
-        arreglo[0]=especie;
-        arreglo[1]=reino;
-        arreglo[2]=orden;
-        arreglo[3]=dominio;
-        arreglo[4]=familia;
-        arreglo[5]=clase;
-        arreglo[6]=filo;
-        arreglo[7]=genero;
-        arreglo[8]=altura;
-        arreglo[9]=largo;
-        arreglo[10]=peso;
-        arreglo[11]= alimentacion;
-        arreglo[12]=registrado;
-        arreglo[13]=paleantologo;
+        for(String pais : listaPaises){
+            paises+=pais+", ";
+        }
+        paises=paises.substring(0, paises.length()-2);
+        for(String periodo : listaPeriodos){
+            periodos+=periodo+", ";
+        }
+        periodos=periodos.substring(0, periodos.length()-2);
+        
+        arreglo[0]="";
+        arreglo[1]=especie;
+        arreglo[2]=periodos;
+        arreglo[3]=paises;
+        
         return arreglo;
     }
+//    public Object[] arreglo(){
+//        Object[] arreglo = new Object[15];
+//        
+//        arreglo[0]=especie;
+//        arreglo[1]=reino;
+//        arreglo[2]=orden;
+//        arreglo[3]=dominio;
+//        arreglo[4]=familia;
+//        arreglo[5]=clase;
+//        arreglo[6]=filo;
+//        arreglo[7]=genero;
+//        arreglo[8]=altura;
+//        arreglo[9]=largo;
+//        arreglo[10]=peso;
+//        arreglo[11]= alimentacion;
+//        arreglo[12]=registrado;
+//        arreglo[13]=paleantologo;
+//        
+////        arreglo[0]=especie;
+////        arreglo[1]=reino;
+////        arreglo[2]=orden;
+////        arreglo[3]=dominio;
+////        arreglo[4]=familia;
+////        arreglo[5]=clase;
+////        arreglo[6]=filo;
+////        arreglo[7]=genero;
+////        arreglo[8]=altura;
+////        arreglo[9]=largo;
+////        arreglo[10]=peso;
+////        arreglo[11]= alimentacion;
+////        arreglo[12]=registrado;
+////        arreglo[13]=paleantologo;
+//        
+//        return arreglo;
+//    }
 }
