@@ -12,6 +12,7 @@ public class Conexion {
     private final String port="5432";
     private Connection con=null;
 
+    /* Esta linea es de ejemplo */
     public Connection getConnection(){
         String url= "jdbc:postgresql://" + host + ":" + port + "/" + BD; 
         
