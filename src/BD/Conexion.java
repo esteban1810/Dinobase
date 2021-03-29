@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//Estoy haciendo pruebas
 public class Conexion {
     private final String usuario="postgres";
     private final String pass="esteban3";
@@ -12,7 +13,6 @@ public class Conexion {
     private final String port="5432";
     private Connection con=null;
 
-    /* Esta linea es de ejemplo */
     public Connection getConnection(){
         String url= "jdbc:postgresql://" + host + ":" + port + "/" + BD; 
         
