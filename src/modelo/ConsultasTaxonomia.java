@@ -2,19 +2,24 @@ package modelo;
 
 import clase.Taxonomia;
 import BD.Conexion;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 public class ConsultasTaxonomia extends Conexion{
+    ImageIcon foto;
+    InputStream is;
     
     public boolean registrar(Taxonomia tax){
         PreparedStatement ps = null;
         Connection con = getConnection();
         
-        String sql = "INSERT INTO taxonomias VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO taxonomias VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             ps = con.prepareStatement(sql);
@@ -32,6 +37,8 @@ public class ConsultasTaxonomia extends Conexion{
             ps.setString(12, tax.getAlimentacion());
             ps.setString(13, tax.getRegistrado());
             ps.setString(14, tax.getPaleantologo());
+            ps.setBinaryStream(15,tax.getImagenNom(),tax.getImagenTam());
+            ps.setString(16, tax.getDescripcion());
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -54,7 +61,7 @@ public class ConsultasTaxonomia extends Conexion{
         String sql = "UPDATE taxonomias SET especie=?, reino=?, "
                 + "orden=?, dominio=?, familia=?, clase=?, filo=?,"
                 + "genero=?, altura=?, largo=?, peso=?, alimentacion=?,"
-                + "registrado=?, paleantologo=? WHERE especie=?";
+                + "registrado=?, paleantologo=?, imagen=?, descripcion=? WHERE especie=?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -72,7 +79,9 @@ public class ConsultasTaxonomia extends Conexion{
             ps.setString(12, tax.getAlimentacion());
             ps.setString(13, tax.getRegistrado());
             ps.setString(14, tax.getPaleantologo());
-            ps.setString(15, especie);
+            ps.setBinaryStream(15,tax.getImagenNom(),tax.getImagenTam());
+            ps.setString(16, tax.getDescripcion());
+            ps.setString(17, especie);
             ps.execute();
             return true;
         } catch (SQLException ex) {
@@ -139,6 +148,8 @@ public class ConsultasTaxonomia extends Conexion{
                 tax.setAlimentacion(rs.getString("alimentacion"));
                 tax.setRegistrado(rs.getString("registrado"));
                 tax.setPaleantologo(rs.getString("paleantologo"));
+                tax.setLeerImagen(rs.getBinaryStream("imagen"));
+                tax.setDescripcion(rs.getString("descripcion"));
                 return true;
             }
             return false;
@@ -269,6 +280,7 @@ public class ConsultasTaxonomia extends Conexion{
                 tax.setAlimentacion(rs.getString("alimentacion"));
                 tax.setRegistrado(rs.getString("registrado"));
                 tax.setPaleantologo(rs.getString("paleantologo"));
+                tax.setLeerImagen(rs.getBinaryStream("imagen"));
                 lista.add(tax);
             }
             return true;

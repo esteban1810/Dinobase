@@ -11,10 +11,13 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lblFoto = new javax.swing.JLabel();
         regresarBtn1 = new javax.swing.JButton();
         salir1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -45,14 +48,7 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         registradoTF1 = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         paleantologoTF1 = new javax.swing.JTextField();
-        modificarBtn1 = new javax.swing.JButton();
-        registrarBtn1 = new javax.swing.JButton();
-        eliminarBtn1 = new javax.swing.JButton();
         paleanBtn1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaT1 = new javax.swing.JList<>();
-        jLabel14 = new javax.swing.JLabel();
-        agregarBtn1 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
@@ -66,16 +62,31 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator13 = new javax.swing.JSeparator();
         jSeparator18 = new javax.swing.JSeparator();
-        btnAgrPais = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
+        btnAgrImagen = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaT1 = new javax.swing.JList<>();
+        agregarBtn1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaPaises = new javax.swing.JList<>();
+        btnAgrPais = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        modificarBtn1 = new javax.swing.JButton();
+        eliminarBtn1 = new javax.swing.JButton();
+        registrarBtn1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descripcionTxa = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(12, 156, 208));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblFoto.setBackground(new java.awt.Color(12, 156, 208));
+        lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblFoto.setOpaque(true);
+        lblFoto.setRequestFocusEnabled(false);
+        jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 350));
 
         regresarBtn1.setBackground(new java.awt.Color(12, 241, 253));
         regresarBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/back-arrow_icon-icons.com_72866.png"))); // NOI18N
@@ -98,6 +109,16 @@ public class TaxonomiaForm extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/paintbrush_79604.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 130, 100));
+
+        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Descripción");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Tiempo:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dinosaur-bones_39225.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 130, 100));
@@ -239,58 +260,32 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         jLabel29.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("Registrado:");
-        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         registradoTF1.setEditable(false);
         registradoTF1.setBackground(new java.awt.Color(12, 156, 208));
         registradoTF1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(registradoTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 150, -1));
+        jPanel2.add(registradoTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 110, -1));
 
         jLabel30.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("Paleantologo:");
-        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
 
         paleantologoTF1.setEditable(false);
         paleantologoTF1.setBackground(new java.awt.Color(12, 156, 208));
         paleantologoTF1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(paleantologoTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 150, -1));
-
-        modificarBtn1.setBackground(new java.awt.Color(87, 198, 196));
-        modificarBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        modificarBtn1.setText("MODIFICAR");
-        jPanel2.add(modificarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, -1));
-
-        registrarBtn1.setBackground(new java.awt.Color(87, 198, 196));
-        registrarBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        registrarBtn1.setText("REGISTRAR");
-        jPanel2.add(registrarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 100, -1));
-
-        eliminarBtn1.setBackground(new java.awt.Color(87, 198, 196));
-        eliminarBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        eliminarBtn1.setText("ELIMINAR");
-        jPanel2.add(eliminarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 90, -1));
+        jPanel2.add(paleantologoTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 110, -1));
 
         paleanBtn1.setBackground(new java.awt.Color(87, 198, 196));
         paleanBtn1.setForeground(new java.awt.Color(255, 255, 255));
         paleanBtn1.setText("Seleccionar");
-        jPanel2.add(paleanBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
-
-        listaT1.setBackground(new java.awt.Color(12, 156, 208));
-        listaT1.setForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(listaT1);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 160, -1));
-
-        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Tiempo:");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
-
-        agregarBtn1.setBackground(new java.awt.Color(87, 198, 196));
-        agregarBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        agregarBtn1.setText("Agregar");
-        jPanel2.add(agregarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, -1, -1));
+        paleanBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paleanBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(paleanBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, -1, -1));
 
         jSeparator9.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
@@ -345,22 +340,67 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         jSeparator18.setForeground(new java.awt.Color(0, 0, 0));
         jPanel2.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 140, 40));
 
-        btnAgrPais.setBackground(new java.awt.Color(87, 198, 196));
-        btnAgrPais.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgrPais.setText("Agregar");
-        jPanel2.add(btnAgrPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, -1, 400));
 
-        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Pais:");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, -1, -1));
+        btnAgrImagen.setBackground(new java.awt.Color(87, 198, 196));
+        btnAgrImagen.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgrImagen.setText("Imagen");
+        jPanel1.add(btnAgrImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+
+        listaT1.setBackground(new java.awt.Color(12, 156, 208));
+        listaT1.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setViewportView(listaT1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 160, -1));
+
+        agregarBtn1.setBackground(new java.awt.Color(87, 198, 196));
+        agregarBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        agregarBtn1.setText("Agregar");
+        jPanel1.add(agregarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 570, -1, -1));
 
         listaPaises.setBackground(new java.awt.Color(12, 156, 208));
         jScrollPane3.setViewportView(listaPaises);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 310, 170, -1));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 170, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 490));
+        btnAgrPais.setBackground(new java.awt.Color(87, 198, 196));
+        btnAgrPais.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgrPais.setText("Agregar");
+        jPanel1.add(btnAgrPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 570, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Pais:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
+
+        modificarBtn1.setBackground(new java.awt.Color(87, 198, 196));
+        modificarBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        modificarBtn1.setText("MODIFICAR");
+        jPanel1.add(modificarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, -1, -1));
+
+        eliminarBtn1.setBackground(new java.awt.Color(87, 198, 196));
+        eliminarBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarBtn1.setText("ELIMINAR");
+        jPanel1.add(eliminarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 430, 90, -1));
+
+        registrarBtn1.setBackground(new java.awt.Color(87, 198, 196));
+        registrarBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        registrarBtn1.setText("REGISTRAR");
+        registrarBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registrarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 540, 100, -1));
+
+        descripcionTxa.setBackground(new java.awt.Color(12, 156, 208));
+        descripcionTxa.setColumns(20);
+        descripcionTxa.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        descripcionTxa.setForeground(new java.awt.Color(255, 255, 255));
+        descripcionTxa.setRows(5);
+        jScrollPane1.setViewportView(descripcionTxa);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 290, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -379,6 +419,14 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     private void salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salir1ActionPerformed
+
+    private void paleanBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paleanBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_paleanBtn1ActionPerformed
+
+    private void registrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registrarBtn1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -406,6 +454,10 @@ public class TaxonomiaForm extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -419,8 +471,10 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     public javax.swing.JButton agregarBtn1;
     public javax.swing.JTextField alimentacionTF1;
     public javax.swing.JTextField alturaTF1;
+    public javax.swing.JButton btnAgrImagen;
     public javax.swing.JButton btnAgrPais;
     public javax.swing.JTextField claseTF1;
+    public javax.swing.JTextArea descripcionTxa;
     public javax.swing.JTextField dominioTF1;
     public javax.swing.JButton eliminarBtn1;
     public javax.swing.JTextField especieTF1;
@@ -434,6 +488,7 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
@@ -449,6 +504,7 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator10;
@@ -464,6 +520,7 @@ public class TaxonomiaForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator9;
     public javax.swing.JTextField largoTF1;
+    public javax.swing.JLabel lblFoto;
     public javax.swing.JList<String> listaPaises;
     public javax.swing.JList<String> listaT1;
     public javax.swing.JButton modificarBtn1;

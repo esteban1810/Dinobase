@@ -1,5 +1,8 @@
 package clase;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 public class Taxonomia {
     private String especie;
     private String reino;
@@ -15,6 +18,41 @@ public class Taxonomia {
     private String alimentacion;
     private String registrado;
     private String paleantologo;
+    private int imagenTam;
+    private FileInputStream imagenNom;
+    private InputStream leerImagen;
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public InputStream getLeerImagen() {
+        return leerImagen;
+    }
+
+    public void setLeerImagen(InputStream leerImagen) {
+        this.leerImagen = leerImagen;
+    }
+    public FileInputStream getImagenNom() {
+        return imagenNom;
+    }
+
+    public void setImagenNom(FileInputStream imagenNom) {
+        this.imagenNom = imagenNom;
+    }
+
+    public int getImagenTam() {
+        return imagenTam;
+    }
+
+    public void setImagenTam(int imagen) {
+        this.imagenTam = imagen;
+    }
 
     public String getEspecie() {
         return especie;
@@ -130,11 +168,11 @@ public class Taxonomia {
 
     @Override
     public String toString() {
-        return "Taxonomia{" + "especie=" + especie + ", reino=" + reino + ", orden=" + orden + ", dominio=" + dominio + ", familia=" + familia + ", clase=" + clase + ", filo=" + filo + ", genero=" + genero + ", altura=" + altura + ", largo=" + largo + ", peso=" + peso + ", alimentacion=" + alimentacion + ", registrado=" + registrado + ", paleantologo=" + paleantologo + '}';
+        return "Taxonomia{" + "especie=" + especie + ", reino=" + reino + ", orden=" + orden + ", dominio=" + dominio + ", familia=" + familia + ", clase=" + clase + ", filo=" + filo + ", genero=" + genero + ", altura=" + altura + ", largo=" + largo + ", peso=" + peso + ", alimentacion=" + alimentacion + ", registrado=" + registrado + ", paleantologo=" + paleantologo + ", imagenTam=" + imagenTam + ", imagenNom=" + imagenNom + '}';
     }
     
     public Object[] arreglo(){
-        Object[] arreglo = new Object[15];
+        Object[] arreglo = new Object[16];
         
         arreglo[0]=especie;
         arreglo[1]=reino;
@@ -150,6 +188,8 @@ public class Taxonomia {
         arreglo[11]= alimentacion;
         arreglo[12]=registrado;
         arreglo[13]=paleantologo;
+        arreglo[14]=imagenTam;
+        arreglo[15]=imagenNom;
         return arreglo;
     }
 }
