@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ConsultasPais extends Conexion{
     
@@ -184,16 +185,60 @@ public class ConsultasPais extends Conexion{
                 System.out.println(ex);
             }
         }
-        
     }
     
-    public boolean coincidencias(ArrayList<Pais> lista, String nombre){
+    public boolean nombrePaises(JComboBox<String> paisCB){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
+
         
-        String sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' ORDER BY nombre";
+        String sql = "SELECT nombre FROM paises ORDER BY nombre";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                paisCB.addItem(rs.getString("nombre"));
+            }
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } finally {
+            try {
+                System.out.println("todo OK");
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        
+    }
+    
+    
+    
+    public ArrayList<Pais> coincidencias(String nombre, String continente){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        ArrayList<Pais> lista = new ArrayList();
+        String sql = null;
+        
+        if(nombre.isEmpty()){
+            if(continente.isEmpty()){
+                return null;
+            } else {
+                sql = "SELECT * FROM paises WHERE continente='"+continente+"' ORDER BY nombre";
+            }
+        } else {
+            if(continente.isEmpty()){
+                sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' ORDER BY nombre";
+            } else {
+                sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' AND continente='"+continente+"' ORDER BY nombre";
+            }
+        }
         
         try {
             ps = con.prepareStatement(sql);
@@ -207,10 +252,10 @@ public class ConsultasPais extends Conexion{
                                                
                 lista.add(pais);
             }
-            return true;
+            return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return false;
+            return null;
         } finally {
             try {
                 con.close();

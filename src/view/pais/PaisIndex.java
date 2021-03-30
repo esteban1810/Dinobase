@@ -43,6 +43,7 @@ public class PaisIndex extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPais = new javax.swing.JTable();
+        continenteCB = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,7 +127,7 @@ public class PaisIndex extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Paises");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 160, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 160, 40));
 
         tbPais.setBackground(new java.awt.Color(87, 198, 196));
         tbPais.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
@@ -150,7 +151,10 @@ public class PaisIndex extends javax.swing.JFrame {
         tbPais.setRowHeight(35);
         jScrollPane1.setViewportView(tbPais);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 137, 960, 410));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 197, 960, 350));
+
+        continenteCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --", "Africa", "America", "Antartida", "Asia", "Europa", "Oceania" }));
+        getContentPane().add(continenteCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 200, -1));
 
         jLabel2.setBackground(new java.awt.Color(12, 156, 208));
         jLabel2.setOpaque(true);
@@ -214,6 +218,7 @@ public class PaisIndex extends javax.swing.JFrame {
     public javax.swing.JButton agregarBtn;
     public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
+    public javax.swing.JComboBox<String> continenteCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

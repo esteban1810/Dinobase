@@ -165,128 +165,202 @@ public class ConsultasTaxonomia extends Conexion{
         }   
     }
 
-    public boolean todasTaxonomias(ArrayList<Taxonomia> lista){
+    
+    public ArrayList<Taxonomia> coincidencias(String especie, String periodo, String pais){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
+        ArrayList<Taxonomia> lista = new ArrayList();
+        Taxonomia  tax = null;
+        String sql=null;
         
-        String sql = "SELECT * FROM taxonomias ORDER BY especie";
+        String especieAnt = null;
+        String periodoAnt = null;
+        String paisAnt = null;
+        boolean banderaPais=true;
+        
+        String especieDes = null;
+        String periodoDes= null;
+        String paisDes = null;
+        
+        if(especie.isEmpty()){
+            if(periodo.isEmpty()){
+                if(pais.isEmpty()){
+                    return null;
+                } else {
+                    sql = "SELECT * FROM taxonomias_index "+
+                        "WHERE nombrepais='"+pais+"'";
+                }
+            } else {
+                if(pais.isEmpty()){
+                    sql = "SELECT * FROM taxonomias_index "+
+                        "WHERE periodo='"+periodo+"'";
+                } else {
+                    sql = "SELECT * FROM taxonomias_index "+
+                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "AND periodo='"+periodo+"'"+
+                        "AND nombrepais='"+pais+"'";
+                }
+            }
+        } else {
+            if(periodo.isEmpty()){
+                if(pais.isEmpty()){
+                    sql = "SELECT * FROM taxonomias_index "+
+                            "WHERE especie LIKE '%"+especie+"%'";
+                } else {
+                    sql = "SELECT * FROM taxonomias_index "+
+                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "AND nombrepais='"+pais+"'";
+                }
+            } else {
+                if(pais.isEmpty()){
+                    sql = "SELECT * FROM taxonomias_index "+
+                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "AND periodo='"+periodo+"'";
+                } else {
+                    sql = "SELECT * FROM taxonomias_index "+
+                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "AND periodo='"+periodo+"'"+
+                        "AND nombrepais='"+pais+"'";
+                }
+            }
+        }
         
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()){
-                Taxonomia tax = new Taxonomia();
-                tax.setEspecie(rs.getString("especie"));
-                tax.setReino(rs.getString("reino"));
-                tax.setOrden(rs.getString("orden"));
-                tax.setDominio(rs.getString("dominio"));
-                tax.setFamilia(rs.getString("familia"));
-                tax.setClase(rs.getString("clase"));
-                tax.setFilo(rs.getString("filo"));
-                tax.setGenero(rs.getString("genero"));
-                tax.setAltura(rs.getDouble("altura"));
-                tax.setLargo(rs.getDouble("largo"));
-                tax.setPeso(rs.getDouble("peso"));
-                tax.setAlimentacion(rs.getString("alimentacion"));
-                tax.setRegistrado(rs.getString("registrado"));
-                tax.setPaleantologo(rs.getString("paleantologo"));
+            if(rs.next()){
+                especieAnt = rs.getString("especie");
+                periodoAnt = rs.getString("periodo");
+                paisAnt = rs.getString("nombrepais");
+                tax = new Taxonomia(especieAnt,periodoAnt,paisAnt);
                 lista.add(tax);
+            } else {
+                return lista;
             }
-            return true;
+            
+            while(rs.next()){
+                especieDes = rs.getString("especie");
+                periodoDes = rs.getString("periodo");
+                paisDes = rs.getString("nombrepais");
+                
+                if(especieDes.equals(especieAnt)){
+                    if(periodoDes.equals(periodoAnt)){
+                        if(banderaPais){
+                            tax.getListaPaises().add(paisDes);
+                            paisAnt = paisDes;
+                        }
+                    } else {
+                        tax.getListaPeriodos().add(periodoDes);
+                        periodoAnt = periodoDes;
+                        banderaPais=false;
+                    }
+                } else {
+                    tax = new Taxonomia(especieDes,periodoDes,paisDes);
+                    lista.add(tax);
+                    especieAnt = especieDes;
+                    periodoAnt = periodoDes;
+                    paisAnt = paisDes;
+                    banderaPais=true;
+                }
+            }
+            
+            return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return false;
+            return null;
         } finally {
             try {
                 con.close();
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
-        }
-        
+        }        
     }
     
-    public boolean coincidencias(ArrayList<Taxonomia> lista, String especie){
+    public ArrayList<Taxonomia> index(){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
+        ArrayList<Taxonomia> lista = new ArrayList();
+        Taxonomia  tax = null;
         
-        String sql = "SELECT * FROM taxonomias WHERE especie LIKE '%"+especie+"%' ORDER BY especie";
+        String especieAnt = null;
+        String periodoAnt = null;
+        String paisAnt = null;
+        boolean banderaPais=true;
+        
+        String especieDes = null;
+        String periodoDes= null;
+        String paisDes = null;
+        
+        String sql = "SELECT * FROM taxonomias_index";
         
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()){
-                Taxonomia tax = new Taxonomia();
-                tax.setEspecie(rs.getString("especie"));
-                tax.setReino(rs.getString("reino"));
-                tax.setOrden(rs.getString("orden"));
-                tax.setDominio(rs.getString("dominio"));
-                tax.setFamilia(rs.getString("familia"));
-                tax.setClase(rs.getString("clase"));
-                tax.setFilo(rs.getString("filo"));
-                tax.setGenero(rs.getString("genero"));
-                tax.setAltura(rs.getDouble("altura"));
-                tax.setLargo(rs.getDouble("largo"));
-                tax.setPeso(rs.getDouble("peso"));
-                tax.setAlimentacion(rs.getString("alimentacion"));
-                tax.setRegistrado(rs.getString("registrado"));
-                tax.setPaleantologo(rs.getString("paleantologo"));
+//<<<<<<< HEAD
+//            while(rs.next()){
+//                Taxonomia tax = new Taxonomia();
+//                tax.setEspecie(rs.getString("especie"));
+//                tax.setReino(rs.getString("reino"));
+//                tax.setOrden(rs.getString("orden"));
+//                tax.setDominio(rs.getString("dominio"));
+//                tax.setFamilia(rs.getString("familia"));
+//                tax.setClase(rs.getString("clase"));
+//                tax.setFilo(rs.getString("filo"));
+//                tax.setGenero(rs.getString("genero"));
+//                tax.setAltura(rs.getDouble("altura"));
+//                tax.setLargo(rs.getDouble("largo"));
+//                tax.setPeso(rs.getDouble("peso"));
+//                tax.setAlimentacion(rs.getString("alimentacion"));
+//                tax.setRegistrado(rs.getString("registrado"));
+//                tax.setPaleantologo(rs.getString("paleantologo"));
+//                tax.setLeerImagen(rs.getBinaryStream("imagen"));
+//=======
+            if(rs.next()){
+                especieAnt = rs.getString("especie");
+                periodoAnt = rs.getString("periodo");
+                paisAnt = rs.getString("nombrepais");
+                tax = new Taxonomia(especieAnt,periodoAnt,paisAnt);
+//>>>>>>> filtracion
                 lista.add(tax);
+            } else {
+                return lista;
             }
-            return true;
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
-        }
-    }
-    
-    public boolean index(ArrayList<Taxonomia> lista){
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConnection();
-        lista.clear();
-        
-        String sql = "SELECT * FROM taxonomias ORDER BY especie";
-        
-        try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
             
             while(rs.next()){
-                Taxonomia tax = new Taxonomia();
-                tax.setEspecie(rs.getString("especie"));
-                tax.setReino(rs.getString("reino"));
-                tax.setOrden(rs.getString("orden"));
-                tax.setDominio(rs.getString("dominio"));
-                tax.setFamilia(rs.getString("familia"));
-                tax.setClase(rs.getString("clase"));
-                tax.setFilo(rs.getString("filo"));
-                tax.setGenero(rs.getString("genero"));
-                tax.setAltura(rs.getDouble("altura"));
-                tax.setLargo(rs.getDouble("largo"));
-                tax.setPeso(rs.getDouble("peso"));
-                tax.setAlimentacion(rs.getString("alimentacion"));
-                tax.setRegistrado(rs.getString("registrado"));
-                tax.setPaleantologo(rs.getString("paleantologo"));
-                tax.setLeerImagen(rs.getBinaryStream("imagen"));
-                lista.add(tax);
+                especieDes = rs.getString("especie");
+                periodoDes = rs.getString("periodo");
+                paisDes = rs.getString("nombrepais");
+                
+                if(especieDes.equals(especieAnt)){
+                    if(periodoDes.equals(periodoAnt)){
+                        if(banderaPais){
+                            tax.getListaPaises().add(paisDes);
+                            paisAnt = paisDes;
+                        }
+                    } else {
+                        tax.getListaPeriodos().add(periodoDes);
+                        periodoAnt = periodoDes;
+                        banderaPais=false;
+                    }
+                } else {
+                    tax = new Taxonomia(especieDes,periodoDes,paisDes);
+                    lista.add(tax);
+                    especieAnt = especieDes;
+                    periodoAnt = periodoDes;
+                    paisAnt = paisDes;
+                    banderaPais=true;
+                }
             }
-            return true;
+            
+            return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return false;
+            return null;
         } finally {
             try {
                 con.close();

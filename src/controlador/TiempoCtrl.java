@@ -77,6 +77,9 @@ public class TiempoCtrl implements ActionListener{
         
         else if (e.getSource() == tiempoIndex.todoBtn) {
             tiempoModelo.todosTiempos(lista);
+            tiempoIndex.buscarTF.setText("");
+            tiempoIndex.desdeTF.setText("");
+            tiempoIndex.hastaTF.setText("");
             cargarTabla();
         } 
         
@@ -267,9 +270,13 @@ public class TiempoCtrl implements ActionListener{
     }
 
     private void presionarBuscarBtn() {
-        lista.clear();
+        String periodo = tiempoIndex.buscarTF.getText();
+        String desde = tiempoIndex.desdeTF.getText();
+        String hasta = tiempoIndex.hastaTF.getText();
+        
         limpiarTabla();
-        tiempoModelo.coincidencias(lista, tiempoIndex.buscarTF.getText());
+        
+        lista = tiempoModelo.coincidencias(periodo,desde,hasta);
         
         if (lista.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");

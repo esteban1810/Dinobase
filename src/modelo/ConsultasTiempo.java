@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ConsultasTiempo  extends Conexion{
      public boolean registrar(Tiempo time){
@@ -156,26 +157,20 @@ public class ConsultasTiempo  extends Conexion{
         
     }
     
-    public boolean coincidencias(ArrayList<Tiempo> lista, String periodo){
+    public boolean nombrePeriodos(JComboBox<String> periodoCB){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
         
-        String sql = "SELECT * FROM tiempos WHERE periodo LIKE '%"+periodo+"%' ORDER BY periodo";
-        
+        String sql = "SELECT * FROM tiempos ORDER BY periodo";
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
             while(rs.next()){
-                Tiempo tiem = new Tiempo();
-                tiem.setPeriodo(rs.getString("periodo"));
-                tiem.setEra(rs.getString("era"));
-                tiem.setEpoca(rs.getString("epoca"));
-                tiem.setDescubierto(rs.getString("descubierto"));
-                lista.add(tiem);
+                periodoCB.addItem(rs.getString("periodo"));
             }
+            
             return true;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -189,5 +184,78 @@ public class ConsultasTiempo  extends Conexion{
         }
         
     }
+    
+    
+    
+    public ArrayList<Tiempo> coincidencias(String periodo,String desde, String hasta){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        ArrayList<Tiempo> lista = new ArrayList();
+        String sql = null;
+        
+        if(periodo.isEmpty()){
+            if(desde.isEmpty()){
+                if(hasta.isEmpty()){
+                    System.out.println("ando por aqui");
+                    return null;
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE descubierto<='"+hasta+"' ORDER BY periodo";
+                }
+            } else {
+                if(hasta.isEmpty()){
+                    sql = "SELECT * FROM tiempos WHERE descubierto>='"+desde+"' ORDER BY periodo";
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE descubierto<='"+hasta+
+                            "' AND descubierto>='"+desde+"' ORDER BY periodo";
+                }
+            }
+        } else {
+            if(desde.isEmpty()){
+                if(hasta.isEmpty()){
+                    sql = "SELECT * FROM tiempos WHERE periodo ILIKE '%"+periodo+
+                            "%' ORDER BY periodo";
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE periodo='%"+periodo+
+                            "%' AND descubierto<='"+hasta+"' ORDER BY periodo";
+                }
+            } else {
+                if(hasta.isEmpty()){
+                    sql = "SELECT * FROM tiempos WHERE descubierto>='"+desde+
+                            "' AND descubierto>='"+desde+"' ORDER BY periodo";
+                } else {
+                    sql = "SELECT * FROM tiempos WHERE periodo='%"+periodo+
+                            "%' AND descubierto<='"+hasta+
+                            "' AND descubierto>='"+desde+"' ORDER BY periodo";
+                }
+            }
+        }
+        
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Tiempo tiem = new Tiempo();
+                tiem.setPeriodo(rs.getString("periodo"));
+                tiem.setEra(rs.getString("era"));
+                tiem.setEpoca(rs.getString("epoca"));
+                tiem.setDescubierto(rs.getString("descubierto"));
+                lista.add(tiem);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        
+    }
+    
     
 }

@@ -157,30 +157,31 @@ public class ConsultasPaleontologo extends Conexion{
         
     }
     
-    public boolean coincidencias(ArrayList<Paleontologo> lista, String cedula){
+    public ArrayList<Paleontologo> coincidencias(String cadena){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        lista.clear();
+        ArrayList<Paleontologo> lista = new ArrayList();
+        Paleontologo paleo;
         
-        String sql = "SELECT * FROM paleantologos WHERE cedula LIKE '%"+cedula+"%' ORDER BY nombre";
+        String sql = "SELECT * FROM paleantologos WHERE cedula ILIKE '%"+cadena+"%' OR CONCAT(nombre,' ',apellidos) ILIKE '%"+cadena+"%' ORDER BY nombre";
         
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
             while(rs.next()){
-                Paleontologo paleo = new Paleontologo();
+                paleo = new Paleontologo();
                 paleo.setNombre(rs.getString("nombre"));
                 paleo.setApellidos(rs.getString("apellidos"));
                 paleo.setCedula(rs.getString("cedula"));
                 paleo.setFechaN(rs.getDate("fechan"));
                 lista.add(paleo);
             }
-            return true;
+            return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
-            return false;
+            return null;
         } finally {
             try {
                 con.close();

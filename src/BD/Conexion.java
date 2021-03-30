@@ -7,7 +7,7 @@ import java.sql.SQLException;
 //Estoy haciendo pruebas
 public class Conexion {
     private final String usuario="postgres";
-    private final String pass="1234";
+    private final String pass="esteban3";
     private final String BD="dinobase";
     private final String host="localhost";
     private final String port="5432";

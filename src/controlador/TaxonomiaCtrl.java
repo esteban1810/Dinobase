@@ -11,8 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,24 +18,23 @@ import modelo.*;
 
 public final class TaxonomiaCtrl implements ActionListener {
 
-    private final Taxonomia taxonomia;
-    private final ConsultasTaxonomia taxonomiaModelo;
+    private final  Taxonomia taxonomia;
+    private final  ConsultasTaxonomia taxonomiaModelo;
     private final TaxonomiaIndex taxonomiaIndex;
-    private final TaxonomiaForm taxonomiaForm;
-    private final MenuCtrl menuCtrl;
+    private final  TaxonomiaForm taxonomiaForm;
+    private final  MenuCtrl menuCtrl;
     private DefaultTableModel modelo;
-    private final ArrayList<Taxonomia> lista;
+    private ArrayList<Taxonomia> lista;
     private int longitudBytes;
     JFileChooser j = new JFileChooser();
-
-    public TaxonomiaCtrl() {
-        this.taxonomia = new Taxonomia();
-        this.taxonomiaModelo = new ConsultasTaxonomia();
+    
+    public TaxonomiaCtrl(){
+        this.taxonomia      = new Taxonomia();
+        this.taxonomiaModelo= new ConsultasTaxonomia();
         this.taxonomiaIndex = new TaxonomiaIndex();
         taxonomiaForm = new TaxonomiaForm();
 
         modelo = new DefaultTableModel();
-        lista = new ArrayList();
         menuCtrl = new MenuCtrl();
 
         this.taxonomiaIndex.todoBtn.addActionListener(this);
@@ -56,9 +53,11 @@ public final class TaxonomiaCtrl implements ActionListener {
         taxonomiaForm.btnAgrPais.addActionListener(this);
         taxonomiaForm.btnAgrImagen.addActionListener(this);
         taxonomiaForm.setLocationRelativeTo(null);
-
-        taxonomiaModelo.todasTaxonomias(lista);
+        
+        lista = taxonomiaModelo.index();
         cargarTabla();
+        this.cargarPeriodoCB();
+        this.cargarPaisCB();
     }
 
     public void iniciar() {
@@ -72,8 +71,10 @@ public final class TaxonomiaCtrl implements ActionListener {
 
         if (e.getSource() == taxonomiaForm.registrarBtn1) {
             presionarRegistrarBtn1();
-        } else if (e.getSource() == taxonomiaIndex.todoBtn) {
-            taxonomiaModelo.todasTaxonomias(lista);
+        } 
+        
+        else if(e.getSource() == taxonomiaIndex.todoBtn){
+            lista = taxonomiaModelo.index();
             cargarTabla();
         } else if (e.getSource() == taxonomiaIndex.mostrarBtn) {
             presionarMostrarBtn();
@@ -107,8 +108,17 @@ public final class TaxonomiaCtrl implements ActionListener {
             this.agregarFileChooser();
         }
     }
-
-    public void limpiar() {
+    
+    
+    public void cargarPeriodoCB(){
+        new ConsultasTiempo().nombrePeriodos(taxonomiaIndex.periodoCB);
+    }
+    
+    public void cargarPaisCB(){
+        new ConsultasPais().nombrePaises(taxonomiaIndex.paisCB);
+    }
+    
+    public void limpiar(){
         taxonomiaForm.especieTF1.setText(null);
         taxonomiaForm.reinoTF1.setText(null);
         taxonomiaForm.ordenTF1.setText(null);
@@ -132,28 +142,20 @@ public final class TaxonomiaCtrl implements ActionListener {
     public void cargarTabla() {
         modelo = new DefaultTableModel();
         taxonomiaIndex.tablaTaxonomias.setModel(modelo);
-        
-        modelo.addColumn("Imagen");
+            
+        modelo.addColumn("IMAGEN");
         modelo.addColumn("ESPECIE");
-        modelo.addColumn("REINO");
-        modelo.addColumn("ORDEN");
-        modelo.addColumn("DOMINIO");
-        modelo.addColumn("FAMILIA");
-        modelo.addColumn("CLASE");
-        modelo.addColumn("FILO");
-        modelo.addColumn("GENERO");
-        modelo.addColumn("ALTURA");
-        modelo.addColumn("LARGO");
-        modelo.addColumn("PESO");
-        modelo.addColumn("ALIMENTACION");
-        modelo.addColumn("REGISTRADO");
-        modelo.addColumn("PALEANTOLOGO");
+        modelo.addColumn("PERIODO");
+        modelo.addColumn("PAIS(ES)");
 
-        Object[] fila = new Object[14];
-
-        for (int i = 0; i < lista.size(); i++) {
-            fila = lista.get(i).arreglo();
-            modelo.addRow(fila);
+//<<<<<<< HEAD
+//        for (int i = 0; i < lista.size(); i++) {
+//            fila = lista.get(i).arreglo();
+//            modelo.addRow(fila);
+//=======
+        for(int i=0; i<lista.size(); i++){
+            modelo.addRow(lista.get(i).arreglo());
+//>>>>>>> filtracion
         }
     }
 
@@ -198,8 +200,13 @@ public final class TaxonomiaCtrl implements ActionListener {
         tt.registrar(taxonomia.getEspecie(), listModelTiempo.toArray());
         tp.registrar(taxonomia.getEspecie(), listModelPais.toArray());
         limpiar();
-
-        taxonomiaModelo.todasTaxonomias(lista);
+//<<<<<<< HEAD
+//
+//        taxonomiaModelo.todasTaxonomias(lista);
+//=======
+        
+        lista=taxonomiaModelo.index();
+//>>>>>>> filtracion
         cargarTabla();
     }
 
@@ -217,7 +224,7 @@ public final class TaxonomiaCtrl implements ActionListener {
             return;
         }
 
-        taxonomia.setEspecie(taxonomiaIndex.tablaTaxonomias.getValueAt(fila, 0).toString());
+        taxonomia.setEspecie(taxonomiaIndex.tablaTaxonomias.getValueAt(fila, 1).toString());
 
         tiempos = new ConsultasTaxo_Tiempo().getRelacionesTiempo(taxonomia.getEspecie());
         modelTiempo = new DefaultListModel();
@@ -321,8 +328,13 @@ public final class TaxonomiaCtrl implements ActionListener {
         tp.modificar(taxonomia.getEspecie(), listaPaises.toArray());
 
         limpiar();
-        taxonomiaModelo.todasTaxonomias(lista);
-        cargarTabla();
+//<<<<<<< HEAD
+//        taxonomiaModelo.todasTaxonomias(lista);
+//        cargarTabla();
+//=======
+        lista = taxonomiaModelo.index();
+        cargarTabla(); 
+//>>>>>>> filtracion
     }
 
     private void presionarEliminarBtn1() {
@@ -336,7 +348,7 @@ public final class TaxonomiaCtrl implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al eliminar");
         }
         limpiar();
-        taxonomiaModelo.todasTaxonomias(lista);
+        lista=taxonomiaModelo.index();
         cargarTabla();
     }
 
@@ -353,8 +365,22 @@ public final class TaxonomiaCtrl implements ActionListener {
     private void presionarBuscarBtn() {
         lista.clear();
         limpiarTabla();
-        taxonomiaModelo.coincidencias(lista, taxonomiaIndex.buscarTF.getText());
-        if (lista.isEmpty()) {
+//<<<<<<< HEAD
+//        taxonomiaModelo.coincidencias(lista, taxonomiaIndex.buscarTF.getText());
+//        if (lista.isEmpty()) {
+//=======
+        String pais = this.taxonomiaIndex.paisCB.getSelectedItem().toString();
+        String periodo = this.taxonomiaIndex.periodoCB.getSelectedItem().toString();
+        String especie = taxonomiaIndex.buscarTF.getText();
+        
+        pais = pais.equals("-- Seleccionar --") ? "" : pais;
+        periodo = periodo.equals("-- Seleccionar --") ? "" : periodo;
+        
+
+        lista = taxonomiaModelo.coincidencias(especie,periodo,pais);
+        
+        if(lista.isEmpty()){
+//>>>>>>> filtracion
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
