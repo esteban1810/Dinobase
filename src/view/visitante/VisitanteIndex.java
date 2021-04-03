@@ -22,10 +22,15 @@ public class VisitanteIndex extends javax.swing.JFrame {
         buscarBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        mostrarPaleoBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        paleontologoCB = new javax.swing.JComboBox<>();
+        periodoCB = new javax.swing.JComboBox<>();
+        paisCB = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,11 +46,11 @@ public class VisitanteIndex extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ESPECIE", "REGISTRADO", "PALEONTOLOGO", "TIEMPO", "PAIS"
+                "ESPECIE", "PALEONTOLOGO", "TIEMPO", "PAIS"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -55,7 +60,7 @@ public class VisitanteIndex extends javax.swing.JFrame {
         tablaTaxonomias2.setRowHeight(25);
         jScrollPane1.setViewportView(tablaTaxonomias2);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 700, 400));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 700, 330));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dino_dinosaur_icon_153295.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 100, 240, 260));
@@ -105,12 +110,7 @@ public class VisitanteIndex extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Especies");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 160, 50));
-
-        mostrarPaleoBtn.setBackground(new java.awt.Color(87, 198, 196));
-        mostrarPaleoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarPaleoBtn.setText("Mostrar paleontologo");
-        jPanel1.add(mostrarPaleoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 160, 50));
 
         regresarBtn.setBackground(new java.awt.Color(12, 241, 253));
         regresarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/back-arrow_icon-icons.com_72866.png"))); // NOI18N
@@ -131,6 +131,35 @@ public class VisitanteIndex extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 190, 10));
+
+        paleontologoCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --" }));
+        jPanel1.add(paleontologoCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 150, -1));
+
+        periodoCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --" }));
+        jPanel1.add(periodoCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 150, -1));
+
+        paisCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --" }));
+        paisCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paisCBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(paisCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 150, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("PALEONTOLOGO:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("PERIODO:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("PAIS:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(12, 156, 208));
         jLabel3.setOpaque(true);
@@ -157,6 +186,10 @@ public class VisitanteIndex extends javax.swing.JFrame {
     private void buscarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarTFActionPerformed
+
+    private void paisCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_paisCBActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -213,11 +246,16 @@ public class VisitanteIndex extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton mostrarBtn;
-    public javax.swing.JButton mostrarPaleoBtn;
+    public javax.swing.JComboBox<String> paisCB;
+    public javax.swing.JComboBox<String> paleontologoCB;
+    public javax.swing.JComboBox<String> periodoCB;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;
     public javax.swing.JTable tablaTaxonomias2;

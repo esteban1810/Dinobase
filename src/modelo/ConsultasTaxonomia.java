@@ -186,7 +186,7 @@ public class ConsultasTaxonomia extends Conexion{
         if(especie.isEmpty()){
             if(periodo.isEmpty()){
                 if(pais.isEmpty()){
-                    return null;
+                    return lista;
                 } else {
                     sql = "SELECT * FROM taxonomias_index "+
                         "WHERE nombrepais='"+pais+"'";
@@ -197,7 +197,7 @@ public class ConsultasTaxonomia extends Conexion{
                         "WHERE periodo='"+periodo+"'";
                 } else {
                     sql = "SELECT * FROM taxonomias_index "+
-                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "WHERE especie ILIKE '%"+especie+"%'"+
                         "AND periodo='"+periodo+"'"+
                         "AND nombrepais='"+pais+"'";
                 }
@@ -206,20 +206,20 @@ public class ConsultasTaxonomia extends Conexion{
             if(periodo.isEmpty()){
                 if(pais.isEmpty()){
                     sql = "SELECT * FROM taxonomias_index "+
-                            "WHERE especie LIKE '%"+especie+"%'";
+                            "WHERE especie ILIKE '%"+especie+"%'";
                 } else {
                     sql = "SELECT * FROM taxonomias_index "+
-                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "WHERE especie ILIKE '%"+especie+"%'"+
                         "AND nombrepais='"+pais+"'";
                 }
             } else {
                 if(pais.isEmpty()){
                     sql = "SELECT * FROM taxonomias_index "+
-                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "WHERE especie ILIKE '%"+especie+"%'"+
                         "AND periodo='"+periodo+"'";
                 } else {
                     sql = "SELECT * FROM taxonomias_index "+
-                        "WHERE especie LIKE '%"+especie+"%'"+
+                        "WHERE especie ILIKE '%"+especie+"%'"+
                         "AND periodo='"+periodo+"'"+
                         "AND nombrepais='"+pais+"'";
                 }
@@ -301,31 +301,11 @@ public class ConsultasTaxonomia extends Conexion{
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-//<<<<<<< HEAD
-//            while(rs.next()){
-//                Taxonomia tax = new Taxonomia();
-//                tax.setEspecie(rs.getString("especie"));
-//                tax.setReino(rs.getString("reino"));
-//                tax.setOrden(rs.getString("orden"));
-//                tax.setDominio(rs.getString("dominio"));
-//                tax.setFamilia(rs.getString("familia"));
-//                tax.setClase(rs.getString("clase"));
-//                tax.setFilo(rs.getString("filo"));
-//                tax.setGenero(rs.getString("genero"));
-//                tax.setAltura(rs.getDouble("altura"));
-//                tax.setLargo(rs.getDouble("largo"));
-//                tax.setPeso(rs.getDouble("peso"));
-//                tax.setAlimentacion(rs.getString("alimentacion"));
-//                tax.setRegistrado(rs.getString("registrado"));
-//                tax.setPaleantologo(rs.getString("paleantologo"));
-//                tax.setLeerImagen(rs.getBinaryStream("imagen"));
-//=======
             if(rs.next()){
                 especieAnt = rs.getString("especie");
                 periodoAnt = rs.getString("periodo");
                 paisAnt = rs.getString("nombrepais");
                 tax = new Taxonomia(especieAnt,periodoAnt,paisAnt);
-//>>>>>>> filtracion
                 lista.add(tax);
             } else {
                 return lista;

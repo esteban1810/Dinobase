@@ -118,6 +118,8 @@ public final class TaxonomiaCtrl implements ActionListener {
         new ConsultasPais().nombrePaises(taxonomiaIndex.paisCB);
     }
     
+    
+    
     public void limpiar(){
         taxonomiaForm.especieTF1.setText(null);
         taxonomiaForm.reinoTF1.setText(null);
@@ -147,15 +149,8 @@ public final class TaxonomiaCtrl implements ActionListener {
         modelo.addColumn("ESPECIE");
         modelo.addColumn("PERIODO");
         modelo.addColumn("PAIS(ES)");
-
-//<<<<<<< HEAD
-//        for (int i = 0; i < lista.size(); i++) {
-//            fila = lista.get(i).arreglo();
-//            modelo.addRow(fila);
-//=======
         for(int i=0; i<lista.size(); i++){
             modelo.addRow(lista.get(i).arreglo());
-//>>>>>>> filtracion
         }
     }
 
@@ -200,13 +195,8 @@ public final class TaxonomiaCtrl implements ActionListener {
         tt.registrar(taxonomia.getEspecie(), listModelTiempo.toArray());
         tp.registrar(taxonomia.getEspecie(), listModelPais.toArray());
         limpiar();
-//<<<<<<< HEAD
-//
-//        taxonomiaModelo.todasTaxonomias(lista);
-//=======
         
         lista=taxonomiaModelo.index();
-//>>>>>>> filtracion
         cargarTabla();
     }
 
@@ -328,13 +318,8 @@ public final class TaxonomiaCtrl implements ActionListener {
         tp.modificar(taxonomia.getEspecie(), listaPaises.toArray());
 
         limpiar();
-//<<<<<<< HEAD
-//        taxonomiaModelo.todasTaxonomias(lista);
-//        cargarTabla();
-//=======
         lista = taxonomiaModelo.index();
         cargarTabla(); 
-//>>>>>>> filtracion
     }
 
     private void presionarEliminarBtn1() {
@@ -363,27 +348,37 @@ public final class TaxonomiaCtrl implements ActionListener {
     }
 
     private void presionarBuscarBtn() {
-        lista.clear();
-        limpiarTabla();
-//<<<<<<< HEAD
-//        taxonomiaModelo.coincidencias(lista, taxonomiaIndex.buscarTF.getText());
-//        if (lista.isEmpty()) {
-//=======
         String pais = this.taxonomiaIndex.paisCB.getSelectedItem().toString();
         String periodo = this.taxonomiaIndex.periodoCB.getSelectedItem().toString();
         String especie = taxonomiaIndex.buscarTF.getText();
+        ArrayList<Taxonomia> listaAux;
         
-        pais = pais.equals("-- Seleccionar --") ? "" : pais;
-        periodo = periodo.equals("-- Seleccionar --") ? "" : periodo;
+        
+        if(pais.equals("-- Seleccionar --")){
+            pais="";
+            if(periodo.equals("-- Seleccionar --")){
+                periodo="";
+                if(especie.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Especifique algún campo de búsqueda");
+                    return;
+                }
+            }
+        } else {
+            if(periodo.equals("-- Seleccionar --")){
+                periodo="";
+            }
+        }
         
 
-        lista = taxonomiaModelo.coincidencias(especie,periodo,pais);
+        listaAux = taxonomiaModelo.coincidencias(especie,periodo,pais);
         
-        if(lista.isEmpty()){
-//>>>>>>> filtracion
+        if(listaAux.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
+        
+        lista = listaAux;
+        limpiarTabla();
         cargarTabla();
     }
 

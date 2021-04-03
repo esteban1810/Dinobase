@@ -69,6 +69,11 @@ public class Taxonomia {
         this.listaPaises.add(pais);
         this.listaPeriodos.add(periodo);
     }
+    
+    public Taxonomia(String especie, String paleon, String periodo, String pais){
+        this(especie,periodo,pais);
+        this.paleantologo=paleon;
+    }
 
     public ArrayList<String> getListaPaises() {
         return listaPaises;
@@ -204,7 +209,7 @@ public class Taxonomia {
     }
     
     public Object[] arreglo(){
-        Object[] arreglo = new Object[15];
+        Object[] arreglo = new Object[4];
         String paises="";
         String periodos="";
         
@@ -219,6 +224,28 @@ public class Taxonomia {
         
         arreglo[0]="";
         arreglo[1]=especie;
+        arreglo[2]=periodos;
+        arreglo[3]=paises;
+        
+        return arreglo;
+    }
+    
+    public Object[] arregloVisitante(){
+        Object[] arreglo = new Object[4];
+        String paises="";
+        String periodos="";
+        
+        for(String pais : listaPaises){
+            paises+=pais+", ";
+        }
+        paises=paises.substring(0, paises.length()-2);
+        for(String periodo : listaPeriodos){
+            periodos+=periodo+", ";
+        }
+        periodos=periodos.substring(0, periodos.length()-2);
+        
+        arreglo[0]=especie;
+        arreglo[1]=paleantologo;
         arreglo[2]=periodos;
         arreglo[3]=paises;
         

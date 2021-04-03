@@ -5,6 +5,7 @@ import clase.Tiempo;
 import clase.Pais;
 import clase.Clima;
 import BD.Conexion;
+import clase.Taxonomia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -180,27 +181,68 @@ public class ConsultasRegistrosV  extends Conexion{
     }
     
     public ArrayList todosRegistros(){
-        ArrayList<RegistroVisitante> lista = new ArrayList();
-        PreparedStatement ps;
-        ResultSet rs;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Connection con = getConnection();
-        RegistroVisitante rv;
+        ArrayList<Taxonomia> lista = new ArrayList();
+        Taxonomia  tax = null;
         
-        String sql = "SELECT * FROM taxonomias ORDER BY especie";
+        String especieAnt = null;
+        String paleonAnt = null;
+        String periodoAnt = null;
+        String paisAnt = null;
+        boolean banderaPais=true;
+        
+        String especieDes = null;
+        String paleonDes = null;
+        String periodoDes= null;
+        String paisDes = null;
+        
+        String sql = "SELECT * FROM index_visitante";
         
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()){
-                rv = new RegistroVisitante();
-                rv.setEspecie(rs.getString("especie"));
-                rv.setRegistrado(rs.getString("registrado"));
-                rv.setPaleontologo(rs.getString("paleantologo"));
-                rv.setPeriodos(this.buscarTiempos(rs.getString("especie")));
-                rv.setPaises(this.buscarPaises(rs.getString("especie")));
-                lista.add(rv);
+            if(rs.next()){
+                especieAnt = rs.getString("especie");
+                paleonAnt = rs.getString(2);
+                periodoAnt = rs.getString("periodo");
+                paisAnt = rs.getString("nombrepais");
+                tax = new Taxonomia(especieAnt,paleonAnt,periodoAnt,paisAnt);
+                lista.add(tax);
+            } else {
+                return lista;
             }
+            
+            while(rs.next()){
+                especieDes = rs.getString("especie");
+                paleonDes = rs.getString(2);
+                periodoDes = rs.getString("periodo");
+                paisDes = rs.getString("nombrepais");
+                
+                if(especieDes.equals(especieAnt)){
+                    if(periodoDes.equals(periodoAnt)){
+                        if(banderaPais){
+                            tax.getListaPaises().add(paisDes);
+                            paisAnt = paisDes;
+                        }
+                    } else {
+                        tax.getListaPeriodos().add(periodoDes);
+                        periodoAnt = periodoDes;
+                        banderaPais=false;
+                    }
+                } else {
+                    tax = new Taxonomia(especieDes,paleonDes,periodoDes,paisDes);
+                    lista.add(tax);
+                    especieAnt = especieDes;
+                    paleonAnt = paleonDes;
+                    periodoAnt = periodoDes;
+                    paisAnt = paisDes;
+                    banderaPais=true;
+                }
+            }
+            
             return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -214,27 +256,164 @@ public class ConsultasRegistrosV  extends Conexion{
         }
     }
     
-     public ArrayList coincidencias(ArrayList<RegistroVisitante> lista,     String especie){
-        PreparedStatement ps;
-        ResultSet rs;
+    public ArrayList<Taxonomia> coincidencias(String especie,String paleontologo, String periodo, String pais){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Connection con = getConnection();
-        RegistroVisitante rv;
+        ArrayList<Taxonomia> lista = new ArrayList();
+        Taxonomia  tax = null;
+        String sql=null;
         
-        String sql = "SELECT * FROM taxonomias WHERE especie LIKE '%"+especie+"%' ORDER BY especie";
+        String especieAnt = null;
+        String paleonAnt = null;
+        String periodoAnt = null;
+        String paisAnt = null;
+        boolean banderaPais=true;
+        
+        String especieDes = null;
+        String paleonDes = null;
+        String periodoDes= null;
+        String paisDes = null;
+        
+        
+        
+        if(especie.isEmpty()){
+            if(periodo.isEmpty()){
+                if(pais.isEmpty()){
+                    if(paleontologo.isEmpty()){
+                        return lista;
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                            "WHERE paleontologo='"+paleontologo+"'";
+                    } 
+                } else {
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE nombrepais='"+pais+"'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE paleontologo='"+paleontologo+"'"+
+                                "AND nombrepais='"+pais+"'";
+                    }
+                }
+            } else {
+                if(pais.isEmpty()){
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE periodo='"+periodo+"'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE paleontologo='"+paleontologo+"'"+
+                                "AND periodo='"+periodo+"'";
+                    } 
+                } else {
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE periodo='"+periodo+"'"+
+                                "AND nombrepais='"+pais+"'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE paleontologo='"+paleontologo+"'"+
+                                "AND periodo='"+periodo+"'"+
+                                "AND nombrepais='"+pais+"'";
+                    }
+                }
+            }
+        } else {
+            if(periodo.isEmpty()){
+                if(pais.isEmpty()){
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                            "WHERE especie ILIKE '%"+especie+"%'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND paleontologo='"+paleontologo+"'";
+                    }
+                } else {
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND nombrepais='"+pais+"'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND nombrepais='"+pais+"'"+
+                                "AND paleontologo='"+paleontologo+"'";
+                    }
+                } 
+            } else {
+                if(pais.isEmpty()){
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND periodo='"+periodo+"'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND periodo='"+periodo+"'"+
+                                "AND paleontologo='"+paleontologo+"'";
+                    }
+                } else {
+                    if(paleontologo.isEmpty()){
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND nombrepais='"+pais+"'"+
+                                "AND periodo='"+periodo+"'";
+                    } else {
+                        sql = "SELECT * FROM index_visitante "+
+                                "WHERE especie ILIKE '%"+especie+"%'"+
+                                "AND nombrepais='"+pais+"'"+
+                                "AND periodo='"+periodo+"'"+
+                                "AND paleontologo='"+paleontologo+"'";
+                    }
+                }
+            }
+        }
         
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()){
-                rv = new RegistroVisitante();
-                rv.setEspecie(rs.getString("especie"));
-                rv.setRegistrado(rs.getString("registrado"));
-                rv.setPaleontologo(rs.getString("paleantologo"));
-                rv.setPeriodos(this.buscarTiempos(rs.getString("especie")));
-                rv.setPaises(this.buscarPaises(rs.getString("especie")));
-                lista.add(rv);
+            if(rs.next()){
+                especieAnt = rs.getString(1);
+                paleonAnt = rs.getString(2);
+                periodoAnt = rs.getString(3);
+                paisAnt = rs.getString(4);
+                tax = new Taxonomia(especieAnt,paleonAnt,periodoAnt,paisAnt);
+                lista.add(tax);
+            } else {
+                return lista;
             }
+            
+            while(rs.next()){
+                especieDes = rs.getString("especie");
+                paleonDes = rs.getString(2);
+                periodoDes = rs.getString("periodo");
+                paisDes = rs.getString("nombrepais");
+                
+                if(especieDes.equals(especieAnt)){
+                    if(periodoDes.equals(periodoAnt)){
+                        if(banderaPais){
+                            tax.getListaPaises().add(paisDes);
+                            paisAnt = paisDes;
+                        }
+                    } else {
+                        tax.getListaPeriodos().add(periodoDes);
+                        periodoAnt = periodoDes;
+                        banderaPais=false;
+                    }
+                } else {
+                    tax = new Taxonomia(especieDes,paleonDes,periodoDes,paisDes);
+                    lista.add(tax);
+                    especieAnt = especieDes;
+                    paleonAnt = paleonDes;
+                    periodoAnt = periodoDes;
+                    paisAnt = paisDes;
+                    banderaPais=true;
+                }
+            }
+            
             return lista;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -245,10 +424,46 @@ public class ConsultasRegistrosV  extends Conexion{
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
-        }
-        
-//        
+        }        
     }
+    
+    
+//     public ArrayList coincidencias(ArrayList<RegistroVisitante> lista,     String especie){
+//        PreparedStatement ps;
+//        ResultSet rs;
+//        Connection con = getConnection();
+//        RegistroVisitante rv;
+//        
+//        String sql = "SELECT * FROM taxonomias WHERE especie LIKE '%"+especie+"%' ORDER BY especie";
+//        
+//        try {
+//            ps = con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//            
+//            while(rs.next()){
+//                rv = new RegistroVisitante();
+//                rv.setEspecie(rs.getString("especie"));
+//                rv.setRegistrado(rs.getString("registrado"));
+//                rv.setPaleontologo(rs.getString("paleantologo"));
+//                rv.setPeriodos(this.buscarTiempos(rs.getString("especie")));
+//                rv.setPaises(this.buscarPaises(rs.getString("especie")));
+//                lista.add(rv);
+//            }
+//            return lista;
+//        } catch (SQLException ex) {
+//            System.out.println(ex);
+//            return null;
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException ex) {
+//                System.out.println(ex);
+//            }
+//        }
+//     }
+     
+     
+     
     
     public ArrayList<Clima> buscarClimasFull(String nombrepais){
         ArrayList<Clima> lista = new ArrayList();
