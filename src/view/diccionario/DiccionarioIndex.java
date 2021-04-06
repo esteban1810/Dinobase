@@ -1,8 +1,10 @@
-package view.visitante;
+package view.diccionario;
 
-public class VisitanteIndex extends javax.swing.JFrame {
+import view.visitante.*;
 
-    public VisitanteIndex() {
+public class DiccionarioIndex extends javax.swing.JFrame {
+
+    public DiccionarioIndex() {
         initComponents();
     }
 
@@ -12,18 +14,21 @@ public class VisitanteIndex extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         nombreTxt = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaTaxonomias2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         BienvenidoLbl = new javax.swing.JLabel();
         userLbl = new javax.swing.JLabel();
+        todoBtn = new javax.swing.JButton();
+        mostrarBtn = new javax.swing.JButton();
+        buscarTF = new javax.swing.JTextField();
+        buscarBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        mostrarPaleoBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
-        estadisticasBtn = new javax.swing.JButton();
-        consultarBtn = new javax.swing.JButton();
-        jugarBtn = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,6 +43,29 @@ public class VisitanteIndex extends javax.swing.JFrame {
         nombreTxt.setForeground(new java.awt.Color(255, 255, 255));
         nombreTxt.setBorder(null);
         jPanel1.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 140, 40));
+
+        tablaTaxonomias2.setBackground(new java.awt.Color(87, 198, 196));
+        tablaTaxonomias2.setForeground(new java.awt.Color(255, 255, 255));
+        tablaTaxonomias2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ESPECIE", "REGISTRADO", "PALEONTOLOGO", "TIEMPO", "PAIS"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaTaxonomias2.setRowHeight(25);
+        jScrollPane1.setViewportView(tablaTaxonomias2);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 700, 400));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dino_dinosaur_icon_153295.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 200, 220));
@@ -54,9 +82,45 @@ public class VisitanteIndex extends javax.swing.JFrame {
         userLbl.setToolTipText("");
         jPanel1.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 160, -1));
 
+        todoBtn.setBackground(new java.awt.Color(223, 122, 19));
+        todoBtn.setForeground(new java.awt.Color(255, 255, 255));
+        todoBtn.setText("TODO");
+        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
+
+        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
+        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        mostrarBtn.setText("MOSTRAR");
+        jPanel1.add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
+
+        buscarTF.setBackground(new java.awt.Color(12, 156, 208));
+        buscarTF.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        buscarTF.setForeground(new java.awt.Color(255, 255, 255));
+        buscarTF.setBorder(null);
+        buscarTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarTFActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buscarTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 190, 25));
+
+        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
+        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        buscarBtn.setText("BUSCAR");
+        jPanel1.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
+
         jLabel2.setBackground(new java.awt.Color(87, 198, 196));
         jLabel2.setOpaque(true);
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 600));
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Especies");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 160, 50));
+
+        mostrarPaleoBtn.setBackground(new java.awt.Color(87, 198, 196));
+        mostrarPaleoBtn.setForeground(new java.awt.Color(255, 255, 255));
+        mostrarPaleoBtn.setText("Mostrar paleontologo");
+        jPanel1.add(mostrarPaleoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, -1, -1));
 
         regresarBtn.setBackground(new java.awt.Color(12, 241, 253));
         regresarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/back-arrow_icon-icons.com_72866.png"))); // NOI18N
@@ -74,44 +138,13 @@ public class VisitanteIndex extends javax.swing.JFrame {
         });
         jPanel1.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, -1, 50));
 
-        estadisticasBtn.setBackground(new java.awt.Color(87, 198, 196));
-        estadisticasBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        estadisticasBtn.setForeground(new java.awt.Color(255, 255, 255));
-        estadisticasBtn.setText("Estadisticas");
-        jPanel1.add(estadisticasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, -1, -1));
-
-        consultarBtn.setBackground(new java.awt.Color(87, 198, 196));
-        consultarBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        consultarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        consultarBtn.setText("Consultar");
-        jPanel1.add(consultarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
-
-        jugarBtn.setBackground(new java.awt.Color(87, 198, 196));
-        jugarBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jugarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        jugarBtn.setText("Jugar");
-        jugarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jugarBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jugarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, -1, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/games-machine_icon-icons.com_73015.png"))); // NOI18N
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, 130, 130));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/statistics-report-for-business_icon-icons.com_70370.png"))); // NOI18N
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 130, 130));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/book_icon-icons.com_73655 (1).png"))); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 130, 130));
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 190, 10));
 
         jLabel3.setBackground(new java.awt.Color(12, 156, 208));
         jLabel3.setOpaque(true);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 760, 600));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 790, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,9 +164,9 @@ public class VisitanteIndex extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
-    private void jugarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarBtnActionPerformed
+    private void buscarTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jugarBtnActionPerformed
+    }//GEN-LAST:event_buscarTFActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -149,14 +182,62 @@ public class VisitanteIndex extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisitanteIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiccionarioIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisitanteIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiccionarioIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisitanteIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiccionarioIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisitanteIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiccionarioIndex.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -177,26 +258,29 @@ public class VisitanteIndex extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisitanteIndex().setVisible(true);
+                new DiccionarioIndex().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel BienvenidoLbl;
-    public javax.swing.JButton consultarBtn;
-    public javax.swing.JButton estadisticasBtn;
+    public javax.swing.JButton buscarBtn;
+    public javax.swing.JTextField buscarTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JButton jugarBtn;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    public javax.swing.JButton mostrarBtn;
+    public javax.swing.JButton mostrarPaleoBtn;
     public javax.swing.JTextField nombreTxt;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;
+    public javax.swing.JTable tablaTaxonomias2;
+    public javax.swing.JButton todoBtn;
     public javax.swing.JLabel userLbl;
     // End of variables declaration//GEN-END:variables
 }

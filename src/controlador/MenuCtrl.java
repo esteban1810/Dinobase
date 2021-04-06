@@ -58,6 +58,7 @@ public final class MenuCtrl implements ActionListener{
         }else if("Visitante".equals(user.getTipoU())){
            this.frameLogin.setVisible(false);
            visit = new RegistroVisitanteCtrl();
+           visit.setUsuario(nickname);
            visit.iniciar();
         }
     }

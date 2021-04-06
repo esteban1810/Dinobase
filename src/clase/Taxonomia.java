@@ -1,5 +1,6 @@
 package clase;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -217,11 +218,15 @@ public class Taxonomia {
         }
         periodos=periodos.substring(0, periodos.length()-2);
         
-        arreglo[0]="";
+        arreglo[0]=leerImagen;
         arreglo[1]=especie;
         arreglo[2]=periodos;
         arreglo[3]=paises;
         
         return arreglo;
+    }
+
+    public void getImagenNom(ByteArrayInputStream byteArrayInputStream) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

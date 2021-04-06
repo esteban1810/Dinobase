@@ -58,7 +58,7 @@ public class TaxonomiaIndex extends javax.swing.JFrame {
         tablaTaxonomias.setRowHeight(25);
         jScrollPane1.setViewportView(tablaTaxonomias);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 960, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 960, 350));
 
         todoBtn.setBackground(new java.awt.Color(223, 122, 19));
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
