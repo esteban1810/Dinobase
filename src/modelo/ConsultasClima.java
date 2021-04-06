@@ -89,26 +89,62 @@ public class ConsultasClima extends Conexion{
         
     }
     
-    public String[] buscar(Clima clima){
+    public ArrayList<Clima> getClimas(String pais){
+        PreparedStatement ps = null;
+        ArrayList<Clima> lista=new ArrayList();
+        ResultSet rs = null;
+        Clima clima = null;
+        Connection con = getConnection();
+        
+        String sql = "SELECT nombre,humedad,presion,temperatura FROM unionpais_clima WHERE nombrepais=?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, pais);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                clima = new Clima();
+                clima.setNombre(rs.getString(1));
+                clima.setHumedad(rs.getInt(2));
+                clima.setPresion(rs.getFloat(3));
+                clima.setTemperatura(rs.getFloat(4));
+                lista.add(clima);
+                
+            }
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return lista;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
+    
+    
+    public Clima buscar(String nombreClima){
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
+        Clima clima = new Clima();
         
         String sql = "SELECT * FROM climas WHERE nombre=?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, clima.getNombre());
+            ps.setString(1, nombreClima);
             rs = ps.executeQuery();
             
             if(rs.next()){
-                String[] a={rs.getString("nombre"),rs.getString("humedad"),rs.getString("presion"),rs.getString("temperatura")};
-                clima.setNombre(a[0]);
-                clima.setHumedad(Integer.parseInt(a[1]));
-                clima.setPresion(Float.parseFloat(a[2]));
-                clima.setTemperatura(Float.parseFloat(a[3])); 
-                
-                return a;
+                clima.setNombre(rs.getString(1));
+                clima.setHumedad(rs.getInt(2));
+                clima.setPresion(rs.getFloat(3));
+                clima.setTemperatura(rs.getFloat(4)); 
+                return clima;
             }
             return null;
         } catch (SQLException ex) {

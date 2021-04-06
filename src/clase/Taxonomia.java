@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Taxonomia {
+    private String paises;
+    private String periodos;
     private String especie;
     private String reino;
     private String orden;
@@ -25,6 +27,24 @@ public class Taxonomia {
     private String descripcion;
     private ArrayList<String> listaPaises;
     private ArrayList<String> listaPeriodos;
+
+    public String getPaises() {
+        return paises;
+    }
+
+    public void setPaises(String paises) {
+        this.paises = paises;
+    }
+
+    public String getPeriodos() {
+        return periodos;
+    }
+
+    public void setPeriodos(String periodos) {
+        this.periodos = periodos;
+    }
+    
+    
 
     public String getDescripcion() {
         return descripcion;
@@ -210,17 +230,6 @@ public class Taxonomia {
     
     public Object[] arreglo(){
         Object[] arreglo = new Object[4];
-        String paises="";
-        String periodos="";
-        
-        for(String pais : listaPaises){
-            paises+=pais+", ";
-        }
-        paises=paises.substring(0, paises.length()-2);
-        for(String periodo : listaPeriodos){
-            periodos+=periodo+", ";
-        }
-        periodos=periodos.substring(0, periodos.length()-2);
         
         arreglo[0]="";
         arreglo[1]=especie;
@@ -232,17 +241,6 @@ public class Taxonomia {
     
     public Object[] arregloVisitante(){
         Object[] arreglo = new Object[4];
-        String paises="";
-        String periodos="";
-        
-        for(String pais : listaPaises){
-            paises+=pais+", ";
-        }
-        paises=paises.substring(0, paises.length()-2);
-        for(String periodo : listaPeriodos){
-            periodos+=periodo+", ";
-        }
-        periodos=periodos.substring(0, periodos.length()-2);
         
         arreglo[0]=especie;
         arreglo[1]=paleantologo;

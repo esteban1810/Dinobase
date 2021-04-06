@@ -4,7 +4,6 @@ import clase.Tiempo;
 import clase.Taxonomia;
 import clase.Pais;
 import clase.Clima;
-import modelo.ConsultasRegistrosV;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -14,21 +13,29 @@ import view.visitante.VisitanteForm;
 import view.visitante.VisitanteIndex;
 
 public final class RegistroVisitanteCtrl implements ActionListener{
-    private ConsultasRegistrosV visitanteMod;
     private VisitanteIndex visitanteIndex;
     private ArrayList<Taxonomia> listaVisitante;
     private DefaultTableModel modelo;
     private DefaultTableModel modelo2;
     private DefaultTableModel modelo3;
     private VisitanteForm visitanteForm;
+    private ConsultasTaxonomia taxonomiaModelo;
+    private ConsultasClima climaModelo;
+    private ConsultasTiempo tiempoModelo;
+    private ConsultasPais paisModelo;
+
     
     public RegistroVisitanteCtrl(){
-        visitanteMod     = new ConsultasRegistrosV();
         visitanteIndex  = new VisitanteIndex();
         modelo          = new DefaultTableModel();
         modelo2         = new DefaultTableModel();
         modelo3         = new DefaultTableModel();
         visitanteForm   = new VisitanteForm();
+        
+        taxonomiaModelo = new ConsultasTaxonomia();
+        climaModelo = new ConsultasClima();
+        tiempoModelo = new ConsultasTiempo();
+        paisModelo = new ConsultasPais();
         
         this.visitanteIndex.buscarBtn.addActionListener(this);
         this.visitanteIndex.mostrarBtn.addActionListener(this);
@@ -39,7 +46,7 @@ public final class RegistroVisitanteCtrl implements ActionListener{
         this.visitanteForm.mostrarClimaBtn.addActionListener(this);
         
         
-        listaVisitante = visitanteMod.todosRegistros();
+        listaVisitante = taxonomiaModelo.indexVisitante();
         cargarPeriodoCB();
         cargarPaisCB();
         cargarPaleontologoCB();
@@ -68,7 +75,7 @@ public final class RegistroVisitanteCtrl implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if (e.getSource() == visitanteIndex.todoBtn) {
-            listaVisitante = visitanteMod.todosRegistros();
+            listaVisitante = taxonomiaModelo.indexVisitante();
             cargarTabla();
         } 
             
@@ -129,7 +136,7 @@ public final class RegistroVisitanteCtrl implements ActionListener{
             }
         }
         
-        listaVisitante=visitanteMod.coincidencias(especie, paleonto, periodo, pais);
+        listaVisitante=taxonomiaModelo.coincidenciasVisitante(especie, paleonto, periodo, pais);
 
         if (listaVisitante.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
@@ -179,9 +186,9 @@ public final class RegistroVisitanteCtrl implements ActionListener{
         modelo3.addColumn("Presion");
         modelo3.addColumn("Temperatura");
 
-        Pais mod = new Pais();
-        mod.setNombre(visitanteForm.tablaPaises.getValueAt(fila, 0).toString());
-        listaT = visitanteMod.buscarClimasFull(mod.getNombre());
+        
+        String nombrePais = visitanteForm.tablaPaises.getValueAt(fila, 0).toString();
+        listaT = climaModelo.getClimas(nombrePais);
 
         for (int i = 0; i < listaT.size(); i++) {
             modelo3.addRow(listaT.get(i).arreglo());
@@ -230,8 +237,9 @@ public final class RegistroVisitanteCtrl implements ActionListener{
         modelo.addColumn("Era");
         modelo.addColumn("Epoca");
         modelo.addColumn("Descubierto");
+        
 
-        listaT = visitanteMod.buscarTiemposFull(mod.getEspecie());
+        listaT = tiempoModelo.getTiempos(mod.getEspecie());
 
         for (int i = 0; i < listaT.size(); i++) {
             modelo.addRow(listaT.get(i).arreglo());
@@ -243,7 +251,7 @@ public final class RegistroVisitanteCtrl implements ActionListener{
         modelo2.addColumn("Continente");
         modelo2.addColumn("Extension");
 
-        listaT1 = visitanteMod.buscarPaisesFull(mod.getEspecie());
+        listaT1 = paisModelo.getPaises(mod.getEspecie());
 
         for (int i = 0; i < listaT1.size(); i++) {
             modelo2.addRow(listaT1.get(i).arreglo());

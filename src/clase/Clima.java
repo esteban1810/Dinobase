@@ -45,7 +45,7 @@ public class Clima {
     }
     
     public Object[] arreglo(){
-        Object[] arreglo = new Object[15];
+        Object[] arreglo = new Object[4];
         
         arreglo[0]=nombre;
         arreglo[1]=humedad;
