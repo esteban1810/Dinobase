@@ -43,6 +43,8 @@ public final class MenuCtrl implements ActionListener{
         frameLogin.setVisible(true); // muestra el frame
         frameLogin.setLocationRelativeTo(null); //centra el frame
         this.bloquear();
+        this.bloquearAdmin();
+        this.bloquearVisitante();
     }
     
     public void loguearse(){
@@ -54,12 +56,19 @@ public final class MenuCtrl implements ActionListener{
             return;
         }
         if("Administrador".equals(user.getTipoU())){
-           desbloquear(user.getNickname());
+            desbloquear(user.getNickname());
+            frameLogin.panelVisitante.setVisible(false);
+            frameLogin.panelAdmin.setVisible(true);
+
         }else if("Visitante".equals(user.getTipoU())){
-           this.frameLogin.setVisible(false);
-           visit = new DiccionarioCtrl();
-//           visit.setUsuario(nickname);
-           visit.iniciar();
+//            this.frameLogin.setVisible(false);
+            desbloquear(user.getNickname());
+//            visit = new DiccionarioCtrl();
+            frameLogin.panelAdmin.setVisible(false);
+            frameLogin.panelVisitante.setVisible(true);
+
+     //           visit.setUsuario(nickname);
+//            visit.iniciar();
         }
     }
     
@@ -108,28 +117,51 @@ public final class MenuCtrl implements ActionListener{
             ctrlT.iniciar();
             frameLogin.setVisible(false);
         }
+        
+        if(e.getSource()==frameLogin.consultarBtn){
+            this.frameLogin.setVisible(false);
+            visit = new DiccionarioCtrl();
+            visit.iniciar();
+        }
+    }
+    
+    public void bloquearVisitante(){
+        frameLogin.panelVisitante.setVisible(false);
+    }
+    
+    public void bloquearAdmin(){
+        frameLogin.panelAdmin.setVisible(false);
+    }
+    
+    public void desbloquearVisitante(){
+        frameLogin.panelVisitante.setVisible(true);
+    }
+    
+    public void desbloquearAdmin(){
+        frameLogin.panelAdmin.setVisible(true);
     }
     
     public void bloquear(){
         this.frameLogin.loguearseBtn.addActionListener(this);
         this.frameLogin.registrarseBtn.addActionListener(this);
-        this.frameLogin.taxonomiasLbl.setVisible(false);
-        this.frameLogin.paisesLbl.setVisible(false);
-        this.frameLogin.periodosLbl.setVisible(false);
-        this.frameLogin.climasLbl.setVisible(false);
-        this.frameLogin.paleontologosLbl.setVisible(false);
+        this.frameLogin.consultarBtn.addActionListener(this);
+//        this.frameLogin.taxonomiasLbl.setVisible(false);
+//        this.frameLogin.paisesLbl.setVisible(false);
+//        this.frameLogin.periodosLbl.setVisible(false);
+//        this.frameLogin.climasLbl.setVisible(false);
+//        this.frameLogin.paleontologosLbl.setVisible(false);
         
-        this.frameLogin.nameTaxLbl.setVisible(false);
-        this.frameLogin.namePaisLbl.setVisible(false);
-        this.frameLogin.namePeriodosLbl.setVisible(false);
-        this.frameLogin.namePaleaLbl.setVisible(false);
-        this.frameLogin.nameClimasLbl.setVisible(false);
+//        this.frameLogin.nameTaxLbl.setVisible(false);
+//        this.frameLogin.namePaisLbl.setVisible(false);
+//        this.frameLogin.namePeriodosLbl.setVisible(false);
+//        this.frameLogin.namePaleaLbl.setVisible(false);
+//        this.frameLogin.nameClimasLbl.setVisible(false);
         
-        this.frameLogin.taxBtn.setVisible(false);
-        this.frameLogin.paisBtn.setVisible(false);
-        this.frameLogin.tiempoBtn.setVisible(false);
-        this.frameLogin.climaBtn.setVisible(false);
-        this.frameLogin.paleanBtn.setVisible(false);
+//        this.frameLogin.taxBtn.setVisible(false);
+//        this.frameLogin.paisBtn.setVisible(false);
+//        this.frameLogin.tiempoBtn.setVisible(false);
+//        this.frameLogin.climaBtn.setVisible(false);
+//        this.frameLogin.paleanBtn.setVisible(false);
         
         this.frameLogin.BienvenidoLbl.setVisible(false);
         this.frameLogin.userLbl.setVisible(false);
@@ -149,22 +181,22 @@ public final class MenuCtrl implements ActionListener{
         this.frameLogin.userLbl.setVisible(true);
         this.frameLogin.userLbl.setText(user);
         
-        this.frameLogin.taxonomiasLbl.setVisible(true);
-        this.frameLogin.paisesLbl.setVisible(true);
-        this.frameLogin.periodosLbl.setVisible(true);
-        this.frameLogin.climasLbl.setVisible(true);
-        this.frameLogin.paleontologosLbl.setVisible(true);
-        
-        this.frameLogin.nameTaxLbl.setVisible(true);
-        this.frameLogin.namePaisLbl.setVisible(true);
-        this.frameLogin.namePeriodosLbl.setVisible(true);
-        this.frameLogin.namePaleaLbl.setVisible(true);
-        this.frameLogin.nameClimasLbl.setVisible(true);
-        
-        this.frameLogin.taxBtn.setVisible(true);
-        this.frameLogin.paisBtn.setVisible(true);
-        this.frameLogin.tiempoBtn.setVisible(true);
-        this.frameLogin.climaBtn.setVisible(true);
-        this.frameLogin.paleanBtn.setVisible(true);
+//        this.frameLogin.taxonomiasLbl.setVisible(true);
+//        this.frameLogin.paisesLbl.setVisible(true);
+//        this.frameLogin.periodosLbl.setVisible(true);
+//        this.frameLogin.climasLbl.setVisible(true);
+//        this.frameLogin.paleontologosLbl.setVisible(true);
+//        
+//        this.frameLogin.nameTaxLbl.setVisible(true);
+//        this.frameLogin.namePaisLbl.setVisible(true);
+//        this.frameLogin.namePeriodosLbl.setVisible(true);
+//        this.frameLogin.namePaleaLbl.setVisible(true);
+//        this.frameLogin.nameClimasLbl.setVisible(true);
+//        
+//        this.frameLogin.taxBtn.setVisible(true);
+//        this.frameLogin.paisBtn.setVisible(true);
+//        this.frameLogin.tiempoBtn.setVisible(true);
+//        this.frameLogin.climaBtn.setVisible(true);
+//        this.frameLogin.paleanBtn.setVisible(true);
     }
 }

@@ -28,211 +28,291 @@ public class UsuarioLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        panelLogin = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         BienvenidoLbl = new javax.swing.JLabel();
+        nameNickNameLbl = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        namePassLbl = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        loguearseBtn = new javax.swing.JButton();
+        registrarseBtn = new javax.swing.JButton();
+        nicknameTF = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
         userLbl = new javax.swing.JLabel();
-        registrarseBtn = new javax.swing.JButton();
-        loguearseBtn = new javax.swing.JButton();
-        namePassLbl = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        nicknameTF = new javax.swing.JTextField();
-        nameNickNameLbl = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        periodosLbl = new javax.swing.JLabel();
-        namePeriodosLbl = new javax.swing.JLabel();
-        paleontologosLbl = new javax.swing.JLabel();
-        namePaleaLbl = new javax.swing.JLabel();
-        paisesLbl = new javax.swing.JLabel();
-        namePaisLbl = new javax.swing.JLabel();
+        panelVisitante = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        consultarBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        estadisticasBtn = new javax.swing.JButton();
+        jugarBtn = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
+        panelAdmin = new javax.swing.JPanel();
         taxonomiasLbl = new javax.swing.JLabel();
         nameTaxLbl = new javax.swing.JLabel();
+        taxBtn = new javax.swing.JButton();
+        paisesLbl = new javax.swing.JLabel();
+        namePaisLbl = new javax.swing.JLabel();
+        paisBtn = new javax.swing.JButton();
+        periodosLbl = new javax.swing.JLabel();
+        namePeriodosLbl = new javax.swing.JLabel();
+        tiempoBtn = new javax.swing.JButton();
         climasLbl = new javax.swing.JLabel();
         nameClimasLbl = new javax.swing.JLabel();
-        salir = new javax.swing.JButton();
-        paisBtn = new javax.swing.JButton();
-        tiempoBtn = new javax.swing.JButton();
         climaBtn = new javax.swing.JButton();
+        paleontologosLbl = new javax.swing.JLabel();
+        namePaleaLbl = new javax.swing.JLabel();
         paleanBtn = new javax.swing.JButton();
-        taxBtn = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        salir1 = new javax.swing.JButton();
+        salir3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 130, 40));
+        jPanel1.setBackground(new java.awt.Color(12, 156, 208));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 130, 40));
+        panelLogin.setBackground(new java.awt.Color(87, 198, 196));
+        panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
+        panelLogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 140, 120));
 
         BienvenidoLbl.setBackground(new java.awt.Color(87, 198, 196));
         BienvenidoLbl.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         BienvenidoLbl.setForeground(new java.awt.Color(255, 255, 255));
         BienvenidoLbl.setText("Bienvenido");
-        getContentPane().add(BienvenidoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
-
-        pass.setBackground(new java.awt.Color(87, 198, 196));
-        pass.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        pass.setForeground(new java.awt.Color(255, 255, 255));
-        pass.setBorder(null);
-        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 130, 20));
-
-        userLbl.setBackground(new java.awt.Color(87, 198, 196));
-        userLbl.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        userLbl.setForeground(new java.awt.Color(255, 255, 255));
-        userLbl.setToolTipText("");
-        getContentPane().add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 160, -1));
-
-        registrarseBtn.setBackground(new java.awt.Color(223, 122, 19));
-        registrarseBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        registrarseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        registrarseBtn.setText("Registrar");
-        getContentPane().add(registrarseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
-
-        loguearseBtn.setBackground(new java.awt.Color(223, 122, 19));
-        loguearseBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        loguearseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        loguearseBtn.setText("Iniciar sesión");
-        getContentPane().add(loguearseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
-
-        namePassLbl.setBackground(new java.awt.Color(87, 198, 196));
-        namePassLbl.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        namePassLbl.setForeground(new java.awt.Color(255, 255, 255));
-        namePassLbl.setText("Cotraseña:");
-        getContentPane().add(namePassLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 140, 120));
-
-        nicknameTF.setBackground(new java.awt.Color(87, 198, 196));
-        nicknameTF.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        nicknameTF.setForeground(new java.awt.Color(255, 255, 255));
-        nicknameTF.setBorder(null);
-        getContentPane().add(nicknameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 130, 20));
+        panelLogin.add(BienvenidoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         nameNickNameLbl.setBackground(new java.awt.Color(87, 198, 196));
         nameNickNameLbl.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         nameNickNameLbl.setForeground(new java.awt.Color(255, 255, 255));
         nameNickNameLbl.setText("NickName:");
-        getContentPane().add(nameNickNameLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        panelLogin.add(nameNickNameLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
-        jLabel1.setBackground(new java.awt.Color(87, 198, 196));
-        jLabel1.setOpaque(true);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 600));
+        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        panelLogin.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 130, 40));
 
-        periodosLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1491254405-recenttimesearchreloadtime_82966.png"))); // NOI18N
-        periodosLbl.setToolTipText("");
-        getContentPane().add(periodosLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 100, 100));
+        namePassLbl.setBackground(new java.awt.Color(87, 198, 196));
+        namePassLbl.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        namePassLbl.setForeground(new java.awt.Color(255, 255, 255));
+        namePassLbl.setText("Cotraseña:");
+        panelLogin.add(namePassLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
-        namePeriodosLbl.setBackground(new java.awt.Color(255, 255, 255));
-        namePeriodosLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        namePeriodosLbl.setForeground(new java.awt.Color(255, 255, 255));
-        namePeriodosLbl.setText("Periodos");
-        getContentPane().add(namePeriodosLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, -1, -1));
+        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        panelLogin.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 130, 40));
 
-        paleontologosLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/paintbrush_79604.png"))); // NOI18N
-        paleontologosLbl.setToolTipText("");
-        getContentPane().add(paleontologosLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 100, 100));
+        loguearseBtn.setBackground(new java.awt.Color(223, 122, 19));
+        loguearseBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        loguearseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loguearseBtn.setText("Iniciar sesión");
+        panelLogin.add(loguearseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
 
-        namePaleaLbl.setBackground(new java.awt.Color(255, 255, 255));
-        namePaleaLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        namePaleaLbl.setForeground(new java.awt.Color(255, 255, 255));
-        namePaleaLbl.setText("Paleontologos");
-        getContentPane().add(namePaleaLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, -1, -1));
+        registrarseBtn.setBackground(new java.awt.Color(223, 122, 19));
+        registrarseBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        registrarseBtn.setForeground(new java.awt.Color(255, 255, 255));
+        registrarseBtn.setText("Registrar");
+        panelLogin.add(registrarseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
 
-        paisesLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/globe_106381.png"))); // NOI18N
-        paisesLbl.setToolTipText("");
-        getContentPane().add(paisesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 90, 100));
+        nicknameTF.setBackground(new java.awt.Color(87, 198, 196));
+        nicknameTF.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        nicknameTF.setForeground(new java.awt.Color(255, 255, 255));
+        nicknameTF.setBorder(null);
+        panelLogin.add(nicknameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 130, 20));
 
-        namePaisLbl.setBackground(new java.awt.Color(255, 255, 255));
-        namePaisLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        namePaisLbl.setForeground(new java.awt.Color(255, 255, 255));
-        namePaisLbl.setText("Países");
-        getContentPane().add(namePaisLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, -1, -1));
+        pass.setBackground(new java.awt.Color(87, 198, 196));
+        pass.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        pass.setForeground(new java.awt.Color(255, 255, 255));
+        pass.setBorder(null);
+        panelLogin.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 130, 20));
 
-        taxonomiasLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dinosaur-bones_39225.png"))); // NOI18N
-        taxonomiasLbl.setToolTipText("");
-        getContentPane().add(taxonomiasLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 100, 100));
+        userLbl.setBackground(new java.awt.Color(87, 198, 196));
+        userLbl.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        userLbl.setForeground(new java.awt.Color(255, 255, 255));
+        userLbl.setToolTipText("");
+        panelLogin.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 160, -1));
 
-        nameTaxLbl.setBackground(new java.awt.Color(255, 255, 255));
-        nameTaxLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        nameTaxLbl.setForeground(new java.awt.Color(255, 255, 255));
-        nameTaxLbl.setText("Taxonomias");
-        getContentPane().add(nameTaxLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+        jPanel1.add(panelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 600));
 
-        climasLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/thermometer-temperature-control-tool-weather-interface-symbol_icon-icons.com_54635.png"))); // NOI18N
-        climasLbl.setToolTipText("");
-        getContentPane().add(climasLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 100, 100));
+        panelVisitante.setBackground(new java.awt.Color(12, 156, 208));
+        panelVisitante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nameClimasLbl.setBackground(new java.awt.Color(255, 255, 255));
-        nameClimasLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        nameClimasLbl.setForeground(new java.awt.Color(255, 255, 255));
-        nameClimasLbl.setText("Climas");
-        getContentPane().add(nameClimasLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, -1, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/book_icon-icons.com_73655 (1).png"))); // NOI18N
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelVisitante.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 130, 130));
 
-        salir.setBackground(new java.awt.Color(12, 156, 208));
-        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/x.png"))); // NOI18N
-        salir.setBorderPainted(false);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/games-machine_icon-icons.com_73015.png"))); // NOI18N
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelVisitante.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 130, 130));
+
+        consultarBtn.setBackground(new java.awt.Color(87, 198, 196));
+        consultarBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        consultarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        consultarBtn.setText("Consultar");
+        panelVisitante.add(consultarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/statistics-report-for-business_icon-icons.com_70370.png"))); // NOI18N
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelVisitante.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 130, 130));
+
+        estadisticasBtn.setBackground(new java.awt.Color(87, 198, 196));
+        estadisticasBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        estadisticasBtn.setForeground(new java.awt.Color(255, 255, 255));
+        estadisticasBtn.setText("Estadisticas");
+        panelVisitante.add(estadisticasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, -1, -1));
+
+        jugarBtn.setBackground(new java.awt.Color(87, 198, 196));
+        jugarBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jugarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        jugarBtn.setText("Jugar");
+        jugarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jugarBtnActionPerformed(evt);
+            }
+        });
+        panelVisitante.add(jugarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
+
+        salir.setBackground(new java.awt.Color(12, 241, 253));
+        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
         salir.setFocusPainted(false);
         salir.setFocusable(false);
-        salir.setOpaque(false);
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
-        getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 0, -1, -1));
+        panelVisitante.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, -1, 50));
 
-        paisBtn.setBackground(new java.awt.Color(87, 198, 196));
-        paisBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        paisBtn.setText("Entrar");
-        paisBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paisBtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(paisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, -1, -1));
+        jPanel1.add(panelVisitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 760, 600));
 
-        tiempoBtn.setBackground(new java.awt.Color(87, 198, 196));
-        tiempoBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        tiempoBtn.setText("Entrar");
-        getContentPane().add(tiempoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, -1, -1));
+        panelAdmin.setBackground(new java.awt.Color(12, 156, 208));
+        panelAdmin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        climaBtn.setBackground(new java.awt.Color(87, 198, 196));
-        climaBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        climaBtn.setText("Entrar");
-        getContentPane().add(climaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, -1, -1));
+        taxonomiasLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dinosaur-bones_39225.png"))); // NOI18N
+        taxonomiasLbl.setToolTipText("");
+        panelAdmin.add(taxonomiasLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 100, 100));
 
-        paleanBtn.setBackground(new java.awt.Color(87, 198, 196));
-        paleanBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        paleanBtn.setText("Entrar");
-        getContentPane().add(paleanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 500, -1, -1));
+        nameTaxLbl.setBackground(new java.awt.Color(255, 255, 255));
+        nameTaxLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nameTaxLbl.setForeground(new java.awt.Color(255, 255, 255));
+        nameTaxLbl.setText("Taxonomias");
+        panelAdmin.add(nameTaxLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
 
         taxBtn.setBackground(new java.awt.Color(87, 198, 196));
         taxBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         taxBtn.setText("Entrar");
-        getContentPane().add(taxBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
+        panelAdmin.add(taxBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
 
-        jLabel5.setBackground(new java.awt.Color(12, 156, 208));
-        jLabel5.setOpaque(true);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 830, 600));
+        paisesLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/globe_106381.png"))); // NOI18N
+        paisesLbl.setToolTipText("");
+        panelAdmin.add(paisesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 90, 100));
+
+        namePaisLbl.setBackground(new java.awt.Color(255, 255, 255));
+        namePaisLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        namePaisLbl.setForeground(new java.awt.Color(255, 255, 255));
+        namePaisLbl.setText("Países");
+        panelAdmin.add(namePaisLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, -1, -1));
+
+        paisBtn.setBackground(new java.awt.Color(87, 198, 196));
+        paisBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        paisBtn.setText("Entrar");
+        panelAdmin.add(paisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+
+        periodosLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1491254405-recenttimesearchreloadtime_82966.png"))); // NOI18N
+        periodosLbl.setToolTipText("");
+        panelAdmin.add(periodosLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 100, 100));
+
+        namePeriodosLbl.setBackground(new java.awt.Color(255, 255, 255));
+        namePeriodosLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        namePeriodosLbl.setForeground(new java.awt.Color(255, 255, 255));
+        namePeriodosLbl.setText("Periodos");
+        panelAdmin.add(namePeriodosLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, -1, -1));
+
+        tiempoBtn.setBackground(new java.awt.Color(87, 198, 196));
+        tiempoBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        tiempoBtn.setText("Entrar");
+        panelAdmin.add(tiempoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, -1, -1));
+
+        climasLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/thermometer-temperature-control-tool-weather-interface-symbol_icon-icons.com_54635.png"))); // NOI18N
+        climasLbl.setToolTipText("");
+        panelAdmin.add(climasLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 100, 100));
+
+        nameClimasLbl.setBackground(new java.awt.Color(255, 255, 255));
+        nameClimasLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nameClimasLbl.setForeground(new java.awt.Color(255, 255, 255));
+        nameClimasLbl.setText("Climas");
+        panelAdmin.add(nameClimasLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
+
+        climaBtn.setBackground(new java.awt.Color(87, 198, 196));
+        climaBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        climaBtn.setText("Entrar");
+        panelAdmin.add(climaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
+
+        paleontologosLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/paintbrush_79604.png"))); // NOI18N
+        paleontologosLbl.setToolTipText("");
+        panelAdmin.add(paleontologosLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 100, 100));
+
+        namePaleaLbl.setBackground(new java.awt.Color(255, 255, 255));
+        namePaleaLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        namePaleaLbl.setForeground(new java.awt.Color(255, 255, 255));
+        namePaleaLbl.setText("Paleontologos");
+        panelAdmin.add(namePaleaLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, -1, -1));
+
+        paleanBtn.setBackground(new java.awt.Color(87, 198, 196));
+        paleanBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        paleanBtn.setText("Entrar");
+        panelAdmin.add(paleanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 480, -1, -1));
+
+        salir1.setBackground(new java.awt.Color(12, 241, 253));
+        salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
+        salir1.setFocusPainted(false);
+        salir1.setFocusable(false);
+        salir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salir1ActionPerformed(evt);
+            }
+        });
+        panelAdmin.add(salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, -1, 50));
+
+        jPanel1.add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 760, 600));
+
+        salir3.setBackground(new java.awt.Color(12, 241, 253));
+        salir3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
+        salir3.setFocusPainted(false);
+        salir3.setFocusable(false);
+        salir3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salir3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(salir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, -1, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jugarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jugarBtnActionPerformed
+
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-         System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
-    private void paisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_paisBtnActionPerformed
+    private void salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salir1ActionPerformed
+
+    private void salir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salir3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,6 +341,12 @@ public class UsuarioLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -274,11 +360,16 @@ public class UsuarioLogin extends javax.swing.JFrame {
     public javax.swing.JLabel BienvenidoLbl;
     public javax.swing.JButton climaBtn;
     public javax.swing.JLabel climasLbl;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JButton consultarBtn;
+    public javax.swing.JButton estadisticasBtn;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     public javax.swing.JSeparator jSeparator3;
     public javax.swing.JSeparator jSeparator4;
+    public javax.swing.JButton jugarBtn;
     public javax.swing.JButton loguearseBtn;
     public javax.swing.JLabel nameClimasLbl;
     public javax.swing.JLabel nameNickNameLbl;
@@ -292,10 +383,15 @@ public class UsuarioLogin extends javax.swing.JFrame {
     public javax.swing.JLabel paisesLbl;
     public javax.swing.JButton paleanBtn;
     public javax.swing.JLabel paleontologosLbl;
+    public javax.swing.JPanel panelAdmin;
+    public javax.swing.JPanel panelLogin;
+    public javax.swing.JPanel panelVisitante;
     public javax.swing.JPasswordField pass;
     public javax.swing.JLabel periodosLbl;
     public javax.swing.JButton registrarseBtn;
     private javax.swing.JButton salir;
+    private javax.swing.JButton salir1;
+    private javax.swing.JButton salir3;
     public javax.swing.JButton taxBtn;
     public javax.swing.JLabel taxonomiasLbl;
     public javax.swing.JButton tiempoBtn;
