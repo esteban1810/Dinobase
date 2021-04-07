@@ -3,21 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/franc/Desktop/dino/Dinobase1/Dinobase/src/controlador/DiccionarioCtrl.java</file>
-            <file>file:/C:/Users/franc/Desktop/dino/Dinobase1/Dinobase/src/controlador/RegistroVisitanteCtrl.java</file>
-            <file>file:/C:/Users/franc/Desktop/dino/Dinobase1/Dinobase/src/view/visitante/VisitanteIndex.java</file>
-            <file>file:/C:/Users/franc/Desktop/dino/Dinobase1/Dinobase/src/view/diccionario/DiccionarioForm.java</file>
-            <file>file:/C:/Users/franc/Desktop/dino/Dinobase1/Dinobase/src/controlador/MenuCtrl.java</file>
-            <file>file:/C:/Users/franc/Desktop/dino/Dinobase1/Dinobase/src/view/diccionario/DiccionarioIndex.java</file>
-=======
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/controlador/TaxonomiaCtrl.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/view/visitante/VisitanteIndex.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/modelo/ConsultasRegistrosV.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/controlador/RegistroVisitanteCtrl.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/modelo/ConsultasPaleontologo.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/modelo/ConsultasTaxonomia.java</file>
->>>>>>> correccion
+            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/controlador/MenuCtrl.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/view/usuario/UsuarioLogin.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/controlador/UsuarioCtrl.java</file>
         </group>
     </open-files>
 </project-private>

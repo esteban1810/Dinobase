@@ -41,6 +41,7 @@ public class UsuarioLogin extends javax.swing.JFrame {
         nicknameTF = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
         userLbl = new javax.swing.JLabel();
+        cerrarSesionBtn = new javax.swing.JButton();
         panelVisitante = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -137,6 +138,12 @@ public class UsuarioLogin extends javax.swing.JFrame {
         userLbl.setForeground(new java.awt.Color(255, 255, 255));
         userLbl.setToolTipText("");
         panelLogin.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 160, -1));
+
+        cerrarSesionBtn.setBackground(new java.awt.Color(255, 80, 80));
+        cerrarSesionBtn.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        cerrarSesionBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesionBtn.setText("Cerrar Sesión");
+        panelLogin.add(cerrarSesionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, -1, -1));
 
         jPanel1.add(panelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 600));
 
@@ -358,6 +365,7 @@ public class UsuarioLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel BienvenidoLbl;
+    public javax.swing.JButton cerrarSesionBtn;
     public javax.swing.JButton climaBtn;
     public javax.swing.JLabel climasLbl;
     public javax.swing.JButton consultarBtn;

@@ -17,6 +17,7 @@ import view.diccionario.DiccionarioForm;
 import view.diccionario.DiccionarioIndex;
 
 public final class DiccionarioCtrl implements ActionListener{
+    private MenuCtrl ctrlM;
     private DiccionarioIndex diccionarioIndex;
     private ArrayList<Taxonomia> listaVisitante;
     private DefaultTableModel modelo;
@@ -35,6 +36,7 @@ public final class DiccionarioCtrl implements ActionListener{
         modelo2         = new DefaultTableModel();
         modelo3         = new DefaultTableModel();
         diccionarioForm   = new DiccionarioForm();
+        ctrlM = new MenuCtrl();
         
         taxonomiaModelo = new ConsultasTaxonomia();
         climaModelo = new ConsultasClima();
@@ -45,6 +47,7 @@ public final class DiccionarioCtrl implements ActionListener{
         this.diccionarioIndex.mostrarBtn.addActionListener(this);
         this.diccionarioIndex.todoBtn.addActionListener(this);
         this.diccionarioForm.regresarBtn.addActionListener(this);
+        this.diccionarioIndex.regresarBtn.addActionListener(this);
         this.diccionarioIndex.setLocationRelativeTo(null);
         this.diccionarioForm.setLocationRelativeTo(null);
         this.diccionarioForm.mostrarClimaBtn.addActionListener(this);
@@ -99,7 +102,15 @@ public final class DiccionarioCtrl implements ActionListener{
 //        
         else if (e.getSource() == diccionarioIndex.buscarBtn) {
             buscarBtn();
-        } 
+        }
+        
+        else if(e.getSource() == diccionarioIndex.regresarBtn){
+            diccionarioIndex.setVisible(false);
+            ctrlM.iniciar();
+            ctrlM.desbloquear(ctrlM.getNickname());
+            ctrlM.desbloquearVisitante();
+        }
+        
   
     }
     

@@ -33,6 +33,7 @@ public final class MenuCtrl implements ActionListener{
         this.frameLogin.tiempoBtn.addActionListener(this);
         this.frameLogin.climaBtn.addActionListener(this);
         this.frameLogin.paleanBtn.addActionListener(this);
+        this.frameLogin.cerrarSesionBtn.addActionListener(this);
     }
     
     public static String getNickname(){
@@ -61,14 +62,9 @@ public final class MenuCtrl implements ActionListener{
             frameLogin.panelAdmin.setVisible(true);
 
         }else if("Visitante".equals(user.getTipoU())){
-//            this.frameLogin.setVisible(false);
             desbloquear(user.getNickname());
-//            visit = new DiccionarioCtrl();
             frameLogin.panelAdmin.setVisible(false);
             frameLogin.panelVisitante.setVisible(true);
-
-     //           visit.setUsuario(nickname);
-//            visit.iniciar();
         }
     }
     
@@ -103,25 +99,32 @@ public final class MenuCtrl implements ActionListener{
             TiempoCtrl ctrlT = new TiempoCtrl();
             ctrlT.iniciar();
             frameLogin.setVisible(false);
-        }
+        } else
         
         if(e.getSource()== frameLogin.paisBtn){
             PaisCtrl ctrlT = new PaisCtrl();
             ctrlT.iniciar();
             frameLogin.setVisible(false);
-        }
+        } else 
         
         if(e.getSource()== frameLogin.climaBtn){
-//            ClimaCtrl ctrlT = new ClimaCtrl(new Clima(), new ConsultasClima());
             ClimaCtrl ctrlT = new ClimaCtrl();
             ctrlT.iniciar();
             frameLogin.setVisible(false);
-        }
+        } else 
         
         if(e.getSource()==frameLogin.consultarBtn){
             this.frameLogin.setVisible(false);
             visit = new DiccionarioCtrl();
             visit.iniciar();
+        } else 
+        
+        if(e.getSource()==frameLogin.cerrarSesionBtn){
+            
+            this.bloquear();
+            this.inicioSesion();
+            this.bloquearAdmin();
+            this.bloquearVisitante();
         }
     }
     
@@ -145,26 +148,10 @@ public final class MenuCtrl implements ActionListener{
         this.frameLogin.loguearseBtn.addActionListener(this);
         this.frameLogin.registrarseBtn.addActionListener(this);
         this.frameLogin.consultarBtn.addActionListener(this);
-//        this.frameLogin.taxonomiasLbl.setVisible(false);
-//        this.frameLogin.paisesLbl.setVisible(false);
-//        this.frameLogin.periodosLbl.setVisible(false);
-//        this.frameLogin.climasLbl.setVisible(false);
-//        this.frameLogin.paleontologosLbl.setVisible(false);
-        
-//        this.frameLogin.nameTaxLbl.setVisible(false);
-//        this.frameLogin.namePaisLbl.setVisible(false);
-//        this.frameLogin.namePeriodosLbl.setVisible(false);
-//        this.frameLogin.namePaleaLbl.setVisible(false);
-//        this.frameLogin.nameClimasLbl.setVisible(false);
-        
-//        this.frameLogin.taxBtn.setVisible(false);
-//        this.frameLogin.paisBtn.setVisible(false);
-//        this.frameLogin.tiempoBtn.setVisible(false);
-//        this.frameLogin.climaBtn.setVisible(false);
-//        this.frameLogin.paleanBtn.setVisible(false);
         
         this.frameLogin.BienvenidoLbl.setVisible(false);
         this.frameLogin.userLbl.setVisible(false);
+        this.frameLogin.cerrarSesionBtn.setVisible(false);
     }
     
     public void desbloquear(String user){
@@ -180,23 +167,17 @@ public final class MenuCtrl implements ActionListener{
         this.frameLogin.BienvenidoLbl.setVisible(true);
         this.frameLogin.userLbl.setVisible(true);
         this.frameLogin.userLbl.setText(user);
-        
-//        this.frameLogin.taxonomiasLbl.setVisible(true);
-//        this.frameLogin.paisesLbl.setVisible(true);
-//        this.frameLogin.periodosLbl.setVisible(true);
-//        this.frameLogin.climasLbl.setVisible(true);
-//        this.frameLogin.paleontologosLbl.setVisible(true);
-//        
-//        this.frameLogin.nameTaxLbl.setVisible(true);
-//        this.frameLogin.namePaisLbl.setVisible(true);
-//        this.frameLogin.namePeriodosLbl.setVisible(true);
-//        this.frameLogin.namePaleaLbl.setVisible(true);
-//        this.frameLogin.nameClimasLbl.setVisible(true);
-//        
-//        this.frameLogin.taxBtn.setVisible(true);
-//        this.frameLogin.paisBtn.setVisible(true);
-//        this.frameLogin.tiempoBtn.setVisible(true);
-//        this.frameLogin.climaBtn.setVisible(true);
-//        this.frameLogin.paleanBtn.setVisible(true);
+        this.frameLogin.cerrarSesionBtn.setVisible(true);
+    }
+    
+    public void inicioSesion(){
+        this.frameLogin.nameNickNameLbl.setVisible(true);
+        this.frameLogin.namePassLbl.setVisible(true);
+        this.frameLogin.nicknameTF.setVisible(true);
+        this.frameLogin.pass.setVisible(true);
+        this.frameLogin.loguearseBtn.setVisible(true);
+        this.frameLogin.registrarseBtn.setVisible(true);
+        this.frameLogin.jSeparator3.setVisible(true);
+        this.frameLogin.jSeparator4.setVisible(true);
     }
 }
