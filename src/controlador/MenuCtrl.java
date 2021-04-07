@@ -12,7 +12,7 @@ import modelo.*;
 public final class MenuCtrl implements ActionListener{
     private final UsuarioLogin frameLogin;
     private static Usuario user;
-    private RegistroVisitanteCtrl visit;
+    private DiccionarioCtrl visit;
     
     
     public MenuCtrl(){
@@ -57,8 +57,8 @@ public final class MenuCtrl implements ActionListener{
            desbloquear(user.getNickname());
         }else if("Visitante".equals(user.getTipoU())){
            this.frameLogin.setVisible(false);
-           visit = new RegistroVisitanteCtrl();
-           visit.setUsuario(nickname);
+           visit = new DiccionarioCtrl();
+//           visit.setUsuario(nickname);
            visit.iniciar();
         }
     }

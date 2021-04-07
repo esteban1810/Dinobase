@@ -2,11 +2,13 @@ package modelo;
 
 import clase.Paleontologo;
 import BD.Conexion;
+import clase.Taxonomia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 public class ConsultasPaleontologo extends Conexion{
     
@@ -63,7 +65,6 @@ public class ConsultasPaleontologo extends Conexion{
                 System.out.println(ex);
             }
         }
-        
     }
 
     public boolean eliminar(Paleontologo paleo){
@@ -142,6 +143,32 @@ public class ConsultasPaleontologo extends Conexion{
                 paleo.setCedula(rs.getString("cedula"));
                 paleo.setFechaN(rs.getDate("fechan"));
                 lista.add(paleo);
+            }
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
+    
+    public boolean paleontologos(JComboBox<String> paleontologoCB){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        
+        String sql = "SELECT (nombre || ' ' || apellidos) as nombrec FROM paleantologos  GROUP BY nombrec ORDER BY nombrec";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                paleontologoCB.addItem(rs.getString(1));
             }
             return true;
         } catch (SQLException ex) {

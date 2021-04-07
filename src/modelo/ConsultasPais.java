@@ -2,6 +2,7 @@ package modelo;
 
 import clase.Pais;
 import BD.Conexion;
+import clase.Clima;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,41 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 
 public class ConsultasPais extends Conexion{
+    
+    public ArrayList<Pais> getPaises(String taxonomia){
+        PreparedStatement ps = null;
+        ArrayList<Pais> lista=new ArrayList();
+        ResultSet rs = null;
+        Pais pais = null;
+        Connection con = getConnection();
+        
+        String sql = "SELECT * FROM unionpaises WHERE especie=?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, taxonomia);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                pais = new Pais();
+                pais.setNombre(rs.getString("nombre"));
+                pais.setContinente(rs.getString("continente"));
+                pais.setExtension(rs.getFloat("extension"));   
+                lista.add(pais);
+                
+            }
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return lista;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
     
     public boolean registrar(Pais pais){
         PreparedStatement ps = null;
@@ -214,7 +250,6 @@ public class ConsultasPais extends Conexion{
                 System.out.println(ex);
             }
         }
-        
     }
     
     

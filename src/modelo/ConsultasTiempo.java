@@ -10,12 +10,48 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 
 public class ConsultasTiempo  extends Conexion{
-     public boolean registrar(Tiempo time){
+    
+    public ArrayList<Tiempo> getTiempos(String taxonomia){
         PreparedStatement ps = null;
+        ResultSet rs = null;
         Connection con = getConnection();
-        
-        String sql = "INSERT INTO tiempos VALUES(?,?,?,?)";
-        
+        Tiempo tiempo = null;
+        ArrayList<Tiempo> lista = new ArrayList();
+
+        String sql = "SELECT * FROM uniontiempos WHERE especietax=?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, taxonomia);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Tiempo tiem = new Tiempo();
+                tiem.setPeriodo(rs.getString("periodo"));
+                tiem.setEra(rs.getString("era"));
+                tiem.setEpoca(rs.getString("epoca"));
+                tiem.setDescubierto(rs.getString("descubierto"));
+                lista.add(tiem);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return lista;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
+    
+    public boolean registrar(Tiempo time){
+       PreparedStatement ps = null;
+       Connection con = getConnection();
+
+       String sql = "INSERT INTO tiempos VALUES(?,?,?,?)";
+
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, time.getPeriodo());
@@ -34,7 +70,6 @@ public class ConsultasTiempo  extends Conexion{
                 System.out.println(ex);
             }
         }
-        
     }
     
     public boolean modificar(Tiempo time, String tiempo){

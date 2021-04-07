@@ -126,7 +126,7 @@ public final class TaxonomiaCtrl implements ActionListener {
         new ConsultasPais().nombrePaises(taxonomiaIndex.paisCB);
     }
 
-    public void limpiar() {
+    public void limpiar(){
         taxonomiaForm.especieTF1.setText(null);
         taxonomiaForm.reinoTF1.setText(null);
         taxonomiaForm.ordenTF1.setText(null);
@@ -154,43 +154,11 @@ public final class TaxonomiaCtrl implements ActionListener {
         modelo.addColumn("ESPECIE");
         modelo.addColumn("PERIODO");
         modelo.addColumn("PAIS(ES)");
-        
-//        taxonomiaIndex.tablaTaxonomias.setDefaultRenderer(Object.class, new tableRender());
-//        String titulos[] = {"Imagen","Especie", "Periodo","Pais(es)"};
-//        DefaultTableModel tm = new DefaultTableModel(null, titulos);
-//        this.taxonomiaIndex.tablaTaxonomias.setRowHeight(300);
-//        taxonomiaIndex.tablaTaxonomias.setModel(tm);
 
-//        modelo.setDefaultRenderer(Object.class, new TableModel());
-        
-
-//<<<<<<< HEAD
-//        for (int i = 0; i < lista.size(); i++) {
-//            fila = lista.get(i).arreglo();
-//            modelo.addRow(fila);
-
-//=======
-//tm.addRow(new Object[]{new JLabel(new ImageIcon(getClass().getResource("/Imagenes/prototipo2.png"))),"Braqueosaurio", "Verde"});
-//        for (int i = 0; i < lista.size(); i++) {
-////            tm.addRow(lista.get(i).arreglo());
-//            BufferedImage bi;
-//            try {
-//                bi = ImageIO.read(lista.get(i).getLeerImagen());
-//                ImageIcon foto = new ImageIcon(bi);
-//                Image img = foto.getImage();
-//                Image newimg = img.getScaledInstance(280, 350, java.awt.Image.SCALE_SMOOTH);
-//                tm.addRow(new Object[]{new JLabel(new ImageImpl(newimg)),lista.get(i).getEspecie(), lista.get(i).getListaPeriodos(), lista.get(i).getListaPaises()});
-//            } catch (IOException ex) {
-//                Logger.getLogger(TaxonomiaCtrl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-    
-           Object[] fila = new Object[4];
-           for (int i = 0; i < lista.size(); i++) {
-            fila = lista.get(i).arreglo();
-               System.out.println(lista.get(i).getImagenNom());
-            modelo.addRow(fila);
+        for(int i=0; i<lista.size(); i++){
+            modelo.addRow(lista.get(i).arreglo());
         }
-}
+    }
             
 //>>>>>>> filtracion
       
@@ -238,13 +206,8 @@ public final class TaxonomiaCtrl implements ActionListener {
         tt.registrar(taxonomia.getEspecie(), listModelTiempo.toArray());
         tp.registrar(taxonomia.getEspecie(), listModelPais.toArray());
         limpiar();
-//<<<<<<< HEAD
-//
-//        taxonomiaModelo.todasTaxonomias(lista);
-//=======
-
-        lista = taxonomiaModelo.index();
-//>>>>>>> filtracion
+        
+        lista=taxonomiaModelo.index();
         cargarTabla();
     }
 
@@ -366,13 +329,8 @@ public final class TaxonomiaCtrl implements ActionListener {
         tp.modificar(taxonomia.getEspecie(), listaPaises.toArray());
 
         limpiar();
-//<<<<<<< HEAD
-//        taxonomiaModelo.todasTaxonomias(lista);
-//        cargarTabla();
-//=======
         lista = taxonomiaModelo.index();
-        cargarTabla();
-//>>>>>>> filtracion
+        cargarTabla(); 
     }
 
     private void presionarEliminarBtn1() {
@@ -401,26 +359,37 @@ public final class TaxonomiaCtrl implements ActionListener {
     }
 
     private void presionarBuscarBtn() {
-        lista.clear();
-        limpiarTabla();
-//<<<<<<< HEAD
-//        taxonomiaModelo.coincidencias(lista, taxonomiaIndex.buscarTF.getText());
-//        if (lista.isEmpty()) {
-//=======
         String pais = this.taxonomiaIndex.paisCB.getSelectedItem().toString();
         String periodo = this.taxonomiaIndex.periodoCB.getSelectedItem().toString();
         String especie = taxonomiaIndex.buscarTF.getText();
+        ArrayList<Taxonomia> listaAux;
+        
+        
+        if(pais.equals("-- Seleccionar --")){
+            pais="";
+            if(periodo.equals("-- Seleccionar --")){
+                periodo="";
+                if(especie.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Especifique algún campo de búsqueda");
+                    return;
+                }
+            }
+        } else {
+            if(periodo.equals("-- Seleccionar --")){
+                periodo="";
+            }
+        }
+        
 
-        pais = pais.equals("-- Seleccionar --") ? "" : pais;
-        periodo = periodo.equals("-- Seleccionar --") ? "" : periodo;
-
-        lista = taxonomiaModelo.coincidencias(especie, periodo, pais);
-
-        if (lista.isEmpty()) {
-//>>>>>>> filtracion
+        listaAux = taxonomiaModelo.coincidencias(especie,periodo,pais);
+        
+        if(listaAux.isEmpty()){
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
+        
+        lista = listaAux;
+        limpiarTabla();
         cargarTabla();
     }
 

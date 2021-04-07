@@ -4,235 +4,268 @@ import clase.Tiempo;
 import clase.Taxonomia;
 import clase.Pais;
 import clase.Clima;
-import modelo.ConsultasRegistrosV;
+import java.awt.Image;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
-import clase.RegistroVisitante;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+
 import view.diccionario.DiccionarioForm;
 import view.diccionario.DiccionarioIndex;
 
-public class DiccionarioCtrl implements ActionListener {
-
-    String usuario;
-    private ConsultasRegistrosV modC;
-    private DiccionarioIndex frm;
-    private ArrayList<RegistroVisitante> listaRV;
+public final class DiccionarioCtrl implements ActionListener{
+    private DiccionarioIndex diccionarioIndex;
+    private ArrayList<Taxonomia> listaVisitante;
     private DefaultTableModel modelo;
     private DefaultTableModel modelo2;
     private DefaultTableModel modelo3;
-    private DiccionarioForm fv;
+    private DiccionarioForm diccionarioForm;
+    private ConsultasTaxonomia taxonomiaModelo;
+    private ConsultasClima climaModelo;
+    private ConsultasTiempo tiempoModelo;
+    private ConsultasPais paisModelo;
 
-    public DiccionarioCtrl() {
-        this.modC = new ConsultasRegistrosV();
-
-        this.frm = new DiccionarioIndex();
-        this.modelo = new DefaultTableModel();
-        this.modelo2 = new DefaultTableModel();
-        this.modelo3 = new DefaultTableModel();
-        fv = new DiccionarioForm();
-        this.frm.buscarBtn.addActionListener(this);
-        this.frm.mostrarBtn.addActionListener(this);
-        this.frm.todoBtn.addActionListener(this);
-        this.fv.regresarBtn.addActionListener(this);
-        this.frm.mostrarPaleoBtn.addActionListener(this);
-        this.frm.setLocationRelativeTo(null);
-        this.fv.setLocationRelativeTo(null);
-        this.fv.mostrarClimaBtn.addActionListener(this);
-        listaRV = modC.todosRegistros();
+    
+    public DiccionarioCtrl(){
+        diccionarioIndex  = new DiccionarioIndex();
+        modelo          = new DefaultTableModel();
+        modelo2         = new DefaultTableModel();
+        modelo3         = new DefaultTableModel();
+        diccionarioForm   = new DiccionarioForm();
+        
+        taxonomiaModelo = new ConsultasTaxonomia();
+        climaModelo = new ConsultasClima();
+        tiempoModelo = new ConsultasTiempo();
+        paisModelo = new ConsultasPais();
+        
+        this.diccionarioIndex.buscarBtn.addActionListener(this);
+        this.diccionarioIndex.mostrarBtn.addActionListener(this);
+        this.diccionarioIndex.todoBtn.addActionListener(this);
+        this.diccionarioForm.regresarBtn.addActionListener(this);
+        this.diccionarioIndex.setLocationRelativeTo(null);
+        this.diccionarioForm.setLocationRelativeTo(null);
+        this.diccionarioForm.mostrarClimaBtn.addActionListener(this);
+        
+        
+        listaVisitante = taxonomiaModelo.indexVisitante();
+        cargarPeriodoCB();
+        cargarPaisCB();
+        cargarPaleontologoCB();
         cargarTabla();
     }
-
-//    public static DefaultListModel getListaR(){
-//        return listaR;
-//    }
-    public void iniciar() {
-        frm.setVisible(true);
-        frm.setTitle("Tiempo");
-        frm.setLocationRelativeTo(null);
-        frm.nombreTxt.setText(usuario);
+    
+    public void cargarPeriodoCB(){
+        new ConsultasTiempo().nombrePeriodos(diccionarioIndex.periodoCB);
+    }
+    
+    public void cargarPaisCB(){
+        new ConsultasPais().nombrePaises(diccionarioIndex.paisCB);
+    }
+    
+    public void cargarPaleontologoCB(){
+        new ConsultasPaleontologo().paleontologos(diccionarioIndex.paleontologoCB);
+    }
+    
+    public void iniciar(){
+        diccionarioIndex.setVisible(true);
+        diccionarioIndex.setTitle("Tiempo");
+        diccionarioIndex.setLocationRelativeTo(null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == frm.todoBtn) {
-            listaRV = modC.todosRegistros();
+        
+        if (e.getSource() == diccionarioIndex.todoBtn) {
+            listaVisitante = taxonomiaModelo.indexVisitante();
             cargarTabla();
-        } else if (e.getSource() == frm.mostrarPaleoBtn) {
-            int fila = frm.tablaTaxonomias2.getSelectedRow();
-            String nombrePaleo;
+        } 
+            
+        else if (e.getSource() == diccionarioForm.mostrarClimaBtn){
+            mostrarClimaBtn();
+        }
+        
+        else if (e.getSource() == diccionarioIndex.mostrarBtn) {
+            mostrarBtn();
+        } 
+//         
+        else if (diccionarioForm.regresarBtn == e.getSource()) {
+            diccionarioForm.setVisible(false);
+            diccionarioIndex.setVisible(true);
+            cargarTabla();
+        } 
+//        
+        else if (e.getSource() == diccionarioIndex.buscarBtn) {
+            buscarBtn();
+        } 
+  
+    }
+    
+    public void buscarBtn(){
+        String pais     = diccionarioIndex.paisCB.getSelectedItem().toString();
+        String periodo  = diccionarioIndex.periodoCB.getSelectedItem().toString();
+        String paleonto  = diccionarioIndex.paleontologoCB.getSelectedItem().toString();
+        String especie  = diccionarioIndex.buscarTF.getText();
+        ArrayList<Taxonomia> listaAux;
 
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
-                return;
-            }
-
-            Taxonomia modT = new Taxonomia();
-            modT.setPaleantologo(frm.tablaTaxonomias2.getValueAt(fila, 2).toString());
-            nombrePaleo = modC.buscarPaleo(modT.getPaleantologo());
-
-            JOptionPane.showMessageDialog(null, "La cedula " + modT.getPaleantologo() + "pertenece a " + nombrePaleo);
-        } else if (e.getSource() == fv.mostrarClimaBtn) {
-            int fila = fv.tablaPaises.getSelectedRow();
-            ArrayList<Clima> listaT = new ArrayList();
-            modelo3 = new DefaultTableModel();
-            fv.climaLbl.setVisible(true);
-            fv.tablaClimas.setModel(modelo3);
-
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
-                return;
-            }
-
-            modelo3.addColumn("Nombre");
-            modelo3.addColumn("Humedad");
-            modelo3.addColumn("Presion");
-            modelo3.addColumn("Temperatura");
-
-            Pais mod = new Pais();
-            mod.setNombre(fv.tablaPaises.getValueAt(fila, 0).toString());
-            listaT = modC.buscarClimasFull(mod.getNombre());
-
-            for (int i = 0; i < listaT.size(); i++) {
-                modelo3.addRow(listaT.get(i).arreglo());
-            }
-
-        } else if (e.getSource() == frm.mostrarBtn) {
-            int fila = frm.tablaTaxonomias2.getSelectedRow();
-            Object[] renglon = new Object[4];
-            ArrayList<Tiempo> listaT = new ArrayList();
-            ArrayList<Pais> listaT1 = new ArrayList();
-            modelo = new DefaultTableModel();
-            modelo2 = new DefaultTableModel();
-
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
-                return;
-            }
-            ConsultasTaxonomia modT = new ConsultasTaxonomia();
-            Taxonomia mod = new Taxonomia();
-
-            mod.setEspecie(frm.tablaTaxonomias2.getValueAt(fila, 0).toString());
-            modT.buscar(mod);
-
-            fv.especieTF.setText(mod.getEspecie());
-            fv.reinoTF.setText(mod.getReino());
-            fv.ordenTF.setText(mod.getOrden());
-            fv.dominioTF.setText(mod.getDominio());
-            fv.familiaTF.setText(mod.getFamilia());
-            fv.claseTF.setText(mod.getClase());
-            fv.filoTF.setText(mod.getFilo());
-            fv.generoTF.setText(mod.getGenero());
-            fv.alturaTF.setText(Double.toString(mod.getAltura()));
-            fv.largoTF.setText(Double.toString(mod.getLargo()));
-            fv.pesoTF.setText(Double.toString(mod.getPeso()));
-            fv.alimentacionTF.setText(mod.getAlimentacion());
-            fv.registradoTF.setText(mod.getRegistrado());
-            fv.paleantologoTF.setText(mod.getPaleantologo());
-            fv.descripcionTXA.append(mod.getDescripcion());
-
-            if (mod.getLeerImagen() != null) {
-                try {
-                    BufferedImage bi = ImageIO.read(mod.getLeerImagen());
-                    ImageIcon foto = new ImageIcon(bi);
-                    Image img = foto.getImage();
-                    Image newimg = img.getScaledInstance(250, 260, java.awt.Image.SCALE_SMOOTH);
-                    ImageIcon newicon = new ImageIcon(newimg);
-                    this.fv.lblFoto.setIcon(newicon);
-                } catch (Exception ex) {
-                    System.out.println("No paso la imagen");
+        
+        if(pais.equals("-- Seleccionar --")){
+            pais="";
+            if(periodo.equals("-- Seleccionar --")){
+                periodo="";
+                if(paleonto.equals("-- Seleccionar --")){
+                    paleonto="";
+                    if(especie.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Especifique algún campo de búsqueda");
+                        return;
+                    }
                 }
             } else {
-
+                if(paleonto.equals("-- Seleccionar --")){
+                    paleonto="";
+                }
             }
-
-            fv.setVisible(true);
-            frm.setVisible(false);
-
-            fv.tablaTiempos.setModel(modelo);
-
-            modelo.addColumn("Periodo");
-            modelo.addColumn("Era");
-            modelo.addColumn("Epoca");
-            modelo.addColumn("Descubierto");
-
-            listaT = modC.buscarTiemposFull(mod.getEspecie());
-
-            for (int i = 0; i < listaT.size(); i++) {
-                modelo.addRow(listaT.get(i).arreglo());
+        } else {
+            if(periodo.equals("-- Seleccionar --")){
+                periodo="";
+                if(paleonto.equals("-- Seleccionar --")){
+                    paleonto="";
+                }
+            } else {
+                if(paleonto.equals("-- Seleccionar --")){
+                    paleonto="";
+                }
             }
+        }
+        
+        listaVisitante=taxonomiaModelo.coincidenciasVisitante(especie, paleonto, periodo, pais);
 
-            fv.tablaPaises.setModel(modelo2);
+        if (listaVisitante.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
+            return;
+        }
+        cargarTabla();
+    }
+    
+    public void cargarTabla(){
+       modelo = new DefaultTableModel();
+       diccionarioIndex.tablaTaxonomias2.setModel(modelo);
+       Object[] fila;
 
-            modelo2.addColumn("Pais");
-            modelo2.addColumn("Continente");
-            modelo2.addColumn("Extension");
+       modelo.addColumn("Especie");
+       modelo.addColumn("Paleontologo");
+       modelo.addColumn("Tiempos");
+       modelo.addColumn("Paises");
 
-            listaT1 = modC.buscarPaisesFull(mod.getEspecie());
+       for(int i=0; i<listaVisitante.size(); i++){
+           fila = listaVisitante.get(i).arregloVisitante();
+           modelo.addRow(fila);
+       }
+   }
 
-            for (int i = 0; i < listaT1.size(); i++) {
-                modelo2.addRow(listaT1.get(i).arreglo());
-            }
-        } //         
-        else if (fv.regresarBtn == e.getSource()) {
-            fv.descripcionTXA.setText("");
-            fv.setVisible(false);
-            frm.setVisible(true);
-            cargarTabla();
-        } //        
-        else if (e.getSource() == frm.buscarBtn) {
+    private void mostrarClimaBtn() {
+        int fila = diccionarioForm.tablaPaises.getSelectedRow();
+        ArrayList<Clima> listaT = new ArrayList();
+        modelo3 =new DefaultTableModel();
+        diccionarioForm.climaLbl.setVisible(true);
+        diccionarioForm.tablaClimas.setModel(modelo3);
 
-            listaRV.clear();
-            limpiarTabla();
-            modC.coincidencias(listaRV, frm.buscarTF.getText());
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
+            return;
+        }
 
-            if (listaRV.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
-                return;
-            }
-            cargarTabla();
+        modelo3.addColumn("Nombre");
+        modelo3.addColumn("Humedad");
+        modelo3.addColumn("Presion");
+        modelo3.addColumn("Temperatura");
 
+        
+        String nombrePais = diccionarioForm.tablaPaises.getValueAt(fila, 0).toString();
+        listaT = climaModelo.getClimas(nombrePais);
+
+        for (int i = 0; i < listaT.size(); i++) {
+            modelo3.addRow(listaT.get(i).arreglo());
         }
     }
 
-    public void cargarTabla() {
-        modelo = new DefaultTableModel();
-        frm.tablaTaxonomias2.setModel(modelo);
+    private void mostrarBtn() {
+        int fila = diccionarioIndex.tablaTaxonomias2.getSelectedRow();
+        Object[] renglon = new Object[4];
+        ArrayList<Tiempo> listaT = new ArrayList();
+        ArrayList<Pais> listaT1 = new ArrayList();
+        modelo=new DefaultTableModel();
+        modelo2 = new DefaultTableModel();
 
-        modelo.addColumn("Especie");
-        modelo.addColumn("Registrado Por:");
-        modelo.addColumn("Paleontologo");
-        modelo.addColumn("Tiempos");
-        modelo.addColumn("Paises");
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
+            return;
+        }
+        ConsultasTaxonomia modT = new ConsultasTaxonomia();
+        Taxonomia mod = new Taxonomia();
 
-        Object[] fila = new Object[5];
+        mod.setEspecie(diccionarioIndex.tablaTaxonomias2.getValueAt(fila, 0).toString());
+        modT.buscar(mod);
 
-        for (int i = 0; i < listaRV.size(); i++) {
-            fila = listaRV.get(i).arreglo();
-            modelo.addRow(fila);
+        diccionarioForm.especieTF.setText(mod.getEspecie());
+        diccionarioForm.reinoTF.setText(mod.getReino());
+        diccionarioForm.ordenTF.setText(mod.getOrden());
+        diccionarioForm.dominioTF.setText(mod.getDominio());
+        diccionarioForm.familiaTF.setText(mod.getFamilia());
+        diccionarioForm.claseTF.setText(mod.getClase());
+        diccionarioForm.filoTF.setText(mod.getFilo());
+        diccionarioForm.generoTF.setText(mod.getGenero());
+        diccionarioForm.alturaTF.setText(Double.toString(mod.getAltura()));
+        diccionarioForm.largoTF.setText(Double.toString(mod.getLargo()));
+        diccionarioForm.pesoTF.setText(Double.toString(mod.getPeso()));
+        diccionarioForm.alimentacionTF.setText(mod.getAlimentacion());
+        diccionarioForm.registradoTF.setText(mod.getRegistrado());
+        diccionarioForm.paleantologoTF.setText(mod.getPaleantologo());
+        diccionarioForm.descripcionTXA.append(mod.getDescripcion());
+
+        if (mod.getLeerImagen() != null) {
+            try {
+                BufferedImage bi = ImageIO.read(mod.getLeerImagen());
+                ImageIcon foto = new ImageIcon(bi);
+                Image img = foto.getImage();
+                Image newimg = img.getScaledInstance(250, 260, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon newicon = new ImageIcon(newimg);
+                this.diccionarioForm.lblFoto.setIcon(newicon);
+            } catch (Exception ex) {
+                System.out.println("No paso la imagen");
+            }
+        }
+
+        diccionarioForm.setVisible(true);
+        diccionarioIndex.setVisible(false);
+
+        diccionarioForm.tablaTiempos.setModel(modelo);
+
+        modelo.addColumn("Periodo");
+        modelo.addColumn("Era");
+        modelo.addColumn("Epoca");
+        modelo.addColumn("Descubierto");
+        
+
+        listaT = tiempoModelo.getTiempos(mod.getEspecie());
+
+        for (int i = 0; i < listaT.size(); i++) {
+            modelo.addRow(listaT.get(i).arreglo());
+        }
+
+        diccionarioForm.tablaPaises.setModel(modelo2);
+
+        modelo2.addColumn("Pais");
+        modelo2.addColumn("Continente");
+        modelo2.addColumn("Extension");
+
+        listaT1 = paisModelo.getPaises(mod.getEspecie());
+
+        for (int i = 0; i < listaT1.size(); i++) {
+            modelo2.addRow(listaT1.get(i).arreglo());
         }
     }
-
-    public void limpiarTabla() {
-        int filas = modelo.getRowCount();
-        System.out.println(modelo.getRowCount());
-        for (int i = 0; filas > i; i++) {
-            modelo.removeRow(0);
-        }
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
+   
 }
