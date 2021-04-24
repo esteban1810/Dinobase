@@ -16,9 +16,7 @@ public class DiccionarioIndex extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         BienvenidoLbl = new javax.swing.JLabel();
         userLbl = new javax.swing.JLabel();
-        todoBtn = new javax.swing.JButton();
         buscarTF = new javax.swing.JTextField();
-        buscarBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         regresarBtn = new javax.swing.JButton();
@@ -76,11 +74,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
         userLbl.setToolTipText("");
         jPanel1.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 160, -1));
 
-        todoBtn.setBackground(new java.awt.Color(223, 122, 19));
-        todoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        todoBtn.setText("TODO");
-        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
-
         buscarTF.setBackground(new java.awt.Color(12, 156, 208));
         buscarTF.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         buscarTF.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,11 +84,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
             }
         });
         jPanel1.add(buscarTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 190, 25));
-
-        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        buscarBtn.setText("BUSCAR");
-        jPanel1.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(87, 198, 196));
         jLabel2.setOpaque(true);
@@ -127,6 +115,11 @@ public class DiccionarioIndex extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 190, 10));
 
         paleontologoCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --" }));
+        paleontologoCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                paleontologoCBItemStateChanged(evt);
+            }
+        });
         jPanel1.add(paleontologoCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 150, -1));
 
         periodoCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --" }));
@@ -184,6 +177,10 @@ public class DiccionarioIndex extends javax.swing.JFrame {
     private void paisCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisCBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_paisCBActionPerformed
+
+    private void paleontologoCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_paleontologoCBItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_paleontologoCBItemStateChanged
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -250,7 +247,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel BienvenidoLbl;
-    public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -268,7 +264,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;
     public javax.swing.JTable tablaTaxonomias2;
-    public javax.swing.JButton todoBtn;
     public javax.swing.JLabel userLbl;
     // End of variables declaration//GEN-END:variables
 }

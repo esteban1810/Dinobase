@@ -16,7 +16,7 @@ import modelo.*;
 import view.diccionario.DiccionarioForm;
 import view.diccionario.DiccionarioIndex;
 
-public final class DiccionarioCtrl implements ActionListener, MouseListener{
+public final class DiccionarioCtrl implements ActionListener, MouseListener, KeyListener, ItemListener{
     private MenuCtrl ctrlM;
     private DiccionarioIndex diccionarioIndex;
     private ArrayList<Taxonomia> listaVisitante;
@@ -61,14 +61,16 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener{
     }
     
     public void actionListener(){
-        this.diccionarioIndex.buscarBtn.addActionListener(this);
-        this.diccionarioIndex.todoBtn.addActionListener(this);
         this.diccionarioForm.regresarBtn.addActionListener(this);
         this.diccionarioIndex.regresarBtn.addActionListener(this);
         this.diccionarioIndex.setLocationRelativeTo(null);
         this.diccionarioForm.setLocationRelativeTo(null);
         this.diccionarioForm.mostrarClimaBtn.addActionListener(this);
         this.diccionarioIndex.tablaTaxonomias2.addMouseListener(this);
+        this.diccionarioIndex.buscarTF.addKeyListener(this);
+        this.diccionarioIndex.paleontologoCB.addItemListener(this);        
+        this.diccionarioIndex.paisCB.addItemListener(this);
+        this.diccionarioIndex.periodoCB.addItemListener(this);
     }
     
     public void cargarPeriodoCB(){
@@ -91,13 +93,7 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if (e.getSource() == diccionarioIndex.todoBtn) {
-            listaVisitante = taxonomiaModelo.indexVisitante();
-            cargarTabla();
-        } 
-            
-        else if (e.getSource() == diccionarioForm.mostrarClimaBtn){
+        if (e.getSource() == diccionarioForm.mostrarClimaBtn){
             mostrarClimaBtn();
         }
 //         
@@ -105,10 +101,6 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener{
             diccionarioForm.setVisible(false);
             diccionarioIndex.setVisible(true);
             cargarTabla();
-        } 
-//        
-        else if (e.getSource() == diccionarioIndex.buscarBtn) {
-            buscarBtn();
         }
         
         else if(e.getSource() == diccionarioIndex.regresarBtn){
@@ -134,8 +126,8 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener{
                 if(paleonto.equals("-- Seleccionar --")){
                     paleonto="";
                     if(especie.isEmpty()){
-                        JOptionPane.showMessageDialog(null, 
-                                "Especifique algún campo de búsqueda");
+                        listaVisitante = taxonomiaModelo.indexVisitante();
+                            cargarTabla();
                         return;
                     }
                 }
@@ -199,7 +191,6 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener{
 
     private void mostrarBtn() {
         int fila = diccionarioIndex.tablaTaxonomias2.getSelectedRow();
-        Object[] renglon = new Object[4];
         ArrayList<Tiempo> listaT;
         ArrayList<Pais> listaT1;
         modelo=new DefaultTableModel();
@@ -301,6 +292,41 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener{
     @Override
     public void mouseExited(MouseEvent me) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+//        if(ke.getSource()==this.diccionarioIndex.buscarTF){
+////            System.out.println("todo excelente Pressed");
+//            buscarBtn();
+//        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource()==this.diccionarioIndex.buscarTF){
+            buscarBtn();
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        if(ie.getSource()==this.diccionarioIndex.paleontologoCB){
+            buscarBtn();
+        }
+        if(ie.getSource()==this.diccionarioIndex.paisCB){
+            buscarBtn();
+        }
+        if(ie.getSource()==this.diccionarioIndex.periodoCB){
+            buscarBtn();
+        }
     }
    
 }
