@@ -110,6 +110,7 @@ public final class TaxonomiaCtrl implements ActionListener {
             taxonomiaIndex.setVisible(false);
             menuCtrl.iniciar();
             menuCtrl.desbloquear(menuCtrl.getNickname());
+            menuCtrl.administrador();
         } else if (e.getSource() == taxonomiaForm.btnAgrPais) {
             PaisCtrl ctrlPais = new PaisCtrl((DefaultListModel) this.taxonomiaForm.listaPaises.getModel());
             ctrlPais.iniciar();
@@ -150,7 +151,6 @@ public final class TaxonomiaCtrl implements ActionListener {
         modelo = new DefaultTableModel();
         taxonomiaIndex.tablaTaxonomias.setModel(modelo);
 
-        modelo.addColumn("IMAGEN");
         modelo.addColumn("ESPECIE");
         modelo.addColumn("PERIODO");
         modelo.addColumn("PAIS(ES)");
@@ -363,24 +363,19 @@ public final class TaxonomiaCtrl implements ActionListener {
         String periodo = this.taxonomiaIndex.periodoCB.getSelectedItem().toString();
         String especie = taxonomiaIndex.buscarTF.getText();
         ArrayList<Taxonomia> listaAux;
-        
-        
         if(pais.equals("-- Seleccionar --")){
             pais="";
             if(periodo.equals("-- Seleccionar --")){
                 periodo="";
                 if(especie.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Especifique algún campo de búsqueda");
+                    JOptionPane.showMessageDialog(null, "Especifique algún "
+                            + "campo de búsqueda");
                     return;
                 }
             }
         } else {
-            if(periodo.equals("-- Seleccionar --")){
-                periodo="";
-            }
+            if(periodo.equals("-- Seleccionar --"))periodo="";
         }
-        
-
         listaAux = taxonomiaModelo.coincidencias(especie,periodo,pais);
         
         if(listaAux.isEmpty()){

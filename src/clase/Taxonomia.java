@@ -232,17 +232,15 @@ public class Taxonomia {
     public Object[] arreglo(){
         Object[] arreglo = new Object[4];
         
-        arreglo[0]=leerImagen;
-        arreglo[1]=especie;
-        arreglo[2]=periodos;
-        arreglo[3]=paises;
+        arreglo[0]=especie;
+        arreglo[1]=periodos;
+        arreglo[2]=paises;
         
         return arreglo;
     }
     
     public Object[] arregloVisitante(){
         Object[] arreglo = new Object[4];
-        
         arreglo[0]=especie;
         arreglo[1]=paleantologo;
         arreglo[2]=periodos;

@@ -219,7 +219,7 @@ public class ConsultasTaxonomia extends Conexion {
         
         query+=concat.replaceFirst("AND", "WHERE");
         
-        return this.toDoQuery(query, 2);
+            return this.toDoQuery(query, 2);
     }
     
     public String queryFiltrada(String especie, String periodo, String pais){

@@ -4,8 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/controlador/ClimaCtrl.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/controlador/DiccionarioCtrl.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/view/diccionario/DiccionarioIndex.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/modelo/ConsultasTaxonomia.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/modelo/ConsultasPais.java</file>
+            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/Dinobase/src/modelo/ConsultasTiempo.java</file>
         </group>
     </open-files>
 </project-private>

@@ -17,7 +17,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
         BienvenidoLbl = new javax.swing.JLabel();
         userLbl = new javax.swing.JLabel();
         todoBtn = new javax.swing.JButton();
-        mostrarBtn = new javax.swing.JButton();
         buscarTF = new javax.swing.JTextField();
         buscarBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -81,11 +80,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
         todoBtn.setText("TODO");
         jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
-
-        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarBtn.setText("MOSTRAR");
-        jPanel1.add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
 
         buscarTF.setBackground(new java.awt.Color(12, 156, 208));
         buscarTF.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
@@ -268,7 +262,6 @@ public class DiccionarioIndex extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    public javax.swing.JButton mostrarBtn;
     public javax.swing.JComboBox<String> paisCB;
     public javax.swing.JComboBox<String> paleontologoCB;
     public javax.swing.JComboBox<String> periodoCB;

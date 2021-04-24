@@ -122,6 +122,7 @@ public class TiempoCtrl implements ActionListener{
             tiempoIndex.setVisible(false);
             ctrlM.iniciar();
             ctrlM.desbloquear(ctrlM.getNickname());
+            ctrlM.administrador();
         }
     }
     
@@ -282,6 +283,7 @@ public class TiempoCtrl implements ActionListener{
             JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
+        
         cargarTabla();
     }
 

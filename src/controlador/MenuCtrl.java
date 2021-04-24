@@ -68,6 +68,11 @@ public final class MenuCtrl implements ActionListener{
         }
     }
     
+    public void administrador(){
+        frameLogin.panelAdmin.setVisible(true);
+        frameLogin.panelVisitante.setVisible(false);
+    }
+    
     
 
     @Override

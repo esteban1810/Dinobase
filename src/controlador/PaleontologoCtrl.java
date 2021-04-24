@@ -117,7 +117,7 @@ public class PaleontologoCtrl implements ActionListener {
             peloentologoIndex.setVisible(false);
             menuCtrl.iniciar();
             menuCtrl.desbloquear(menuCtrl.getNickname());
-
+            menuCtrl.administrador();
         }
 
     }

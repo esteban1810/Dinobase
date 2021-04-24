@@ -145,6 +145,7 @@ public class PaisCtrl implements ActionListener{
             paisIndex.setVisible(false);
             menuCtrl.iniciar();
             menuCtrl.desbloquear(menuCtrl.getNickname());
+            menuCtrl.administrador();
         }
         else if (e.getSource() == paisForm.btnAgreClim){
             ClimaCtrl ctrlClima = new ClimaCtrl((DefaultListModel)this.paisForm.ListPaisClima.getModel());

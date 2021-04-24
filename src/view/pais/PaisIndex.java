@@ -44,6 +44,7 @@ public class PaisIndex extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPais = new javax.swing.JTable();
         continenteCB = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,7 +155,14 @@ public class PaisIndex extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 197, 960, 350));
 
         continenteCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --", "Africa", "America", "Antartida", "Asia", "Europa", "Oceania" }));
-        getContentPane().add(continenteCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 200, -1));
+        getContentPane().add(continenteCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 200, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Continente:");
+        jLabel5.setAutoscrolls(true);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80, -1));
 
         jLabel2.setBackground(new java.awt.Color(12, 156, 208));
         jLabel2.setOpaque(true);
@@ -222,6 +230,7 @@ public class PaisIndex extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;

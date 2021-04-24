@@ -1,7 +1,5 @@
 package view.diccionario;
 
-import view.visitante.*;
-
 public class DiccionarioForm extends javax.swing.JFrame {
 
     public DiccionarioForm() {

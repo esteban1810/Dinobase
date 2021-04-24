@@ -248,6 +248,7 @@ public class ClimaCtrl  implements ActionListener{
             climaIndex.setVisible(false);
             ctrlM.iniciar();
             ctrlM.desbloquear(ctrlM.getNickname());
+            ctrlM.administrador();
         }
         
         else if(e.getSource() == climaIndex.btnAgregar){

@@ -16,7 +16,7 @@ import modelo.*;
 import view.diccionario.DiccionarioForm;
 import view.diccionario.DiccionarioIndex;
 
-public final class DiccionarioCtrl implements ActionListener{
+public final class DiccionarioCtrl implements ActionListener, MouseListener{
     private MenuCtrl ctrlM;
     private DiccionarioIndex diccionarioIndex;
     private ArrayList<Taxonomia> listaVisitante;
@@ -32,32 +32,43 @@ public final class DiccionarioCtrl implements ActionListener{
     
     public DiccionarioCtrl(){
         diccionarioIndex  = new DiccionarioIndex();
+        
+        //Componentes Interfaz DiccionarioForm
+        diccionarioForm   = new DiccionarioForm();
         modelo          = new DefaultTableModel();
         modelo2         = new DefaultTableModel();
         modelo3         = new DefaultTableModel();
-        diccionarioForm   = new DiccionarioForm();
+        
         ctrlM = new MenuCtrl();
         
         taxonomiaModelo = new ConsultasTaxonomia();
         climaModelo = new ConsultasClima();
         tiempoModelo = new ConsultasTiempo();
         paisModelo = new ConsultasPais();
+
+        //Se vinculan los eventos
+        actionListener();
         
+        listaVisitante = taxonomiaModelo.indexVisitante();
+        
+        //Se cargan los ComboBox
+        cargarPeriodoCB();
+        cargarPaisCB();
+        cargarPaleontologoCB();
+        
+        //Cargando la tabla
+        cargarTabla();
+    }
+    
+    public void actionListener(){
         this.diccionarioIndex.buscarBtn.addActionListener(this);
-        this.diccionarioIndex.mostrarBtn.addActionListener(this);
         this.diccionarioIndex.todoBtn.addActionListener(this);
         this.diccionarioForm.regresarBtn.addActionListener(this);
         this.diccionarioIndex.regresarBtn.addActionListener(this);
         this.diccionarioIndex.setLocationRelativeTo(null);
         this.diccionarioForm.setLocationRelativeTo(null);
         this.diccionarioForm.mostrarClimaBtn.addActionListener(this);
-        
-        
-        listaVisitante = taxonomiaModelo.indexVisitante();
-        cargarPeriodoCB();
-        cargarPaisCB();
-        cargarPaleontologoCB();
-        cargarTabla();
+        this.diccionarioIndex.tablaTaxonomias2.addMouseListener(this);
     }
     
     public void cargarPeriodoCB(){
@@ -89,10 +100,6 @@ public final class DiccionarioCtrl implements ActionListener{
         else if (e.getSource() == diccionarioForm.mostrarClimaBtn){
             mostrarClimaBtn();
         }
-        
-        else if (e.getSource() == diccionarioIndex.mostrarBtn) {
-            mostrarBtn();
-        } 
 //         
         else if (diccionarioForm.regresarBtn == e.getSource()) {
             diccionarioForm.setVisible(false);
@@ -119,8 +126,6 @@ public final class DiccionarioCtrl implements ActionListener{
         String periodo  = diccionarioIndex.periodoCB.getSelectedItem().toString();
         String paleonto  = diccionarioIndex.paleontologoCB.getSelectedItem().toString();
         String especie  = diccionarioIndex.buscarTF.getText();
-        ArrayList<Taxonomia> listaAux;
-
         
         if(pais.equals("-- Seleccionar --")){
             pais="";
@@ -129,34 +134,24 @@ public final class DiccionarioCtrl implements ActionListener{
                 if(paleonto.equals("-- Seleccionar --")){
                     paleonto="";
                     if(especie.isEmpty()){
-                        JOptionPane.showMessageDialog(null, "Especifique algún campo de búsqueda");
+                        JOptionPane.showMessageDialog(null, 
+                                "Especifique algún campo de búsqueda");
                         return;
                     }
                 }
-            } else {
-                if(paleonto.equals("-- Seleccionar --")){
-                    paleonto="";
-                }
-            }
+            } else
+                if(paleonto.equals("-- Seleccionar --"))paleonto="";
         } else {
             if(periodo.equals("-- Seleccionar --")){
                 periodo="";
-                if(paleonto.equals("-- Seleccionar --")){
-                    paleonto="";
-                }
-            } else {
-                if(paleonto.equals("-- Seleccionar --")){
-                    paleonto="";
-                }
-            }
+                if(paleonto.equals("-- Seleccionar --")) paleonto="";
+            } else if(paleonto.equals("-- Seleccionar --")) paleonto="";
         }
         
         listaVisitante=taxonomiaModelo.coincidenciasVisitante(especie, paleonto, periodo, pais);
-
-        if (listaVisitante.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
-            return;
-        }
+        
+        if (listaVisitante.isEmpty()) return;
+        
         cargarTabla();
     }
     
@@ -205,8 +200,8 @@ public final class DiccionarioCtrl implements ActionListener{
     private void mostrarBtn() {
         int fila = diccionarioIndex.tablaTaxonomias2.getSelectedRow();
         Object[] renglon = new Object[4];
-        ArrayList<Tiempo> listaT = new ArrayList();
-        ArrayList<Pais> listaT1 = new ArrayList();
+        ArrayList<Tiempo> listaT;
+        ArrayList<Pais> listaT1;
         modelo=new DefaultTableModel();
         modelo2 = new DefaultTableModel();
 
@@ -214,6 +209,7 @@ public final class DiccionarioCtrl implements ActionListener{
             JOptionPane.showMessageDialog(null, "Seleccione alguna fila");
             return;
         }
+        
         ConsultasTaxonomia modT = new ConsultasTaxonomia();
         Taxonomia mod = new Taxonomia();
 
@@ -277,6 +273,34 @@ public final class DiccionarioCtrl implements ActionListener{
         for (int i = 0; i < listaT1.size(); i++) {
             modelo2.addRow(listaT1.get(i).arreglo());
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        if(me.getSource()==this.diccionarioIndex.tablaTaxonomias2){
+            this.mostrarBtn();
+        } 
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 }
