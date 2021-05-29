@@ -296,7 +296,9 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener, Key
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(ke.getSource()==this.diccionarioIndex.buscarTF){
+            buscarBtn();
+        }
     }
 
     @Override
@@ -310,9 +312,7 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener, Key
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        if(ke.getSource()==this.diccionarioIndex.buscarTF){
-            buscarBtn();
-        }
+        
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

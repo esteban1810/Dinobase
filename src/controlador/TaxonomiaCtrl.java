@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.*;
 
-public final class TaxonomiaCtrl implements ActionListener {
+public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyListener, ItemListener {
 
     private final Taxonomia taxonomia;
     private final ConsultasTaxonomia taxonomiaModelo;
@@ -48,6 +48,15 @@ public final class TaxonomiaCtrl implements ActionListener {
         modelo = new DefaultTableModel();
         menuCtrl = new MenuCtrl();
 
+        actionListener();
+        
+        lista = taxonomiaModelo.index();
+        cargarTabla();
+        this.cargarPeriodoCB();
+        this.cargarPaisCB();
+    }
+    
+    public void actionListener(){
         this.taxonomiaIndex.todoBtn.addActionListener(this);
         this.taxonomiaIndex.mostrarBtn.addActionListener(this);
         this.taxonomiaIndex.nuevoBtn.addActionListener(this);
@@ -65,10 +74,10 @@ public final class TaxonomiaCtrl implements ActionListener {
         taxonomiaForm.btnAgrImagen.addActionListener(this);
         taxonomiaForm.setLocationRelativeTo(null);
 
-        lista = taxonomiaModelo.index();
-        cargarTabla();
-        this.cargarPeriodoCB();
-        this.cargarPaisCB();
+        this.taxonomiaIndex.tablaTaxonomias.addMouseListener(this);
+        this.taxonomiaIndex.buscarTF.addKeyListener(this);     
+        this.taxonomiaIndex.paisCB.addItemListener(this);
+        this.taxonomiaIndex.periodoCB.addItemListener(this);
     }
 
     public void iniciar() {
@@ -225,7 +234,7 @@ public final class TaxonomiaCtrl implements ActionListener {
             return;
         }
 
-        taxonomia.setEspecie(taxonomiaIndex.tablaTaxonomias.getValueAt(fila, 1).toString());
+        taxonomia.setEspecie(taxonomiaIndex.tablaTaxonomias.getValueAt(fila, 0).toString());
 
         tiempos = new ConsultasTaxo_Tiempo().getRelacionesTiempo(taxonomia.getEspecie());
         modelTiempo = new DefaultListModel();
@@ -427,6 +436,48 @@ public final class TaxonomiaCtrl implements ActionListener {
     
     private void cargarTamanio(int tam){
         this.tam = tam;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        if(me.getSource()==this.taxonomiaIndex.tablaTaxonomias){
+            this.presionarMostrarBtn();
+        } 
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {}
+
+    @Override
+    public void mouseReleased(MouseEvent me) {}
+
+    @Override
+    public void mouseEntered(MouseEvent me) {}
+
+    @Override
+    public void mouseExited(MouseEvent me) {}
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        if(ke.getSource()==this.taxonomiaIndex.buscarTF){
+            presionarBuscarBtn();
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {}
+
+    @Override
+    public void keyReleased(KeyEvent ke) {}
+
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        if(ie.getSource()==this.taxonomiaIndex.paisCB){
+            presionarBuscarBtn();
+        }
+        if(ie.getSource()==this.taxonomiaIndex.periodoCB){
+            presionarBuscarBtn();
+        }
     }
 
     

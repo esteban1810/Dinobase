@@ -10,11 +10,17 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasPais;
 import clase.Pais;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import modelo.ConsultasPais_Clima;
 
 
 
-public class PaisCtrl implements ActionListener{
+public class PaisCtrl implements ActionListener, MouseListener, KeyListener, ItemListener{
     private Pais pais;
     private ConsultasPais paisModelo;
     private PaisForm paisForm;
@@ -36,7 +42,16 @@ public class PaisCtrl implements ActionListener{
         model       = new DefaultTableModel();
         lista       = new ArrayList();
                 
-        this.paisForm.btnGuardar.addActionListener(this); 
+        actionListener();
+        
+       
+        paisModelo.todosPaises(lista);
+        cargarTabla();
+        
+    }
+
+     public void actionListener(){
+         this.paisForm.btnGuardar.addActionListener(this); 
         this.paisForm.btnModificar.addActionListener(this);
         this.paisForm.btnEliminar.addActionListener(this);
         this.paisForm.regresarBtn.addActionListener(this);
@@ -54,11 +69,12 @@ public class PaisCtrl implements ActionListener{
         this.paisIndex.aceptarBtn.setVisible(false);
         this.paisIndex.agregarBtn.setVisible(false);
         this.paisIndex.listaPaises.setVisible(false);
-       
-        paisModelo.todosPaises(lista);
-        cargarTabla();
         
-    }
+        this.paisIndex.continenteCB.addItemListener(this);
+        this.paisIndex.tbPais.addMouseListener(this);
+        this.paisIndex.buscarTF.addKeyListener(this);
+     }
+     
      
      public void cargarTabla(){
         model = new DefaultTableModel();
@@ -299,6 +315,46 @@ public class PaisCtrl implements ActionListener{
         
         if(!this.modeloList.removeElement(tiempo)){
             this.modeloList.addElement(tiempo);
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        if(me.getSource()==this.paisIndex.tbPais){
+            System.out.println("entramos");
+            this.presionarMostrarBtn();
+        } 
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me){}
+
+    @Override
+    public void mouseReleased(MouseEvent me) {}
+
+    @Override
+    public void mouseEntered(MouseEvent me) {}
+
+    @Override
+    public void mouseExited(MouseEvent me) {}
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+//        if(ke.getSource()==this.paisIndex.buscarTF){
+//            presionarBuscarBtn();
+//        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {}
+
+    @Override
+    public void keyReleased(KeyEvent ke) {}
+
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        if(ie.getSource()==this.paisIndex.continenteCB){
+            presionarBuscarBtn();
         }
     }
     

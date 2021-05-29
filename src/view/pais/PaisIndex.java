@@ -150,6 +150,11 @@ public class PaisIndex extends javax.swing.JFrame {
             }
         });
         tbPais.setRowHeight(35);
+        tbPais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPaisMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPais);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 197, 960, 350));
@@ -182,6 +187,10 @@ public class PaisIndex extends javax.swing.JFrame {
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
+
+    private void tbPaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPaisMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbPaisMouseClicked
 
     /**
      * @param args the command line arguments
