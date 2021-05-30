@@ -33,10 +33,7 @@ public class PaleontologoIndex extends javax.swing.JFrame {
         tablaPaleontologos = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         buscarTF = new javax.swing.JTextField();
-        buscarBtn = new javax.swing.JButton();
         todoBtn = new javax.swing.JButton();
-        mostrarBtn = new javax.swing.JButton();
-        selecBtn = new javax.swing.JButton();
         nuevoBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -87,30 +84,10 @@ public class PaleontologoIndex extends javax.swing.JFrame {
         buscarTF.setBorder(null);
         jPanel1.add(buscarTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 20));
 
-        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        buscarBtn.setText("Buscar");
-        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
-
         todoBtn.setBackground(new java.awt.Color(223, 122, 19));
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
         todoBtn.setText("Todo");
-        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
-
-        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarBtn.setText("Mostrar");
-        jPanel1.add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
-
-        selecBtn.setBackground(new java.awt.Color(223, 122, 19));
-        selecBtn.setForeground(new java.awt.Color(255, 255, 255));
-        selecBtn.setText("Seleccionar");
-        jPanel1.add(selecBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 140, -1));
+        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         nuevoBtn.setBackground(new java.awt.Color(223, 122, 19));
         nuevoBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +97,7 @@ public class PaleontologoIndex extends javax.swing.JFrame {
                 nuevoBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
+        jPanel1.add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         salir.setBackground(new java.awt.Color(12, 241, 253));
         salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
@@ -159,10 +136,6 @@ public class PaleontologoIndex extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarBtnActionPerformed
 
     private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
         // TODO add your handling code here:
@@ -335,7 +308,6 @@ public class PaleontologoIndex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -343,11 +315,9 @@ public class PaleontologoIndex extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    public javax.swing.JButton mostrarBtn;
     public javax.swing.JButton nuevoBtn;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;
-    public javax.swing.JButton selecBtn;
     public javax.swing.JTable tablaPaleontologos;
     public javax.swing.JButton todoBtn;
     // End of variables declaration//GEN-END:variables

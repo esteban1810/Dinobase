@@ -38,6 +38,8 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
     FileInputStream imagen;
     int tam;
     
+    private int tipo;
+    
     
     public TaxonomiaCtrl() {
         this.taxonomia = new Taxonomia();
@@ -58,9 +60,7 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
     
     public void actionListener(){
         this.taxonomiaIndex.todoBtn.addActionListener(this);
-        this.taxonomiaIndex.mostrarBtn.addActionListener(this);
         this.taxonomiaIndex.nuevoBtn.addActionListener(this);
-        this.taxonomiaIndex.buscarBtn.addActionListener(this);
         this.taxonomiaIndex.regresarBtn.addActionListener(this);
         this.taxonomiaIndex.setLocationRelativeTo(null);
 
@@ -94,10 +94,7 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
         } else if (e.getSource() == taxonomiaIndex.todoBtn) {
             lista = taxonomiaModelo.index();
             cargarTabla();
-        } else if (e.getSource() == taxonomiaIndex.mostrarBtn) {
-            presionarMostrarBtn();
-
-        } else if (e.getSource() == taxonomiaForm.modificarBtn1) {
+        } else  if (e.getSource() == taxonomiaForm.modificarBtn1) {
             presionarModificarBtn1();
         } else if (e.getSource() == taxonomiaForm.eliminarBtn1) {
             presionarEliminarBtn1();
@@ -107,14 +104,14 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
             taxonomiaIndex.setVisible(true);
             taxonomiaForm.setVisible(false);
             limpiar();
-        } else if (e.getSource() == taxonomiaIndex.buscarBtn) {
-            presionarBuscarBtn();
         } else if (e.getSource() == taxonomiaForm.paleanBtn1) {
             PaleontologoCtrl ctrlP = new PaleontologoCtrl(this.taxonomiaForm.paleantologoTF1);
             ctrlP.iniciar();
+            ctrlP.likeRelacion();
         } else if (e.getSource() == taxonomiaForm.agregarBtn1) {
             TiempoCtrl ctrlTiempo = new TiempoCtrl((DefaultListModel) this.taxonomiaForm.listaT1.getModel());
             ctrlTiempo.iniciar();
+            ctrlTiempo.likeRelacion();
         } else if (e.getSource() == taxonomiaIndex.regresarBtn) {
             taxonomiaIndex.setVisible(false);
             menuCtrl.iniciar();
@@ -123,6 +120,7 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
         } else if (e.getSource() == taxonomiaForm.btnAgrPais) {
             PaisCtrl ctrlPais = new PaisCtrl((DefaultListModel) this.taxonomiaForm.listaPaises.getModel());
             ctrlPais.iniciar();
+            ctrlPais.likeRelacion();
         } else if (e.getSource() == taxonomiaForm.btnAgrImagen) {
             this.agregarFileChooser();
         }
@@ -372,23 +370,23 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
         String periodo = this.taxonomiaIndex.periodoCB.getSelectedItem().toString();
         String especie = taxonomiaIndex.buscarTF.getText();
         ArrayList<Taxonomia> listaAux;
-        if(pais.equals("-- Seleccionar --")){
-            pais="";
-            if(periodo.equals("-- Seleccionar --")){
-                periodo="";
-                if(especie.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Especifique algún "
-                            + "campo de búsqueda");
+        
+        pais=(pais.equals("-- Seleccionar --"))?"":pais;
+        periodo=(periodo.equals("-- Seleccionar --"))?"":periodo;
+        
+        if(especie.isEmpty()){
+            if(especie.isEmpty()){
+                if(pais.isEmpty()){
+                    lista = taxonomiaModelo.index();
+                    cargarTabla();
                     return;
                 }
             }
-        } else {
-            if(periodo.equals("-- Seleccionar --"))periodo="";
         }
+        
         listaAux = taxonomiaModelo.coincidencias(especie,periodo,pais);
         
         if(listaAux.isEmpty()){
-            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
         
@@ -437,9 +435,18 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
     private void cargarTamanio(int tam){
         this.tam = tam;
     }
+    
+    public void likeVisita(){
+        tipo = 1;
+    }
+    
+    public void likeRelacion(){
+        tipo = 2;
+    }
 
     @Override
     public void mouseClicked(MouseEvent me) {
+        
         if(me.getSource()==this.taxonomiaIndex.tablaTaxonomias){
             this.presionarMostrarBtn();
         } 
@@ -459,16 +466,17 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        if(ke.getSource()==this.taxonomiaIndex.buscarTF){
-            presionarBuscarBtn();
-        }
     }
 
     @Override
     public void keyPressed(KeyEvent ke) {}
 
     @Override
-    public void keyReleased(KeyEvent ke) {}
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource()==this.taxonomiaIndex.buscarTF){
+            presionarBuscarBtn();
+        }
+    }
 
     @Override
     public void itemStateChanged(ItemEvent ie) {

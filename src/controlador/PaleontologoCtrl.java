@@ -10,9 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasPaleontologo;
 import clase.Paleontologo;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JTextField;
 
-public class PaleontologoCtrl implements ActionListener {
+public class PaleontologoCtrl implements ActionListener, MouseListener, KeyListener {
 
     private static String cedula;
     
@@ -26,6 +30,7 @@ public class PaleontologoCtrl implements ActionListener {
     private ArrayList<Paleontologo> lista;
     
     private JTextField nombre;
+    private int tipo;
 
     public PaleontologoCtrl() {
         this.paleontologo = new Paleontologo();
@@ -37,22 +42,26 @@ public class PaleontologoCtrl implements ActionListener {
         menuCtrl = new MenuCtrl();
         lista = new ArrayList();
 
-        this.peloentologoIndex.buscarBtn.addActionListener(this);
-        this.peloentologoIndex.mostrarBtn.addActionListener(this);
+        this.peloentologoIndex.setLocationRelativeTo(null);
+        this.peloentologoForm.setLocationRelativeTo(null);
+        paleontologoModelo.todosPaleontologos(lista);
+        actionListener();
+        
+        cargarTabla();
+    }
+    
+    
+    public void actionListener(){
         this.peloentologoIndex.nuevoBtn.addActionListener(this);
         this.peloentologoIndex.todoBtn.addActionListener(this);
-        this.peloentologoIndex.selecBtn.addActionListener(this);
         this.peloentologoIndex.regresarBtn.addActionListener(this);
-        this.peloentologoIndex.setLocationRelativeTo(null);
-
         this.peloentologoForm.registrarBtn.addActionListener(this);
         this.peloentologoForm.eliminarBtn.addActionListener(this);
         this.peloentologoForm.limpiarBtn.addActionListener(this);
         this.peloentologoForm.modificarBtn.addActionListener(this);
         this.peloentologoForm.regresarBtn.addActionListener(this);
-        this.peloentologoForm.setLocationRelativeTo(null);
-        paleontologoModelo.todosPaleontologos(lista);
-        cargarTabla();
+        this.peloentologoIndex.tablaPaleontologos.addMouseListener(this);
+        this.peloentologoIndex.buscarTF.addKeyListener(this);
     }
     
     public PaleontologoCtrl(JTextField nombre) {
@@ -80,10 +89,6 @@ public class PaleontologoCtrl implements ActionListener {
             paleontologoModelo.todosPaleontologos(lista);
             cargarTabla();
         } else 
-            
-        if (e.getSource() == peloentologoIndex.mostrarBtn) {
-            presionarMostrarBtn();
-        } else 
         
         if (e.getSource() == peloentologoForm.modificarBtn) {
             presionarModificarBtn();
@@ -99,14 +104,6 @@ public class PaleontologoCtrl implements ActionListener {
         
         if (peloentologoForm.regresarBtn == e.getSource()) {
             presionarRegresarBtn();
-        } else 
-        
-        if (e.getSource() == peloentologoIndex.buscarBtn) {
-            presionarBuscarBtn();
-        } else 
-        
-        if (e.getSource() == peloentologoIndex.selecBtn) {
-            presionarSelecBtn();
         } else 
         
         if (e.getSource() == peloentologoForm.limpiarBtn) {
@@ -280,6 +277,8 @@ public class PaleontologoCtrl implements ActionListener {
         String cadenaBuscada = peloentologoIndex.buscarTF.getText();
         
         if(cadenaBuscada.isEmpty()){
+            paleontologoModelo.todosPaleontologos(lista);
+            cargarTabla();
             return;
         }
         
@@ -289,7 +288,6 @@ public class PaleontologoCtrl implements ActionListener {
         lista = paleontologoModelo.coincidencias(cadenaBuscada);
         
         if (lista.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
         
@@ -305,5 +303,52 @@ public class PaleontologoCtrl implements ActionListener {
         cedula = peloentologoIndex.tablaPaleontologos.getValueAt(fila, 0).toString();
         nombre.setText(cedula);
         peloentologoIndex.setVisible(false);
+    }
+    
+    public void likeVisita(){
+        tipo = 1;
+    }
+    
+    public void likeRelacion(){
+        tipo = 2;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        if(tipo==1){
+            if(me.getSource()==this.peloentologoIndex.tablaPaleontologos){
+                this.presionarMostrarBtn();
+            } 
+        } else 
+        if(tipo==2){
+            if(me.getSource()==this.peloentologoIndex.tablaPaleontologos){
+                this.presionarSelecBtn();
+            } 
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {}
+
+    @Override
+    public void mouseReleased(MouseEvent me) {}
+
+    @Override
+    public void mouseEntered(MouseEvent me) {}
+
+    @Override
+    public void mouseExited(MouseEvent me) {}
+
+    @Override
+    public void keyTyped(KeyEvent ke) {}
+
+    @Override
+    public void keyPressed(KeyEvent ke) {}
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource()==this.peloentologoIndex.buscarTF){
+            presionarBuscarBtn();
+        }
     }
 }

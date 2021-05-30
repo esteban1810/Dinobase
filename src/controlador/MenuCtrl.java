@@ -97,24 +97,28 @@ public final class MenuCtrl implements ActionListener{
         if(e.getSource()==frameLogin.paleanBtn){
             PaleontologoCtrl ctrlP = new PaleontologoCtrl();
             ctrlP.iniciar();
+            ctrlP.likeVisita();
             frameLogin.setVisible(false);
         }else 
         
         if(e.getSource()== frameLogin.tiempoBtn){
             TiempoCtrl ctrlT = new TiempoCtrl();
             ctrlT.iniciar();
+            ctrlT.likeVisita();
             frameLogin.setVisible(false);
         } else
         
         if(e.getSource()== frameLogin.paisBtn){
             PaisCtrl ctrlT = new PaisCtrl();
             ctrlT.iniciar();
+            ctrlT.likeVisita();
             frameLogin.setVisible(false);
         } else 
         
         if(e.getSource()== frameLogin.climaBtn){
             ClimaCtrl ctrlT = new ClimaCtrl();
             ctrlT.iniciar();
+            ctrlT.likeVisita();
             frameLogin.setVisible(false);
         } else 
         

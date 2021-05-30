@@ -10,9 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ConsultasClima;
 import clase.Clima;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 
-public class ClimaCtrl  implements ActionListener{
+public class ClimaCtrl  implements ActionListener, MouseListener, KeyListener{
     private Clima clima;
     private ConsultasClima climaModelo;
     private MenuCtrl ctrlM;
@@ -24,6 +28,7 @@ public class ClimaCtrl  implements ActionListener{
     
     private ArrayList<Clima> lista;
     private DefaultListModel modeloList;
+    private int tipo;
     
     public ClimaCtrl(){
         lista = new ArrayList();
@@ -33,17 +38,19 @@ public class ClimaCtrl  implements ActionListener{
         this.climaIndex=new ClimaIndex();
         ctrlM = new MenuCtrl();
        
+        actionListener();
         
-        this.climaIndex.buscarBtn.addActionListener(this);
-        this.climaIndex.mostrarBtn.addActionListener(this);
+        
+        cargarTabla();
+    }
+    
+    public void actionListener(){
         this.climaIndex.todoBtn.addActionListener(this);
         this.climaIndex.nuevoBtn.addActionListener(this);
         this.climaIndex.regresarBtn.addActionListener(this);
         this.climaIndex.btnAceptar.addActionListener(this);
-        this.climaIndex.btnAgregar.addActionListener(this);
         
         this.climaIndex.listClima.setVisible(false);
-        this.climaIndex.btnAgregar.setVisible(false);
         this.climaIndex.btnAceptar.setVisible(false);
         
         this.climaForm.btnGuardar.addActionListener(this);                
@@ -51,7 +58,9 @@ public class ClimaCtrl  implements ActionListener{
         this.climaForm.btnModificar.addActionListener(this);
         this.climaForm.regresarBtn.addActionListener(this);
         
-        cargarTabla();
+        this.climaIndex.tbClima.addMouseListener(this);
+        this.climaIndex.buscarTF.addKeyListener(this);
+        
     }
     
     public ClimaCtrl(DefaultListModel modeloList){
@@ -60,7 +69,6 @@ public class ClimaCtrl  implements ActionListener{
         this.climaIndex.listClima.setModel(modeloList);
         this.climaIndex.listClima.setVisible(true);
         this.climaIndex.btnAceptar.setVisible(true);
-        this.climaIndex.btnAgregar.setVisible(true);
     }
      
     public void cargarTabla(){
@@ -162,7 +170,6 @@ public class ClimaCtrl  implements ActionListener{
         }
         climaModelo.coincidencias(lista, climaIndex.buscarTF.getText());
         if(lista.size()==0){
-            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
         cargarTabla();
@@ -226,17 +233,10 @@ public class ClimaCtrl  implements ActionListener{
             selectBtnEliminar();
         }
         
-        else if(e.getSource() == climaIndex.buscarBtn){
-            selectBuscarBtn();
-        }   
         
         else if(e.getSource() == climaIndex.todoBtn){
            climaModelo.todosClimas(lista); 
            cargarTabla();
-        }
-        
-        else if (e.getSource() == climaIndex.mostrarBtn){
-            selectMostrarBtn();
         }
         
         else if(e.getSource() == climaForm.regresarBtn){
@@ -251,12 +251,57 @@ public class ClimaCtrl  implements ActionListener{
             ctrlM.administrador();
         }
         
-        else if(e.getSource() == climaIndex.btnAgregar){
-            selectBtnAgregar();
-        } 
-        
         else if (e.getSource() == climaIndex.btnAceptar) {
             climaIndex.setVisible(false);
+        }
+    }
+
+    public void likeVisita(){
+        tipo = 1;
+    }
+    
+    public void likeRelacion(){
+        tipo = 2;
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        
+        if(tipo==1){
+            if(me.getSource()==this.climaIndex.tbClima){
+                this.selectMostrarBtn();
+            } 
+        } else 
+        if(tipo==2){
+            if(me.getSource()==this.climaIndex.tbClima){
+                selectBtnAgregar();
+            } 
+        }
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {}
+
+    @Override
+    public void mouseReleased(MouseEvent me) {}
+
+    @Override
+    public void mouseEntered(MouseEvent me) {}
+
+    @Override
+    public void mouseExited(MouseEvent me) {}
+
+    @Override
+    public void keyTyped(KeyEvent ke) {}
+
+    @Override
+    public void keyPressed(KeyEvent ke) {}
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource()==this.climaIndex.buscarTF){
+            this.selectBuscarBtn();
         }
     }
 }

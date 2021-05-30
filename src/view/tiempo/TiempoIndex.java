@@ -32,22 +32,19 @@ public class TiempoIndex extends javax.swing.JFrame {
         tablaTiempos = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         buscarTF = new javax.swing.JTextField();
-        agregarBtn = new javax.swing.JButton();
         aceptarBtn = new javax.swing.JButton();
-        buscarBtn = new javax.swing.JButton();
         todoBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaT = new javax.swing.JList<>();
-        mostrarBtn = new javax.swing.JButton();
         nuevoBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        desdeTF = new javax.swing.JTextField();
-        hastaTF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        sprDesde = new javax.swing.JSpinner();
+        sprHasta = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,13 +91,6 @@ public class TiempoIndex extends javax.swing.JFrame {
         buscarTF.setBorder(null);
         jPanel1.add(buscarTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 20));
 
-        agregarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        agregarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        agregarBtn.setText("Agregar");
-        agregarBtn.setFocusPainted(false);
-        agregarBtn.setFocusable(false);
-        jPanel1.add(agregarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
-
         aceptarBtn.setBackground(new java.awt.Color(223, 122, 19));
         aceptarBtn.setForeground(new java.awt.Color(255, 255, 255));
         aceptarBtn.setText("Aceptar");
@@ -112,29 +102,14 @@ public class TiempoIndex extends javax.swing.JFrame {
         });
         jPanel1.add(aceptarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, -1, -1));
 
-        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        buscarBtn.setText("Buscar");
-        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
-
         todoBtn.setBackground(new java.awt.Color(223, 122, 19));
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
         todoBtn.setText("Todo");
-        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
+        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jScrollPane2.setViewportView(listaT);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 150, 60));
-
-        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarBtn.setText("Mostrar");
-        jPanel1.add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
         nuevoBtn.setBackground(new java.awt.Color(223, 122, 19));
         nuevoBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +119,7 @@ public class TiempoIndex extends javax.swing.JFrame {
                 nuevoBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
+        jPanel1.add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         salir.setBackground(new java.awt.Color(12, 241, 253));
         salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
@@ -171,12 +146,6 @@ public class TiempoIndex extends javax.swing.JFrame {
         jLabel3.setText("Descubierto");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
-        desdeTF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(desdeTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 70, -1));
-
-        hastaTF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(hastaTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 80, -1));
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hasta:");
@@ -186,6 +155,14 @@ public class TiempoIndex extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Desde:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jPanel1.add(sprDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 120, 70, -1));
+
+        sprHasta.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sprHastaStateChanged(evt);
+            }
+        });
+        jPanel1.add(sprHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 70, -1));
 
         jLabel2.setBackground(new java.awt.Color(12, 156, 208));
         jLabel2.setOpaque(true);
@@ -205,10 +182,6 @@ public class TiempoIndex extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarBtnActionPerformed
-
     private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nuevoBtnActionPerformed
@@ -220,6 +193,10 @@ public class TiempoIndex extends javax.swing.JFrame {
     private void aceptarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptarBtnActionPerformed
+
+    private void sprHastaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sprHastaStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sprHastaStateChanged
 
     /**
      * @param args the command line arguments
@@ -265,11 +242,7 @@ public class TiempoIndex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton aceptarBtn;
-    public javax.swing.JButton agregarBtn;
-    public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
-    public javax.swing.JTextField desdeTF;
-    public javax.swing.JTextField hastaTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -281,10 +254,11 @@ public class TiempoIndex extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JList<String> listaT;
-    public javax.swing.JButton mostrarBtn;
     public javax.swing.JButton nuevoBtn;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;
+    public javax.swing.JSpinner sprDesde;
+    public javax.swing.JSpinner sprHasta;
     public javax.swing.JTable tablaTiempos;
     public javax.swing.JButton todoBtn;
     // End of variables declaration//GEN-END:variables

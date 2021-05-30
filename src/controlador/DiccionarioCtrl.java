@@ -119,26 +119,22 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener, Key
         String paleonto  = diccionarioIndex.paleontologoCB.getSelectedItem().toString();
         String especie  = diccionarioIndex.buscarTF.getText();
         
-        if(pais.equals("-- Seleccionar --")){
-            pais="";
-            if(periodo.equals("-- Seleccionar --")){
-                periodo="";
-                if(paleonto.equals("-- Seleccionar --")){
-                    paleonto="";
-                    if(especie.isEmpty()){
+        periodo = (periodo.equals("-- Seleccionar --"))?"":periodo;
+        pais = (pais.equals("-- Seleccionar --"))?"":pais;
+        paleonto = paleonto.equals("-- Seleccionar --")?"":paleonto;
+        
+        if(especie.isEmpty()){
+            if(periodo.isEmpty()){
+                if(pais.isEmpty()){
+                    if(paleonto.isEmpty()){
                         listaVisitante = taxonomiaModelo.indexVisitante();
-                            cargarTabla();
+                        cargarTabla();
                         return;
                     }
                 }
-            } else
-                if(paleonto.equals("-- Seleccionar --"))paleonto="";
-        } else {
-            if(periodo.equals("-- Seleccionar --")){
-                periodo="";
-                if(paleonto.equals("-- Seleccionar --")) paleonto="";
-            } else if(paleonto.equals("-- Seleccionar --")) paleonto="";
+            }
         }
+        
         
         listaVisitante=taxonomiaModelo.coincidenciasVisitante(especie, paleonto, periodo, pais);
         
@@ -296,24 +292,16 @@ public final class DiccionarioCtrl implements ActionListener, MouseListener, Key
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        if(ke.getSource()==this.diccionarioIndex.buscarTF){
-            buscarBtn();
-        }
     }
 
     @Override
-    public void keyPressed(KeyEvent ke) {
-//        if(ke.getSource()==this.diccionarioIndex.buscarTF){
-////            System.out.println("todo excelente Pressed");
-//            buscarBtn();
-//        }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void keyPressed(KeyEvent ke) {}
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(ke.getSource()==this.diccionarioIndex.buscarTF){
+            buscarBtn();
+        }
     }
 
     @Override

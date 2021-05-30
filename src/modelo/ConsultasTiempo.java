@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.scene.control.Spinner;
 import javax.swing.JComboBox;
+import javax.swing.SpinnerModel;
 
 public class ConsultasTiempo  extends Conexion{
     
@@ -220,6 +222,64 @@ public class ConsultasTiempo  extends Conexion{
         
     }
     
+    public String getMenorAnio(){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        String minimo = "";
+        
+        String sql = "SELECT min(descubierto) minimo FROM tiempos";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                minimo = rs.getString("minimo");
+            }
+            
+            return minimo;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return minimo;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        
+    }
+    
+    public String getMayorAnio(){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        String maximo="";
+        
+        String sql = "SELECT max(descubierto) maximo FROM tiempos";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                maximo = rs.getString("maximo");
+            }
+            
+            return maximo;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return maximo;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        
+    }
+    
     
     
     public ArrayList<Tiempo> coincidencias(String periodo,String desde, String hasta){
@@ -232,7 +292,6 @@ public class ConsultasTiempo  extends Conexion{
         if(periodo.isEmpty()){
             if(desde.isEmpty()){
                 if(hasta.isEmpty()){
-                    System.out.println("ando por aqui");
                     return null;
                 } else {
                     sql = "SELECT * FROM tiempos WHERE descubierto<='"+hasta+"' ORDER BY periodo";
@@ -259,7 +318,7 @@ public class ConsultasTiempo  extends Conexion{
                     sql = "SELECT * FROM tiempos WHERE descubierto>='"+desde+
                             "' AND descubierto>='"+desde+"' ORDER BY periodo";
                 } else {
-                    sql = "SELECT * FROM tiempos WHERE periodo='%"+periodo+
+                    sql = "SELECT * FROM tiempos WHERE periodo ILIKE '%"+periodo+
                             "%' AND descubierto<='"+hasta+
                             "' AND descubierto>='"+desde+"' ORDER BY periodo";
                 }

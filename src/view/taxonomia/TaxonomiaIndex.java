@@ -14,12 +14,10 @@ public class TaxonomiaIndex extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaTaxonomias = new javax.swing.JTable();
         todoBtn = new javax.swing.JButton();
-        mostrarBtn = new javax.swing.JButton();
         nuevoBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         buscarTF = new javax.swing.JTextField();
-        buscarBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -62,17 +60,12 @@ public class TaxonomiaIndex extends javax.swing.JFrame {
         todoBtn.setBackground(new java.awt.Color(223, 122, 19));
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
         todoBtn.setText("TODO");
-        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
-
-        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarBtn.setText("MOSTRAR");
-        jPanel1.add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
+        jPanel1.add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
 
         nuevoBtn.setBackground(new java.awt.Color(223, 122, 19));
         nuevoBtn.setForeground(new java.awt.Color(255, 255, 255));
         nuevoBtn.setText("NUEVO");
-        jPanel1.add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
+        jPanel1.add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -89,11 +82,6 @@ public class TaxonomiaIndex extends javax.swing.JFrame {
         buscarTF.setForeground(new java.awt.Color(255, 255, 255));
         buscarTF.setBorder(null);
         jPanel1.add(buscarTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 20));
-
-        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        buscarBtn.setText("BUSCAR");
-        jPanel1.add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         salir.setBackground(new java.awt.Color(12, 241, 253));
         salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
@@ -189,7 +177,6 @@ public class TaxonomiaIndex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -199,7 +186,6 @@ public class TaxonomiaIndex extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    public javax.swing.JButton mostrarBtn;
     public javax.swing.JButton nuevoBtn;
     public javax.swing.JComboBox<String> paisCB;
     public javax.swing.JComboBox<String> periodoCB;

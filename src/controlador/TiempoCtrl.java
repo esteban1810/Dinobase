@@ -6,10 +6,12 @@ import view.tiempo.TiempoForm;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 
-public class TiempoCtrl implements ActionListener{
+public class TiempoCtrl implements ActionListener, ChangeListener, MouseListener, KeyListener{
     private Tiempo tiempo;
     private ConsultasTiempo tiempoModelo;
     private TiempoIndex tiempoIndex;
@@ -19,6 +21,8 @@ public class TiempoCtrl implements ActionListener{
     private ArrayList<Tiempo> lista;
     private MenuCtrl ctrlM;
     private DefaultListModel modeloList;
+    
+    private int tipo;
     
     public TiempoCtrl(){
         this.tiempo= new Tiempo();
@@ -30,16 +34,21 @@ public class TiempoCtrl implements ActionListener{
         lista = new ArrayList();
         ctrlM = new MenuCtrl();
         
-        this.tiempoIndex.buscarBtn.addActionListener(this);
-        this.tiempoIndex.mostrarBtn.addActionListener(this);
+        cargarSpinners();
+        
+        tiempoModelo.todosTiempos(lista);
+        cargarTabla();
+        
+        actionListener();
+    }
+    
+    public void actionListener(){
         this.tiempoIndex.nuevoBtn.addActionListener(this);
         this.tiempoIndex.todoBtn.addActionListener(this);
-        this.tiempoIndex.agregarBtn.addActionListener(this);
         this.tiempoIndex.aceptarBtn.addActionListener(this);
         this.tiempoIndex.setLocationRelativeTo(null);
         this.tiempoIndex.listaT.setVisible(false);
         this.tiempoIndex.aceptarBtn.setVisible(false);
-        this.tiempoIndex.agregarBtn.setVisible(false);
         this.tiempoIndex.regresarBtn.addActionListener(this);
         
         this.tiempoForm.registrarBtn.addActionListener(this);
@@ -49,9 +58,18 @@ public class TiempoCtrl implements ActionListener{
         this.tiempoForm.regresarBtn.addActionListener(this);
         this.tiempoForm.setLocationRelativeTo(null);
         
+        this.tiempoIndex.tablaTiempos.addMouseListener(this);
+        this.tiempoIndex.buscarTF.addKeyListener(this);
         
-        tiempoModelo.todosTiempos(lista);
-        cargarTabla();
+        this.tiempoIndex.sprDesde.addChangeListener(this);
+        this.tiempoIndex.sprHasta.addChangeListener(this);
+    }
+    
+    public void cargarSpinners(){
+        int desde = Integer.parseInt(tiempoModelo.getMenorAnio());
+        int hasta = Integer.parseInt(tiempoModelo.getMayorAnio());
+        this.tiempoIndex.sprDesde.setValue(desde);
+        this.tiempoIndex.sprHasta.setValue(hasta);
     }
     
     public TiempoCtrl(DefaultListModel modeloList){
@@ -60,7 +78,6 @@ public class TiempoCtrl implements ActionListener{
         this.tiempoIndex.listaT.setModel(modeloList);
         this.tiempoIndex.listaT.setVisible(true);
         this.tiempoIndex.aceptarBtn.setVisible(true);
-        this.tiempoIndex.agregarBtn.setVisible(true);
     }
     
     public void iniciar(){
@@ -78,14 +95,10 @@ public class TiempoCtrl implements ActionListener{
         else if (e.getSource() == tiempoIndex.todoBtn) {
             tiempoModelo.todosTiempos(lista);
             tiempoIndex.buscarTF.setText("");
-            tiempoIndex.desdeTF.setText("");
-            tiempoIndex.hastaTF.setText("");
+            this.cargarSpinners();
             cargarTabla();
         } 
         
-        else if (e.getSource() == tiempoIndex.mostrarBtn) {
-            presionarMostrarBtn();
-        } 
         
         else if (e.getSource() == tiempoForm.modificarBtn) {
             presionarModificarBtn();
@@ -101,14 +114,6 @@ public class TiempoCtrl implements ActionListener{
         
         else if (tiempoForm.regresarBtn == e.getSource()) {
             presionarRegresarBtn();
-        } 
-        
-        else if (e.getSource() == tiempoIndex.buscarBtn) {
-            presionarBuscarBtn();
-        } 
-        
-        else if (e.getSource() == tiempoIndex.agregarBtn) {
-            presionarAgregarBtn();
         } 
         
         else if (e.getSource() == tiempoIndex.aceptarBtn) {
@@ -272,15 +277,16 @@ public class TiempoCtrl implements ActionListener{
 
     private void presionarBuscarBtn() {
         String periodo = tiempoIndex.buscarTF.getText();
-        String desde = tiempoIndex.desdeTF.getText();
-        String hasta = tiempoIndex.hastaTF.getText();
+        String desde = tiempoIndex.sprDesde.getValue().toString();
+        String hasta = tiempoIndex.sprHasta.getValue().toString();
+        
         
         limpiarTabla();
         
         lista = tiempoModelo.coincidencias(periodo,desde,hasta);
+
         
         if (lista.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
         
@@ -300,6 +306,72 @@ public class TiempoCtrl implements ActionListener{
         
         if(!this.modeloList.removeElement(tiempo)){
             this.modeloList.addElement(tiempo);
+        }
+    }
+    
+    public void likeVisita(){
+        tipo = 1;
+    }
+    
+    public void likeRelacion(){
+        tipo = 2;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        
+        if(tipo==1){
+            if(me.getSource()==this.tiempoIndex.tablaTiempos){
+                this.presionarMostrarBtn();
+            } 
+        } else 
+        if(tipo==2){
+            if(me.getSource()==this.tiempoIndex.tablaTiempos){
+                presionarAgregarBtn();
+            } 
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {}
+
+    @Override
+    public void mouseReleased(MouseEvent me) {}
+
+    @Override
+    public void mouseEntered(MouseEvent me) {}
+
+    @Override
+    public void mouseExited(MouseEvent me) {}
+
+    @Override
+    public void keyTyped(KeyEvent ke) {}
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        if(ke.getSource()==this.tiempoIndex.sprDesde){
+            presionarBuscarBtn();
+        } else 
+        if(ke.getSource()==this.tiempoIndex.sprHasta){
+            presionarBuscarBtn();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource()==this.tiempoIndex.buscarTF){
+            presionarBuscarBtn();
+        } 
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent ce) {
+        System.out.println("Aqui andamos");
+        if(ce.getSource()==this.tiempoIndex.sprDesde){
+            presionarBuscarBtn();
+        } else 
+        if(ce.getSource()==this.tiempoIndex.sprHasta){
+            presionarBuscarBtn();
         }
     }
 }

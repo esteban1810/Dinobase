@@ -29,16 +29,13 @@ public class PaisIndex extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         listaPaises = new javax.swing.JList<>();
-        agregarBtn = new javax.swing.JButton();
         aceptarBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         todoBtn = new javax.swing.JButton();
         buscarTF = new javax.swing.JTextField();
         nuevoBtn = new javax.swing.JButton();
-        buscarBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
-        mostrarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -54,11 +51,6 @@ public class PaisIndex extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listaPaises);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 170, 60));
-
-        agregarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        agregarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        agregarBtn.setText("Agregar");
-        getContentPane().add(agregarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
         aceptarBtn.setBackground(new java.awt.Color(223, 122, 19));
         aceptarBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,7 +69,7 @@ public class PaisIndex extends javax.swing.JFrame {
         todoBtn.setBackground(new java.awt.Color(223, 122, 19));
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
         todoBtn.setText("Todo");
-        getContentPane().add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+        getContentPane().add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         buscarTF.setBackground(new java.awt.Color(87, 198, 196));
         buscarTF.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -93,17 +85,7 @@ public class PaisIndex extends javax.swing.JFrame {
                 nuevoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
-
-        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        buscarBtn.setText("Buscar");
-        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarBtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        getContentPane().add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         salir.setBackground(new java.awt.Color(12, 241, 253));
         salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/letterx_83737.png"))); // NOI18N
@@ -115,11 +97,6 @@ public class PaisIndex extends javax.swing.JFrame {
             }
         });
         getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
-
-        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarBtn.setText("Mostrar");
-        getContentPane().add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(87, 198, 196));
         jLabel1.setOpaque(true);
@@ -180,10 +157,6 @@ public class PaisIndex extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nuevoBtnActionPerformed
 
-    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarBtnActionPerformed
-
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
@@ -232,8 +205,6 @@ public class PaisIndex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton aceptarBtn;
-    public javax.swing.JButton agregarBtn;
-    public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
     public javax.swing.JComboBox<String> continenteCB;
     private javax.swing.JLabel jLabel1;
@@ -244,7 +215,6 @@ public class PaisIndex extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JList<String> listaPaises;
-    public javax.swing.JButton mostrarBtn;
     public javax.swing.JButton nuevoBtn;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;

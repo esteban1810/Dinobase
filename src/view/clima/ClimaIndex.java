@@ -31,13 +31,10 @@ public class ClimaIndex extends javax.swing.JFrame {
         tbClima = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         listClima = new javax.swing.JList<>();
-        btnAgregar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         buscarTF = new javax.swing.JTextField();
-        buscarBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         todoBtn = new javax.swing.JButton();
-        mostrarBtn = new javax.swing.JButton();
         nuevoBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
@@ -72,11 +69,6 @@ public class ClimaIndex extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 210, 60));
 
-        btnAgregar.setBackground(new java.awt.Color(223, 122, 19));
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Agregar");
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 80, -1));
-
         btnAceptar.setBackground(new java.awt.Color(223, 122, 19));
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
@@ -88,16 +80,6 @@ public class ClimaIndex extends javax.swing.JFrame {
         buscarTF.setBorder(null);
         getContentPane().add(buscarTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 190, 20));
 
-        buscarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        buscarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        buscarBtn.setText("Buscar");
-        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarBtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
-
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, 10));
@@ -105,12 +87,7 @@ public class ClimaIndex extends javax.swing.JFrame {
         todoBtn.setBackground(new java.awt.Color(223, 122, 19));
         todoBtn.setForeground(new java.awt.Color(255, 255, 255));
         todoBtn.setText("Todo");
-        getContentPane().add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
-
-        mostrarBtn.setBackground(new java.awt.Color(223, 122, 19));
-        mostrarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mostrarBtn.setText("Mostrar");
-        getContentPane().add(mostrarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
+        getContentPane().add(todoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         nuevoBtn.setBackground(new java.awt.Color(223, 122, 19));
         nuevoBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +97,7 @@ public class ClimaIndex extends javax.swing.JFrame {
                 nuevoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
+        getContentPane().add(nuevoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         regresarBtn.setBackground(new java.awt.Color(12, 241, 253));
         regresarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/back-arrow_icon-icons.com_72866.png"))); // NOI18N
@@ -153,10 +130,6 @@ public class ClimaIndex extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarBtnActionPerformed
 
     private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
         // TODO add your handling code here:
@@ -206,8 +179,6 @@ public class ClimaIndex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAceptar;
-    public javax.swing.JButton btnAgregar;
-    public javax.swing.JButton buscarBtn;
     public javax.swing.JTextField buscarTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -216,7 +187,6 @@ public class ClimaIndex extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JList<String> listClima;
-    public javax.swing.JButton mostrarBtn;
     public javax.swing.JButton nuevoBtn;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;

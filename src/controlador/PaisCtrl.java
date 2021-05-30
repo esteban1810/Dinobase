@@ -31,6 +31,8 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
     ArrayList<Pais> lista;
     private MenuCtrl menuCtrl;
     
+    private int tipo;
+    
     
     
      public PaisCtrl(){
@@ -57,17 +59,12 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
         this.paisForm.regresarBtn.addActionListener(this);
         this.paisForm.btnAgreClim.addActionListener(this);
         
-                     
-        this.paisIndex.buscarBtn.addActionListener(this); 
         this.paisIndex.todoBtn.addActionListener(this);
-        this.paisIndex.mostrarBtn.addActionListener(this);
         this.paisIndex.nuevoBtn.addActionListener(this);
         this.paisIndex.regresarBtn.addActionListener(this);
-        this.paisIndex.agregarBtn.addActionListener(this);
         this.paisIndex.aceptarBtn.addActionListener(this);
         
         this.paisIndex.aceptarBtn.setVisible(false);
-        this.paisIndex.agregarBtn.setVisible(false);
         this.paisIndex.listaPaises.setVisible(false);
         
         this.paisIndex.continenteCB.addItemListener(this);
@@ -87,7 +84,6 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
         Object[] fila = new Object[3];
 
         for(int i=0; i<lista.size(); i++){
-            System.out.println(i+" : Fila");
             fila = lista.get(i).arreglo();
             model.addRow(fila);
         }
@@ -98,7 +94,6 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
         this.modeloList=modeloList;
         this.paisIndex.listaPaises.setModel(modeloList);
         this.paisIndex.aceptarBtn.setVisible(true);
-        this.paisIndex.agregarBtn.setVisible(true);
         this.paisIndex.listaPaises.setVisible(true);
     }
      
@@ -138,18 +133,12 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
             presionarBtnEliminar();
         }
         
-        else if(e.getSource() == paisIndex.buscarBtn){
-            presionarBuscarBtn();
-        }
         
         else if(e.getSource() == paisIndex.todoBtn){  
-            paisModelo.todosPaises(lista);     
+            this.paisIndex.buscarTF.setText(null);
             this.paisIndex.continenteCB.setSelectedIndex(0);
+            paisModelo.todosPaises(lista);
             cargarTabla();
-        }
-        
-        else if (e.getSource() == paisIndex.mostrarBtn){
-            presionarMostrarBtn();           
         }
         
         else if(e.getSource() == paisForm.regresarBtn){
@@ -166,10 +155,7 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
         else if (e.getSource() == paisForm.btnAgreClim){
             ClimaCtrl ctrlClima = new ClimaCtrl((DefaultListModel)this.paisForm.ListPaisClima.getModel());
             ctrlClima.iniciar();
-        }
-        
-        else if(e.getSource()==this.paisIndex.agregarBtn){
-            presionarAgregarBtn();
+            ctrlClima.likeRelacion();
         }
         
         else if(e.getSource()==this.paisIndex.aceptarBtn){
@@ -257,20 +243,31 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
         String continente = this.paisIndex.continenteCB.getSelectedItem().toString();
         int fila2 = paisIndex.tbPais.getRowCount();
         
+        continente= (continente.equals("-- Seleccionar --"))?"":continente;
+        
         lista.clear();
+        
+        if(continente.isEmpty()){
+            if(pais.isEmpty()){
+                paisModelo.todosPaises(lista);     
+                cargarTabla();
+                return;
+            }
+        }
         
         for(int i = fila2-1; i >= 0 ; i--){
             model.removeRow(i); 
         }
         
+        
         lista = paisModelo.coincidencias(pais,continente);
         
         if(lista.size()==0){
-            JOptionPane.showMessageDialog(null, "No se encontraron coincidencias");
             return;
         }
         cargarTabla();            
     }
+    
 
     private void presionarMostrarBtn() {
         paisForm.btnGuardar.setVisible(false);
@@ -317,13 +314,29 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
             this.modeloList.addElement(tiempo);
         }
     }
+    
+    public void likeVisita(){
+        tipo = 1;
+    }
+    
+    public void likeRelacion(){
+        tipo = 2;
+    }
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        if(me.getSource()==this.paisIndex.tbPais){
-            System.out.println("entramos");
-            this.presionarMostrarBtn();
-        } 
+        
+        if(tipo==1){
+            if(me.getSource()==this.paisIndex.tbPais){
+                this.presionarMostrarBtn();
+            } 
+        } else 
+        if(tipo==2){
+            if(me.getSource()==this.paisIndex.tbPais){
+                this.presionarAgregarBtn();
+            } 
+        }
+        
     }
 
     @Override
@@ -349,7 +362,11 @@ public class PaisCtrl implements ActionListener, MouseListener, KeyListener, Ite
     public void keyPressed(KeyEvent ke) {}
 
     @Override
-    public void keyReleased(KeyEvent ke) {}
+    public void keyReleased(KeyEvent ke) {
+        if(ke.getSource()==this.paisIndex.buscarTF){
+            presionarBuscarBtn();
+        }
+    }
 
     @Override
     public void itemStateChanged(ItemEvent ie) {

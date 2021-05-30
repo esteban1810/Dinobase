@@ -261,6 +261,9 @@ public class ConsultasPais extends Conexion{
         ArrayList<Pais> lista = new ArrayList();
         String sql = null;
         
+//        System.out.println("exito");
+//        sql="SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' ORDER BY nombre";
+        
         if(nombre.isEmpty()){
             if(continente.isEmpty()){
                 return null;
@@ -269,9 +272,9 @@ public class ConsultasPais extends Conexion{
             }
         } else {
             if(continente.isEmpty()){
-                sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' ORDER BY nombre";
+                sql = "SELECT * FROM paises WHERE nombre ILIKE '%"+nombre+"%' ORDER BY nombre";
             } else {
-                sql = "SELECT * FROM paises WHERE nombre LIKE '%"+nombre+"%' AND continente='"+continente+"' ORDER BY nombre";
+                sql = "SELECT * FROM paises WHERE nombre ILIKE '%"+nombre+"%' AND continente='"+continente+"' ORDER BY nombre";
             }
         }
         
