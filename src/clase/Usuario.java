@@ -8,6 +8,15 @@ public class Usuario {
     private Date fechaN;
     private String correo;
     private String tipoU;
+    private int puntaje;
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
 
     public String getNickname() {
         return nickname;
@@ -47,6 +56,14 @@ public class Usuario {
 
     public void setTipoU(String tipoU) {
         this.tipoU = tipoU;
+    }
+    
+    public Object[] arreglo(){
+        Object[] arreglo = new Object[4];
+        
+        arreglo[0]=nickname;
+        arreglo[1]=puntaje;
+        return arreglo;
     }
 
     @Override

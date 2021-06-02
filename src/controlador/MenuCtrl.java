@@ -12,6 +12,8 @@ import modelo.*;
 public final class MenuCtrl implements ActionListener{
     private final UsuarioLogin frameLogin;
     private static Usuario user;
+    private quizCtrl juego;
+    private EstadisticasCtrl estadisticas;
     private DiccionarioCtrl visit;
     
     
@@ -34,6 +36,8 @@ public final class MenuCtrl implements ActionListener{
         this.frameLogin.climaBtn.addActionListener(this);
         this.frameLogin.paleanBtn.addActionListener(this);
         this.frameLogin.cerrarSesionBtn.addActionListener(this);
+        this.frameLogin.jugarBtn.addActionListener(this);
+        this.frameLogin.estadisticasBtn.addActionListener(this);
     }
     
     public static String getNickname(){
@@ -126,9 +130,15 @@ public final class MenuCtrl implements ActionListener{
             this.frameLogin.setVisible(false);
             visit = new DiccionarioCtrl();
             visit.iniciar();
-        } else 
-        
-        if(e.getSource()==frameLogin.cerrarSesionBtn){
+        }  else if(e.getSource()==frameLogin.jugarBtn){
+            this.frameLogin.setVisible(false);
+            juego = new quizCtrl();
+            juego.iniciar();
+        }  else if(e.getSource()==frameLogin.estadisticasBtn){
+            this.frameLogin.setVisible(false);
+            estadisticas = new EstadisticasCtrl();
+            estadisticas.iniciar();
+        }  else if(e.getSource()==frameLogin.cerrarSesionBtn){
             
             this.bloquear();
             this.inicioSesion();
