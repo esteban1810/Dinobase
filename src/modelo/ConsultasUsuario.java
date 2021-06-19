@@ -226,7 +226,7 @@ public class ConsultasUsuario extends Conexion{
         Connection con = getConnection();
         ArrayList<Usuario> usuarios = new ArrayList();
         
-        String sql = "SELECT * FROM usuarios WHERE tipou=?";
+        String sql = "SELECT * FROM usuarios WHERE tipou=? order by puntaje";
         
         try {
             ps = con.prepareStatement(sql);
