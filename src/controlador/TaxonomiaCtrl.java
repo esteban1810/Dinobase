@@ -374,8 +374,10 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
         pais=(pais.equals("-- Seleccionar --"))?"":pais;
         periodo=(periodo.equals("-- Seleccionar --"))?"":periodo;
         
+        System.out.println(periodo);
+        
         if(especie.isEmpty()){
-            if(especie.isEmpty()){
+            if(periodo.isEmpty()){
                 if(pais.isEmpty()){
                     lista = taxonomiaModelo.index();
                     cargarTabla();
