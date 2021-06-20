@@ -15,7 +15,7 @@ public class ConsultasUsuario extends Conexion{
         PreparedStatement ps;
         Connection con = getConnection();
         
-        String sql = "INSERT INTO usuarios VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios VALUES(?,?,?,?,?,0)";
         
         try {
             ps = con.prepareStatement(sql);
@@ -226,7 +226,7 @@ public class ConsultasUsuario extends Conexion{
         Connection con = getConnection();
         ArrayList<Usuario> usuarios = new ArrayList();
         
-        String sql = "SELECT * FROM usuarios WHERE tipou=? order by puntaje";
+        String sql = "SELECT * FROM usuarios WHERE tipou=? order by puntaje desc";
         
         try {
             ps = con.prepareStatement(sql);

@@ -66,14 +66,19 @@ public class EstadisticasCtrl implements ActionListener{
     public void cargarTabla() {
         modelo = new DefaultTableModel();
         estadisticas.tablaPuntajes.setModel(modelo);
-
+        
+        modelo.addColumn("Posición");
         modelo.addColumn("Usuario");
         modelo.addColumn("Puntaje");
         System.out.println(lista.size());
-        Object[] fila = new Object[1];
+        Object[] fila;
+        Object[] renglon = new Object[3];
         for (int i = 0; i < lista.size(); i++) {
             fila = lista.get(i).arreglo();
-            modelo.addRow(fila);
+            renglon[0] = i+1;
+            renglon[1]=fila[0];
+            renglon[2]=fila[1];
+            modelo.addRow(renglon);
         }
     }
     
