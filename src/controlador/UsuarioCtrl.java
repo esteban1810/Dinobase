@@ -13,10 +13,10 @@ public class UsuarioCtrl implements ActionListener {
     private ConsultasUsuario modC;
     private UsuarioForm frame;
     
-    public UsuarioCtrl(Usuario mod, ConsultasUsuario modC){
-        this.mod=mod;
-        this.modC=modC;
-        this.frame=new UsuarioForm();
+    public UsuarioCtrl(UsuarioForm usuarioForm){
+        this.mod=new Usuario();
+        this.modC=new ConsultasUsuario();
+        this.frame=usuarioForm;
         
         this.frame.registrarBtn.addActionListener(this);
         
@@ -34,7 +34,13 @@ public class UsuarioCtrl implements ActionListener {
             mod.setNickname(frame.nicknameTF.getText());
             mod.setCorreo(frame.correoTF.getText());
             mod.setPass(frame.passTF.getText());
-            mod.setFechaN(new Date(frame.fechaN.getDate().getTime()));
+            try{
+                System.out.println(frame.fechaN.getDate());
+                System.out.println("pasa");
+                mod.setFechaN(new Date(frame.fechaN.getDate().getTime()));
+            }catch(Exception ex){
+                System.out.println("aqui ando");
+            }
             
             if(frame.visitanteRB.isSelected()){
                 mod.setTipoU("Visitante");
@@ -42,6 +48,7 @@ public class UsuarioCtrl implements ActionListener {
                 mod.setTipoU("Administrador");
             }
             
+            System.out.println(mod);
             if(modC.registrar(mod)){
                 JOptionPane.showMessageDialog(null, "Registro Guardado");
             } else {

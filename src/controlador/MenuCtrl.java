@@ -8,9 +8,11 @@ import view.usuario.UsuarioLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.*;
+import view.usuario.UsuarioForm;
 
 public final class MenuCtrl implements ActionListener{
     private final UsuarioLogin frameLogin;
+    private final UsuarioForm usuarioForm;
     private static Usuario user;
     private quizCtrl juego;
     private EstadisticasCtrl estadisticas;
@@ -18,6 +20,7 @@ public final class MenuCtrl implements ActionListener{
     
     
     public MenuCtrl(){
+        usuarioForm=new UsuarioForm();
         //Instacia del frame UsuarioLogin
         frameLogin = new UsuarioLogin();
 
@@ -29,7 +32,8 @@ public final class MenuCtrl implements ActionListener{
     }
     
     public void vincularBotones(){
-        this.frameLogin.registrarseBtn.addActionListener(this);
+        this.usuarioForm.registrarBtn.addActionListener(this);
+//        this.frameLogin.registrarseBtn.addActionListener(this);
         this.frameLogin.taxBtn.addActionListener(this);
         this.frameLogin.paisBtn.addActionListener(this);
         this.frameLogin.tiempoBtn.addActionListener(this);
@@ -87,10 +91,18 @@ public final class MenuCtrl implements ActionListener{
         } else 
             
         if(e.getSource()==frameLogin.registrarseBtn){
-            UsuarioCtrl ctrlU = new UsuarioCtrl(new Usuario(), new ConsultasUsuario());
+            System.out.println("presionado");
+            System.out.println("entra");
+            UsuarioCtrl ctrlU = new UsuarioCtrl(usuarioForm);
             ctrlU.iniciar();
             this.frameLogin.setVisible(false);
+            usuarioForm.setVisible(true);
         } else 
+            
+        if(e.getSource()==usuarioForm.registrarBtn){
+            usuarioForm.setVisible(false);
+            this.frameLogin.setVisible(true);
+        }else
             
         if(e.getSource()==frameLogin.taxBtn){
             TaxonomiaCtrl ctrlTax = new TaxonomiaCtrl();
