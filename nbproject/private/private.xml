@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/src/view/quiz/quizIndex.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/src/view/estadisticas/estadisticasIndex.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/src/controlador/UsuarioCtrl.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/src/controlador/DiccionarioCtrl.java</file>
-            <file>file:/C:/Users/ESTEBAN%20SG/Desktop/Dinobase/src/controlador/quizCtrl.java</file>
+            <file>file:/D:/todo/dino/Dinobase/src/view/quiz/quizIndex.java</file>
+            <file>file:/D:/todo/dino/Dinobase/src/controlador/quizCtrl.java</file>
+            <file>file:/D:/todo/dino/Dinobase/src/view/quiz/QuizForm.java</file>
         </group>
     </open-files>
 </project-private>

@@ -59,7 +59,7 @@ public class quizCtrl implements ActionListener, MouseListener {
     }
     
     public void jugarBtn(){
-        
+            this.limpiarCampos();
             int fila = quizIndex.tablaTaxonomias2.getSelectedRow();
             Object[] renglon = new Object[4];
             ArrayList<Tiempo> listaT = new ArrayList();
@@ -205,6 +205,14 @@ public class quizCtrl implements ActionListener, MouseListener {
         return true;
     }
     
+    public void limpiarCampos(){
+        this.QuizForm.respuestaTxt.setText("");
+        this.QuizForm.respuesta1Txt.setText("");
+        this.QuizForm.respuesta2Txt.setText("");
+        this.QuizForm.respuesta3Txt.setText("");
+        this.QuizForm.respuesta4Txt.setText("");
+    }
+    
     public void limpiarErrores(){
         this.QuizForm.mensaje1Txt.setText("");
         this.QuizForm.mensaje2Txt.setText("");
@@ -259,6 +267,7 @@ public class quizCtrl implements ActionListener, MouseListener {
         }
        
         usuario = usuarioModelo.PuntajeAnterior(MenuCtrl.getNickname());
+        this.QuizForm.puntajeLbl.setText(String.valueOf(oldP));
         oldP += usuario.getPuntaje();
         con.puntajeNuevo(oldP, usuario.getNickname());
     }
