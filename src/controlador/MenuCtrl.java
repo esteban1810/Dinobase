@@ -42,6 +42,7 @@ public final class MenuCtrl implements ActionListener{
         this.frameLogin.cerrarSesionBtn.addActionListener(this);
         this.frameLogin.jugarBtn.addActionListener(this);
         this.frameLogin.estadisticasBtn.addActionListener(this);
+        this.usuarioForm.regresarBtn.addActionListener(this);
     }
     
     public static String getNickname(){
@@ -156,6 +157,11 @@ public final class MenuCtrl implements ActionListener{
             this.inicioSesion();
             this.bloquearAdmin();
             this.bloquearVisitante();
+        } else 
+        
+        if(e.getSource()==usuarioForm.regresarBtn){
+            usuarioForm.setVisible(false);
+            this.frameLogin.setVisible(true);
         }
     }
     
