@@ -45,6 +45,7 @@ public class QuizForm extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 220, 230));
 
+        pregunta1Txt.setEditable(false);
         pregunta1Txt.setBackground(new java.awt.Color(12, 156, 208));
         pregunta1Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pregunta1Txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,24 +57,28 @@ public class QuizForm extends javax.swing.JFrame {
         });
         jPanel1.add(pregunta1Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 360, 40));
 
+        pregunta4Txt.setEditable(false);
         pregunta4Txt.setBackground(new java.awt.Color(12, 156, 208));
         pregunta4Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pregunta4Txt.setForeground(new java.awt.Color(255, 255, 255));
         pregunta4Txt.setBorder(null);
         jPanel1.add(pregunta4Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 360, 40));
 
+        pregunta5Txt.setEditable(false);
         pregunta5Txt.setBackground(new java.awt.Color(12, 156, 208));
         pregunta5Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pregunta5Txt.setForeground(new java.awt.Color(255, 255, 255));
         pregunta5Txt.setBorder(null);
         jPanel1.add(pregunta5Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 360, 40));
 
+        pregunta3Txt.setEditable(false);
         pregunta3Txt.setBackground(new java.awt.Color(12, 156, 208));
         pregunta3Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pregunta3Txt.setForeground(new java.awt.Color(255, 255, 255));
         pregunta3Txt.setBorder(null);
         jPanel1.add(pregunta3Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 360, 40));
 
+        pregunta2Txt.setEditable(false);
         pregunta2Txt.setBackground(new java.awt.Color(12, 156, 208));
         pregunta2Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         pregunta2Txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,6 +152,7 @@ public class QuizForm extends javax.swing.JFrame {
         respuesta1Txt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(respuesta1Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 220, 40));
 
+        mensaje5Txt.setEditable(false);
         mensaje5Txt.setBackground(new java.awt.Color(12, 156, 208));
         mensaje5Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mensaje5Txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,6 +164,7 @@ public class QuizForm extends javax.swing.JFrame {
         });
         jPanel1.add(mensaje5Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 380, 120, 40));
 
+        mensaje4Txt.setEditable(false);
         mensaje4Txt.setBackground(new java.awt.Color(12, 156, 208));
         mensaje4Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mensaje4Txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,6 +176,7 @@ public class QuizForm extends javax.swing.JFrame {
         });
         jPanel1.add(mensaje4Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 310, 120, 40));
 
+        mensaje3Txt.setEditable(false);
         mensaje3Txt.setBackground(new java.awt.Color(12, 156, 208));
         mensaje3Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mensaje3Txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,6 +188,7 @@ public class QuizForm extends javax.swing.JFrame {
         });
         jPanel1.add(mensaje3Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, 120, 40));
 
+        mensaje2Txt.setEditable(false);
         mensaje2Txt.setBackground(new java.awt.Color(12, 156, 208));
         mensaje2Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mensaje2Txt.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,6 +200,7 @@ public class QuizForm extends javax.swing.JFrame {
         });
         jPanel1.add(mensaje2Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 120, 40));
 
+        mensaje1Txt.setEditable(false);
         mensaje1Txt.setBackground(new java.awt.Color(12, 156, 208));
         mensaje1Txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mensaje1Txt.setForeground(new java.awt.Color(255, 255, 255));
