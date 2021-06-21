@@ -97,7 +97,7 @@ public class quizCtrl implements ActionListener, MouseListener {
             Preguntas modP1 = new Preguntas();
             modP.buscar(preguntasFacil, "Facil");
             modP.buscar(preguntasNormal, "Normal");
-            modP.buscar(preguntasDificil, "Dificil");
+            modP.buscar(preguntasDificil, "Dificil");  
             quizIndex.setVisible(false);
             QuizForm.setVisible(true);
             QuizForm.setLocationRelativeTo(null);
