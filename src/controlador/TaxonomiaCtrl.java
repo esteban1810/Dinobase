@@ -291,7 +291,7 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
     }
 
     private void presionarModificarBtn1() {
-        String especie = taxonomia.getEspecie();
+         String especie = taxonomia.getEspecie();
         ConsultasTaxo_Tiempo tt = new ConsultasTaxo_Tiempo();
         ConsultasTaxo_Pais tp = new ConsultasTaxo_Pais();
         ImageIcon foto;
@@ -311,6 +311,9 @@ public final class TaxonomiaCtrl implements ActionListener, MouseListener, KeyLi
         taxonomia.setRegistrado(taxonomiaForm.registradoTF1.getText());
         taxonomia.setPaleantologo(taxonomiaForm.paleantologoTF1.getText());
         taxonomia.setDescripcion(taxonomiaForm.descripcionTxa.getText());
+        taxonomia.setImagenNom(this.obtenerImagen());
+        taxonomia.setImagenTam(this.obtenerTamanio());
+
         taxonomiaIndex.setVisible(true);
         taxonomiaForm.setVisible(false);
 
