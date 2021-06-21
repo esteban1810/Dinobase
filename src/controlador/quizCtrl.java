@@ -108,6 +108,8 @@ public class quizCtrl implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == QuizForm.calificarBtn) {
             this.calificar(QuizForm.respuestaTxt.getText(), QuizForm.respuesta1Txt.getText(), QuizForm.respuesta2Txt.getText(), QuizForm.respuesta3Txt.getText(), QuizForm.respuesta4Txt.getText());
+            this.QuizForm.setVisible(false);
+            this.quizIndex.setVisible(true);
         } else if(e.getSource() == quizIndex.regresarBtn){
             quizIndex.setVisible(false);
             menuCtrl.iniciar();
