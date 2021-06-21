@@ -37,7 +37,6 @@ public class quizIndex extends javax.swing.JFrame {
         userLbl = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jugarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         regresarBtn = new javax.swing.JButton();
         salir = new javax.swing.JButton();
@@ -107,12 +106,6 @@ public class quizIndex extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(87, 198, 196));
         jLabel2.setOpaque(true);
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 600));
-
-        jugarBtn.setBackground(new java.awt.Color(87, 198, 196));
-        jugarBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jugarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        jugarBtn.setText("Jugar");
-        jPanel1.add(jugarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 460, -1, -1));
 
         jLabel1.setToolTipText("");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 120, 130, 100));
@@ -200,7 +193,6 @@ public class quizIndex extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JButton jugarBtn;
     public javax.swing.JTextField nombreTxt;
     public javax.swing.JButton regresarBtn;
     private javax.swing.JButton salir;

@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
 import view.quiz.QuizForm;
 import view.quiz.quizIndex;
 
-public class quizCtrl implements ActionListener {
+public class quizCtrl implements ActionListener, MouseListener {
 
     private ConsultasTaxonomia modC;
     private quizIndex quizIndex;
@@ -37,9 +37,9 @@ public class quizCtrl implements ActionListener {
         this.QuizForm = new QuizForm();
         this.menuCtrl = new MenuCtrl();
         this.usuario = new Usuario();
-        this.quizIndex.jugarBtn.addActionListener(this);
         this.QuizForm.calificarBtn.addActionListener(this);
         this.quizIndex.regresarBtn.addActionListener(this);
+        this.quizIndex.tablaTaxonomias2.addMouseListener(this);
         this.QuizForm.regresarBtn.addActionListener(this);
         usuarioModelo = new ConsultasUsuario();
         paisModelo = new ConsultasPais();
@@ -57,10 +57,9 @@ public class quizCtrl implements ActionListener {
         quizIndex.setVisible(true);
         quizIndex.setLocationRelativeTo(null);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == quizIndex.jugarBtn) {
+    
+    public void jugarBtn(){
+        
             int fila = quizIndex.tablaTaxonomias2.getSelectedRow();
             Object[] renglon = new Object[4];
             ArrayList<Tiempo> listaT = new ArrayList();
@@ -103,8 +102,11 @@ public class quizCtrl implements ActionListener {
             QuizForm.setVisible(true);
             QuizForm.setLocationRelativeTo(null);
             mostrarPreguntas(preguntasFacil, preguntasNormal, preguntasDificil, quizIndex.dificultadCB.getSelectedItem().toString());
+    }
 
-        } else if (e.getSource() == QuizForm.calificarBtn) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == QuizForm.calificarBtn) {
             this.calificar(QuizForm.respuestaTxt.getText(), QuizForm.respuesta1Txt.getText(), QuizForm.respuesta2Txt.getText(), QuizForm.respuesta3Txt.getText(), QuizForm.respuesta4Txt.getText());
         } else if(e.getSource() == quizIndex.regresarBtn){
             quizIndex.setVisible(false);
@@ -258,5 +260,24 @@ public class quizCtrl implements ActionListener {
         oldP += usuario.getPuntaje();
         con.puntajeNuevo(oldP, usuario.getNickname());
     }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        if(me.getSource()==this.quizIndex.tablaTaxonomias2){
+            jugarBtn();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {    }
 
 }
