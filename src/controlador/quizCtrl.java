@@ -222,11 +222,11 @@ public class quizCtrl implements ActionListener, MouseListener {
         if(!valida){
             return;
         }
-        respuestas[0] = res;
-        respuestas[1] = res1;
-        respuestas[2] = res2;
-        respuestas[3] = res3;
-        respuestas[4] = res4;
+        respuestas[0] = res.trim();
+        respuestas[1] = res1.trim();
+        respuestas[2] = res2.trim();
+        respuestas[3] = res3.trim();
+        respuestas[4] = res4.trim();
 
         ConsultasTaxonomia modT = new ConsultasTaxonomia();
         Taxonomia mod = new Taxonomia();
@@ -237,23 +237,23 @@ public class quizCtrl implements ActionListener, MouseListener {
         ConsultasUsuario con = new ConsultasUsuario();
         for (int i = 0; i < 5; i++) {
            
-            if(respuestas[i].equals(mod.getReino())){
+            if(respuestas[i].equalsIgnoreCase(mod.getReino())){
                 oldP +=2;
-            } else if(respuestas[i].equals(mod.getGenero())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getGenero())){
                 oldP += 2;
-            } else if(respuestas[i].equals(mod.getAlimentacion())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getAlimentacion())){
                 oldP += 2;
-            } else if(respuestas[i].equals(mod.getFamilia())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getFamilia())){
                 oldP +=4;
-            } else if(respuestas[i].equals(mod.getDominio())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getDominio())){
                  oldP +=4;
-            } else if(respuestas[i].equals(mod.getClase())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getClase())){
                  oldP +=4;
-            } else if(respuestas[i].equals(mod.getOrden())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getOrden())){
                 oldP +=6;
-            } else if(respuestas[i].equals(mod.getFilo())){
+            } else if(respuestas[i].equalsIgnoreCase(mod.getFilo())){
                 oldP += 6;
-            } else if(respuestas[i].equals(String.valueOf(mod.getPeso()))){
+            } else if(respuestas[i].equalsIgnoreCase(String.valueOf(mod.getPeso()))){
                 oldP += 6;
             }
         }
